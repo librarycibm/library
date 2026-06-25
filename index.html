@@ -1078,6 +1078,48 @@ function downloadBookCatalogue() {
   a.click();
 }
 
+// ===== SELECT ALL / BULK DELETE =====
+function toggleAll(chk) {
+  document.querySelectorAll('.row-chk').forEach(c => c.checked = chk.checked);
+  updateSelCount();
+}
+
+function updateSelCount() {
+  const selected = document.querySelectorAll('.row-chk:checked').length;
+  const total = document.querySelectorAll('.row-chk').length;
+  const countEl = document.getElementById('SEL-COUNT');
+  if(countEl) countEl.textContent = selected + ' of ' + total + ' selected';
+  // Update select all checkbox state
+  const chkAll = document.getElementById('CHK-ALL');
+  if(chkAll) {
+    chkAll.checked = selected === total && total > 0;
+    chkAll.indeterminate = selected > 0 && selected < total;
+  }
+}
+
+function delSelected() {
+  const checked = [...document.querySelectorAll('.row-chk:checked')].map(c => parseInt(c.value));
+  if(!checked.length) { alert('Koi entry select nahi ki hai.'); return; }
+  showModal(
+    '🗑️ Delete Selected Entries',
+    `Are you sure you want to <b>permanently DELETE ${checked.length} selected entries</b>?<br><br>
+     <span style="color:#A32D2D"><b>This action cannot be undone.</b></span>`,
+    'Delete All Selected', 'br',
+    () => {
+      checked.forEach(sr => {
+        const idx = ISS.findIndex(x => x.sr === sr);
+        if(idx > -1) {
+          const bk = BM[ISS[idx].ba];
+          if(bk && !ISS[idx].rd) bk.av = true;
+          if(SHEETS_CONNECTED && SHEET_URL) saveToSheets('deleteEntry', {srNo: sr});
+          ISS.splice(idx, 1);
+        }
+      });
+      go('adm');
+    }
+  );
+}
+
 function chgPwd(empNo, pwId, pw2Id, msgId){
   const pw=document.getElementById(pwId).value;
   const pw2=document.getElementById(pw2Id).value;
