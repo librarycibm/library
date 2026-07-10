@@ -1,0 +1,2965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>पुस्तक कोष — CIBM Manipal</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+.hidden{display:none!important}
+body{background:#f4f6fa;min-height:100vh}
+input,select{padding:7px 10px;border:1px solid #ccc;border-radius:6px;font-size:13px;width:100%;background:#fff;color:#222}
+input[readonly]{background:#f5f5f5;color:#666}
+button{cursor:pointer;border-radius:6px;border:1px solid #ccc;padding:7px 14px;font-size:13px;background:#fff;color:#222;font-weight:500}
+button:hover{opacity:0.85}
+.bp{background:#1a3a6b!important;color:#fff!important;border-color:#1a3a6b!important}
+.bg{background:#0F6E56!important;color:#fff!important;border-color:#0F6E56!important}
+.br{background:#A32D2D!important;color:#fff!important;border-color:#A32D2D!important}
+.bo{background:#854F0B!important;color:#fff!important;border-color:#854F0B!important}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{padding:7px 8px;background:#f0f0f0;color:#444;font-weight:700;font-size:11px;border-bottom:1px solid #ddd;text-align:left}
+td{padding:7px 8px;border-bottom:1px solid #eee;color:#222;vertical-align:middle}
+tr:hover td{background:#fafafa}
+.card{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:16px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,0.05)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}
+.fi label{font-size:11px;color:#555;display:block;margin-bottom:4px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px}
+.bdg{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700}
+.bok{background:#E1F5EE;color:#0F6E56}
+.blt{background:#FCEBEB;color:#A32D2D}
+.bis{background:#FAEEDA;color:#854F0B}
+.bdn{background:#F0F0F0;color:#555}
+.bbl{background:#E6F1FB;color:#185FA5}
+.mok{background:#E1F5EE;color:#0F6E56;padding:10px 12px;border-radius:6px;font-size:13px;margin-bottom:10px;border-left:4px solid #0F6E56}
+.mer{background:#FCEBEB;color:#A32D2D;padding:10px 12px;border-radius:6px;font-size:13px;margin-bottom:10px;border-left:4px solid #A32D2D}
+.mwarn{background:#FAEEDA;color:#854F0B;padding:10px 12px;border-radius:6px;font-size:13px;margin-bottom:10px;border-left:4px solid #854F0B}
+.tw{overflow-x:auto}
+.nb{padding:10px 16px;font-size:13px;border:none;background:none;cursor:pointer;color:#666;border-bottom:3px solid transparent;white-space:nowrap;border-radius:0;font-weight:600}
+.nb.act{color:#1a3a6b;border-bottom-color:#1a3a6b}
+.modal-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);z-index:999;display:flex;align-items:center;justify-content:center}
+.modal{background:#fff;border-radius:14px;padding:28px;width:480px;max-width:93vw;box-shadow:0 12px 40px rgba(0,0,0,0.25)}
+.modal h3{font-size:16px;margin-bottom:12px;color:#222}
+.modal p{font-size:13px;color:#444;margin-bottom:18px;line-height:1.6}
+.modal-btns{display:flex;gap:8px;justify-content:flex-end}
+.admin-chip{background:#1a3a6b;color:#fff;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:700;margin-left:6px;vertical-align:middle}
+.lib-chip{background:#0F6E56;color:#fff;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:700;margin-left:6px;vertical-align:middle}
+.section-title{font-size:14px;font-weight:700;color:#1a3a6b;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid #e8f0ff}
+.info-box{background:#f0f4ff;border-radius:6px;padding:10px 12px;font-size:12px;color:#555;margin-top:6px}
+.email-box{background:#E6F1FB;border:1px solid #b5d4f4;border-radius:8px;padding:14px;font-size:12px;font-family:monospace;line-height:1.8;margin-top:8px}
+</style>
+</head>
+<body>
+
+<!-- MODAL -->
+<div id="MOD" class="modal-bg hidden">
+  <div class="modal">
+    <h3 id="MOD-T"></h3>
+    <p id="MOD-B"></p>
+    <div class="modal-btns">
+      <button onclick="modClose()">Cancel</button>
+      <button id="MOD-OK" class="bp" onclick="modConfirm()">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div id="LS" style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a3a6b,#2d5fa8)">
+  <div style="background:#fff;border-radius:14px;padding:36px 30px;width:360px;box-shadow:0 8px 32px rgba(0,0,0,0.2)">
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="width:60px;height:60px;background:#1a3a6b;border-radius:14px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:12px;font-size:28px">&#127974;</div>
+      <div style="font-weight:700;font-size:18px;color:#1a3a6b">CIBM Manipal</div>
+      <div style="font-size:13px;color:#888;margin-top:3px">&#2346;&#2369;&#2360;&#2381;&#2340;&#2325; &#2325;&#2379;&#2359;</div>
+    </div>
+    <div id="LE" class="mer hidden"></div>
+    <div class="fi" style="margin-bottom:12px"><label>Employee Number</label><input id="LU" placeholder="Enter your employee number" autocomplete="off" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <div class="fi" style="margin-bottom:20px">
+      <label>Password</label>
+      <div style="position:relative">
+        <input id="LP" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()" style="padding-right:40px">
+        <button type="button" onclick="togglePwd('LP','EYE1')" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);border:none;background:none;cursor:pointer;font-size:16px;padding:0;width:24px" id="EYE1">&#128065;</button>
+      </div>
+    </div>
+    <button class="bp" style="width:100%;padding:12px;font-size:14px;font-weight:700" onclick="doLogin()">Login &#8594;</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="AP" class="hidden">
+  <div style="background:#1a3a6b;color:#fff;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.2)">
+    <div style="display:flex;align-items:center;gap:10px">
+      <span style="font-size:22px">&#127974;</span>
+      <div>
+        <div style="font-size:14px;font-weight:700">&#2346;&#2369;&#2360;&#2381;&#2340;&#2325; &#2325;&#2379;&#2359; &#8212; CIBM Manipal</div>
+        <div id="WH" style="font-size:11px;opacity:0.8"></div>
+      </div>
+    </div>
+    <button onclick="doLogout()" style="background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);padding:6px 14px;font-size:12px;font-weight:600">Logout</button>
+  </div>
+  <div style="background:#fff;border-bottom:1px solid #ddd;display:flex;overflow-x:auto;box-shadow:0 1px 4px rgba(0,0,0,0.06)">
+    <button class="nb act" onclick="go('dash')">&#128202; Dashboard</button>
+    <button class="nb" onclick="go('iss')">&#128228; Issue Book</button>
+    <button class="nb" onclick="go('ret')">&#128229; Return</button>
+    <button class="nb" onclick="go('bks')">&#128218; Books</button>
+    <button class="nb" onclick="go('mbr')">&#128101; Members</button>
+    <button class="nb" onclick="go('reg')">&#128203; Register</button>
+    <button class="nb hidden" id="ADM-TAB" onclick="go('adm')" style="color:#A32D2D">&#9881;&#65039; Admin</button>
+  </div>
+  <div id="MC" style="padding:16px;max-width:1400px;margin:0 auto"></div>
+</div>
+
+<script>
+const USERS={
+  '898736':{pass:'lib@cibm',role:'librarian',name:'SHASHI KANT PANDEY',empNo:'898736'},
+  '864559':{pass:'Senator@4219',role:'admin',name:'NITIN SETIA',empNo:'864559'}
+};
+
+let SHEET_URL='https://script.google.com/macros/s/AKfycbygJkIdT_jToHOJe0f9fCFlJe4c2In0SuyG2s8Zt5ReqCjemvECNCawEfMchLVjQHjKbg/exec';
+let SHEETS_CONNECTED=false;
+let CU=null,ISS=[],NSR=1;
+let _modCb=null;
+const NEW_BOOKS=[];
+
+const td=()=>new Date().toISOString().split('T')[0];
+const ad=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x.toISOString().split('T')[0]};
+const fd=d=>{if(!d)return'\u2014';const p=d.split('-');return p[2]+'/'+p[1]+'/'+p[0]};
+const ov=i=>!i.rd&&i.dd<td();
+const isAdmin=()=>CU&&CU.role==='admin';
+
+function showModal(title,body,btnLabel,btnClass,cb){
+  document.getElementById('MOD-T').textContent=title;
+  document.getElementById('MOD-B').innerHTML=body;
+  const ok=document.getElementById('MOD-OK');
+  ok.textContent=btnLabel||'Confirm';ok.className=btnClass||'bp';
+  _modCb=cb;
+  document.getElementById('MOD').classList.remove('hidden');
+}
+function modClose(){document.getElementById('MOD').classList.add('hidden');_modCb=null;}
+function modConfirm(){document.getElementById('MOD').classList.add('hidden');if(_modCb)_modCb();_modCb=null;}
+
+function togglePwd(inputId,btnId){
+  const inp=document.getElementById(inputId);
+  const btn=document.getElementById(btnId);
+  if(inp.type==='password'){inp.type='text';btn.innerHTML='&#128584;';}
+  else{inp.type='password';btn.innerHTML='&#128065;';}
+}
+
+async function saveToSheets(action,data){
+  if(!SHEET_URL)return null;
+  try{
+    const params=new URLSearchParams({action,...data});
+    const url=SHEET_URL+'?'+params.toString();
+    const resp=await fetch(url,{method:'GET',redirect:'follow',mode:'cors'});
+    const text=await resp.text();
+    try{return JSON.parse(text);}catch(e){return{status:'ok'};}
+  }catch(e){
+    try{
+      const params=new URLSearchParams({action,...data});
+      fetch(SHEET_URL+'?'+params.toString(),{method:'GET',mode:'no-cors',redirect:'follow'});
+    }catch(e2){}
+    return{status:'ok'};
+  }
+}
+
+async function sheetsRequest(params){
+  if(!SHEET_URL)return null;
+  try{
+    const url=SHEET_URL+'?'+new URLSearchParams(params).toString();
+    const resp=await fetch(url,{redirect:'follow'});
+    const text=await resp.text();
+    const clean=text.trim().replace(/^[^{]*(\{)/,'$1').replace(/(\})[^}]*$/,'$1');
+    try{return JSON.parse(clean);}
+    catch(e){return JSON.parse(text);}
+  }catch(e){console.log('Sheets request failed:',e);return null;}
+}
+
+async function loadFromSheets(){
+  if(!SHEET_URL)return false;
+  try{
+    const result=await sheetsRequest({action:'getIssues'});
+    if(result&&result.status==='ok'){
+      ISS=result.issues.map(i=>({
+        sr:i.sr,id:i.id,sno:String(i.sno),en:i.en,dg:i.dg,
+        ba:String(i.ba),bt:i.bt,dd:i.dd,rd:i.rd||'',rm:i.rm||'',
+        lib:i.lib,libEmp:String(i.libEmp||''),em:i.em||''
+      }));
+      if(ISS.length>0)NSR=Math.max(...ISS.map(i=>parseInt(i.sr)||0))+1;
+      SHEETS_CONNECTED=true;
+      BOOKS.forEach(b=>{
+        const activeIssue=ISS.find(i=>String(i.ba)===String(b.acc)&&!i.rd);
+        if(activeIssue)b.av=false;
+      });
+      return true;
+    }
+  }catch(e){console.log('Load from sheets failed:',e);}
+  return false;
+}
+
+function sendReturnMail(sr,empName,staffNo,bookTitle,accNo,issueDate,dueDate,email){
+  if(!SHEETS_CONNECTED||!SHEET_URL){alert('Please connect Google Sheets first from Admin tab.');return;}
+  if(!email){
+    const em=prompt('No email found for this employee.\nEnter email address to send reminder:');
+    if(!em)return;
+    email=em;
+    const issue=ISS.find(i=>String(i.sr)===String(sr));
+    if(issue)issue.em=em;
+    const s=ST.find(x=>x.no===staffNo);
+    if(s)s.em=em;
+  }
+  sheetsRequest({action:'sendReturnReminder',empName,staffNo,email,bookTitle,accNo,issueDate,dueDate}).then(r=>{
+    if(r&&r.status==='ok'){alert('\u2705 Reminder email sent to '+email);}
+    else{alert('\u26d4 Email failed: '+(r?r.message:'Connection error'));}
+  });
+}
+
+function doLogin(){
+  const u=document.getElementById('LU').value.trim(),p=document.getElementById('LP').value;
+  const usr=USERS[u];
+  if(!usr||usr.pass!==p){const le=document.getElementById('LE');le.classList.remove('hidden');le.textContent='Invalid employee number or password.';return;}
+  CU=usr;
+  document.getElementById('LS').classList.add('hidden');
+  document.getElementById('AP').classList.remove('hidden');
+  const chip=CU.role==='admin'?'<span class="admin-chip">ADMIN</span>':'<span class="lib-chip">LIBRARIAN</span>';
+  document.getElementById('WH').innerHTML=CU.name+' &nbsp;|&nbsp; Emp No: '+CU.empNo+chip;
+  if(isAdmin())document.getElementById('ADM-TAB').classList.remove('hidden');
+  if(SHEET_URL){
+    document.getElementById('MC').innerHTML='<div style="text-align:center;padding:40px;color:#1a3a6b"><div style="font-size:30px">&#9203;</div><div style="margin-top:10px;font-weight:600;font-size:14px">Connecting to Google Sheets...</div><div style="font-size:12px;color:#888;margin-top:4px">Loading your library data...</div></div>';
+    loadFromSheets().then(connected=>{
+      SHEETS_CONNECTED=connected;
+      go('dash');
+    });
+  }else{go('dash');}
+}
+
+function doLogout(){
+  CU=null;
+  document.getElementById('AP').classList.add('hidden');
+  document.getElementById('LS').classList.remove('hidden');
+  document.getElementById('LU').value='';
+  document.getElementById('LP').value='';
+  document.getElementById('LE').classList.add('hidden');
+}
+
+function go(t){
+  document.querySelectorAll('.nb').forEach((b,i)=>b.classList.toggle('act',['dash','iss','ret','bks','mbr','reg','adm'][i]===t));
+  const mc=document.getElementById('MC');
+  if(t==='dash')mc.innerHTML=rdash();
+  else if(t==='iss'){mc.innerHTML=riss();setTimeout(()=>{const d=document.getElementById('IDA');if(d){d.value=td();document.getElementById('IDD').value=ad(td(),90);}},30);}
+  else if(t==='ret')mc.innerHTML=rret();
+  else if(t==='bks')mc.innerHTML=rbks();
+  else if(t==='mbr')mc.innerHTML=rmbr();
+  else if(t==='reg')mc.innerHTML=rreg();
+  else if(t==='adm'){if(!isAdmin())return;mc.innerHTML=radm();}
+}
+
+function rdash(){
+  const act=ISS.filter(i=>!i.rd).length,ovr=ISS.filter(i=>ov(i)).length,avl=BOOKS.filter(b=>b.av).length;
+  return`
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:14px">
+    ${[['&#128218;','Total Books',BOOKS.length,'#1a3a6b'],['&#9989;','Available',avl,'#0F6E56'],['&#128228;','Issued',act,'#854F0B'],['&#9888;&#65039;','Overdue',ovr,'#A32D2D'],['&#128101;','Members',ST.length,'#185FA5']].map(([ic,l,v,c])=>`
+    <div style="background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:14px 10px;text-align:center;border-top:4px solid ${c}">
+      <div style="font-size:22px;margin-bottom:4px">${ic}</div>
+      <div style="font-size:24px;font-weight:700;color:${c}">${v}</div>
+      <div style="font-size:11px;color:#777;margin-top:3px">${l}</div>
+    </div>`).join('')}
+  </div>
+  ${ovr>0?`<div class="card" style="border-left:4px solid #A32D2D"><div class="section-title" style="color:#A32D2D">&#9888;&#65039; Overdue Books (${ovr})</div><div class="tw"><table><thead><tr><th>Sr No</th><th>Staff No</th><th>Employee Name</th><th>Book Title</th><th>Acc No</th><th>Issue Date</th><th>Due Date</th><th>Days Overdue</th></tr></thead><tbody>${ISS.filter(i=>ov(i)).map(i=>{const dy=Math.floor((new Date()-new Date(i.dd))/864e5);return`<tr style="background:#fff5f5"><td>${i.sr}</td><td>${i.sno}</td><td>${i.en}</td><td>${i.bt}</td><td>${i.ba}</td><td>${fd(i.id)}</td><td>${fd(i.dd)}</td><td style="color:#A32D2D;font-weight:700">${dy} days</td></tr>`}).join('')}</tbody></table></div></div>`:''}
+  <div class="card"><div class="section-title">&#128203; Recent Transactions</div>
+  ${ISS.length===0?'<p style="color:#888;font-size:13px;text-align:center;padding:20px">No transactions yet.</p>':`<div class="tw"><table><thead><tr><th>Sr No</th><th>Issue Date</th><th>Staff No</th><th>Employee Name</th><th>Book Title</th><th>Acc No</th><th>Due Date</th><th>Return Date</th><th>Status</th></tr></thead><tbody>${[...ISS].reverse().slice(0,10).map(i=>`<tr><td>${i.sr}</td><td>${fd(i.id)}</td><td>${i.sno}</td><td>${i.en}</td><td>${i.bt}</td><td>${i.ba}</td><td>${fd(i.dd)}</td><td style="font-weight:${i.rd?700:400};color:${i.rd?'#0F6E56':'#aaa'}">${i.rd?fd(i.rd):'&#8212;'}</td><td><span class="bdg ${i.rd?'bdn':ov(i)?'blt':'bok'}">${i.rd?'Returned':ov(i)?'Overdue':'Active'}</span></td></tr>`).join('')}</tbody></table></div>`}
+  </div>`;
+}
+
+function riss(){
+  return`<div class="card">
+  <div class="section-title">&#128228; Issue Book to Employee</div>
+  <div id="IM"></div>
+  <div class="row2">
+    <div class="fi"><label>Issue Date *</label><input type="date" id="IDA" oninput="upd()"></div>
+    <div class="fi"><label>Due Date (Auto: Issue Date + 90 Days)</label><input type="date" id="IDD" readonly></div>
+  </div>
+  <div style="margin-bottom:9px">
+    <div style="display:flex;gap:8px;margin-bottom:7px;align-items:center">
+      <label style="font-size:11px;color:#555;font-weight:700;white-space:nowrap">FIND EMPLOYEE</label>
+      <div style="display:flex;gap:6px">
+        <button type="button" id="MODE-LIST" class="bp" style="font-size:11px;padding:4px 10px" onclick="setMode('list')">&#128203; Select from List</button>
+        <button type="button" id="MODE-MAN" style="font-size:11px;padding:4px 10px;border:1px solid #ccc" onclick="setMode('manual')">&#9998;&#65039; Enter Manually</button>
+      </div>
+    </div>
+    <div id="DIV-LIST">
+      <div class="row2">
+        <div class="fi" style="position:relative">
+          <label>Search by Staff No or Name *</label>
+          <input id="ST-SEARCH" placeholder="Type staff no or name to search..." oninput="filterStaff()" autocomplete="off">
+          <div id="ST-DROPDOWN" style="display:none;position:absolute;z-index:200;background:#fff;border:1px solid #ccc;border-radius:6px;max-height:200px;overflow-y:auto;width:100%;box-shadow:0 4px 12px rgba(0,0,0,0.15)"></div>
+        </div>
+        <div class="fi"><label>Employee Name</label><input id="INM" readonly placeholder="Auto-filled"></div>
+      </div>
+      <input type="hidden" id="IST" value="">
+    </div>
+    <div id="DIV-MAN" style="display:none">
+      <div class="row3">
+        <div class="fi"><label>Staff No *</label><input id="MAN-SNO" placeholder="Enter staff number" oninput="document.getElementById('IST').value=this.value"></div>
+        <div class="fi"><label>Employee Name *</label><input id="MAN-NM" placeholder="Enter full name" oninput="document.getElementById('INM').value=this.value"></div>
+        <div class="fi"><label>Designation</label><input id="MAN-DG" placeholder="e.g. Manager" oninput="document.getElementById('IDG').value=this.value;document.getElementById('DG-ROW').style.display='none'"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row2">
+    <div class="fi" id="DG-ROW"><label>Designation</label><input id="IDG" readonly placeholder="Auto-filled"></div>
+    <div class="fi"><label>Email Address * (required for confirmation)</label><input type="email" id="IEM" placeholder="employee@gmail.com"></div>
+  </div>
+  <div class="row2">
+    <div class="fi"><label>Search Book by Acc No or Title *</label><input id="IBS" placeholder="Type accession number or part of book title..." oninput="sb()"></div>
+    <div class="fi"><label>Select Book *</label>
+      <select id="IBK" onchange="document.getElementById('IAC').value=this.value">
+        <option value="">-- Search first, then select --</option>
+      </select>
+    </div>
+  </div>
+  <div class="row2">
+    <div class="fi"><label>Accession No</label><input id="IAC" readonly></div>
+    <div class="fi"><label>Remarks</label><input id="IRM" placeholder="Optional notes"></div>
+  </div>
+  <div class="info-box">&#8505;&#65039; <b>Issuing Librarian:</b> ${CU?CU.name:''} (Emp: ${CU?CU.empNo:''}) &nbsp;|&nbsp; Please obtain employee signature on physical register before clicking Issue. &nbsp;|&nbsp; <b>Maximum 3 books per employee.</b></div>
+  <div style="margin-top:12px;display:flex;gap:10px">
+    <button class="bp" onclick="issB()">&#9989; Issue Book</button>
+    <button onclick="go('iss')">Clear Form</button>
+  </div>
+  </div>`;
+}
+
+function upd(){const d=document.getElementById('IDA');if(d&&d.value)document.getElementById('IDD').value=ad(d.value,90);}
+
+function setMode(mode){
+  if(mode==='list'){
+    document.getElementById('DIV-LIST').style.display='';
+    document.getElementById('DIV-MAN').style.display='none';
+    document.getElementById('MODE-LIST').className='bp';
+    document.getElementById('MODE-MAN').style.cssText='font-size:11px;padding:4px 10px;border:1px solid #ccc;background:#fff;color:#222;border-radius:6px;cursor:pointer';
+    const dgRow=document.getElementById('DG-ROW');if(dgRow)dgRow.style.display='';
+    document.getElementById('IST').value='';document.getElementById('INM').value='';document.getElementById('IDG').value='';
+  }else{
+    document.getElementById('DIV-LIST').style.display='none';
+    document.getElementById('DIV-MAN').style.display='';
+    document.getElementById('MODE-MAN').className='bo';
+    document.getElementById('MODE-LIST').style.cssText='font-size:11px;padding:4px 10px;border:1px solid #ccc;background:#fff;color:#222;border-radius:6px;cursor:pointer';
+    const dgRow=document.getElementById('DG-ROW');if(dgRow)dgRow.style.display='none';
+    document.getElementById('IST').value='';document.getElementById('INM').value='';document.getElementById('IDG').value='';
+  }
+}
+
+function filterStaff(){
+  const q=(document.getElementById('ST-SEARCH').value||'').toLowerCase().trim();
+  const dd=document.getElementById('ST-DROPDOWN');
+  if(!q||q.length<2){dd.style.display='none';return;}
+  const results=ST.filter(s=>s.no.includes(q)||s.nm.toLowerCase().includes(q)).slice(0,15);
+  if(!results.length){dd.style.display='none';return;}
+  dd.innerHTML=results.map(s=>`<div onclick="selectStaff('${s.no}')" style="padding:8px 12px;cursor:pointer;border-bottom:1px solid #f0f0f0;font-size:12px" onmouseover="this.style.background='#f0f4ff'" onmouseout="this.style.background=''"><b>${s.no}</b> &#8212; ${s.nm}<br><span style="color:#888;font-size:10px">${s.dg} | ${s.br}</span></div>`).join('');
+  dd.style.display='';
+}
+
+function selectStaff(sno){
+  const s=ST.find(x=>x.no===sno);if(!s)return;
+  document.getElementById('ST-SEARCH').value=s.no+' &#8212; '+s.nm;
+  document.getElementById('ST-DROPDOWN').style.display='none';
+  document.getElementById('IST').value=s.no;
+  document.getElementById('INM').value=s.nm;
+  document.getElementById('IDG').value=s.dg;
+  document.getElementById('IEM').value=s.em||'';
+  const c=ISS.filter(i=>i.sno===sno&&!i.rd).length;
+  const m=document.getElementById('IM');
+  if(c>=3){m.className='mer';m.innerHTML='&#9940; This employee already has 3 books issued (maximum limit). A return must be made before issuing another book.';}
+  else if(c>0){m.className='mwarn';m.innerHTML=`&#9888;&#65039; This employee currently has <b>${c}</b> book(s) issued. <b>${3-c}</b> more can be issued.`;}
+  else{m.className='';m.innerHTML='';}
+}
+
+function sb(){
+  const q=document.getElementById('IBS').value.toLowerCase().trim(),sel=document.getElementById('IBK');
+  if(!q){sel.innerHTML='<option value="">-- Search first --</option>';return;}
+  const f=BOOKS.filter(b=>b.av&&(b.acc.includes(q)||b.title.toLowerCase().includes(q))).slice(0,50);
+  if(!f.length){sel.innerHTML='<option value="">No available books found</option>';return;}
+  sel.innerHTML='<option value="">-- Select a book --</option>'+f.map(b=>`<option value="${b.acc}">${b.acc} &#8212; ${b.title}</option>`).join('');
+}
+
+function issB(){
+  const date=document.getElementById('IDA').value;
+  const manDiv=document.getElementById('DIV-MAN');
+  const isManual=manDiv&&manDiv.style.display!=='none';
+  const sno=isManual?(document.getElementById('MAN-SNO').value.trim()):document.getElementById('IST').value;
+  const nm=document.getElementById('INM').value;
+  const acc=document.getElementById('IBK').value;
+  const em=document.getElementById('IEM').value;
+  const rm=document.getElementById('IRM').value;
+  const m=document.getElementById('IM');
+  if(!date||!sno||!acc){m.className='mer';m.innerHTML='&#9940; Issue Date, Employee, and Book are all required.';return;}
+  if(!em||!em.includes('@')){m.className='mer';m.innerHTML='&#9940; Valid email address is required to issue a book.';return;}
+  const c=ISS.filter(i=>i.sno===sno&&!i.rd).length;
+  if(c>=3){m.className='mer';m.innerHTML='&#9940; Maximum 3 books limit reached. Employee must return a book first.';return;}
+  const bk=BM[acc];
+  if(!bk||!bk.av){m.className='mer';m.innerHTML='&#9940; This book is not available for issue.';return;}
+  const due=ad(date,90),s=ST.find(x=>x.no===sno);
+  showModal(
+    '&#128228; Confirm Book Issue',
+    `<b>Please confirm you are issuing this book:</b><br><br>
+     &#128214; <b>Book:</b> ${bk.title}<br>
+     &#128278; <b>Accession No:</b> ${acc}<br>
+     &#128100; <b>Employee:</b> ${nm} (${sno})<br>
+     &#128188; <b>Designation:</b> ${s?s.dg:''}<br>
+     &#128197; <b>Issue Date:</b> ${fd(date)}<br>
+     &#128197; <b>Due Date:</b> ${fd(due)}<br><br>
+     &#9888;&#65039; <i>Ensure employee has signed the physical register before confirming.</i>`,
+    'Confirm & Issue','bp',
+    ()=>{
+      if(s&&em)s.em=em;
+      const newEntry={sr:NSR,id:date,sno,en:nm,dg:s?s.dg:'',ba:acc,bt:bk.title,dd:due,rd:'',rm,lib:CU.name,libEmp:CU.empNo,em};
+      ISS.push(newEntry);NSR++;bk.av=false;
+      if(SHEETS_CONNECTED&&SHEET_URL){
+        saveToSheets('issueBook',{issueDate:date,staffNo:sno,empName:nm,designation:s?s.dg:'',bookTitle:bk.title,accNo:acc,dueDate:due,libName:CU.name,libEmp:CU.empNo,email:em,remarks:rm}).then(r=>{if(r&&r.srNo)newEntry.sr=r.srNo;});
+      }
+      if(em&&SHEETS_CONNECTED&&SHEET_URL){
+        sheetsRequest({action:'sendNow',empName:nm,staffNo:sno,email:em,bookTitle:bk.title,accNo:acc,issueDate:date,dueDate:due});
+      }
+      m.className='mok';
+      m.innerHTML=`&#9989; <b>SUCCESS:</b> "${bk.title}" (Acc: ${acc}) issued to <b>${nm}</b>. Due Date: <b>${fd(due)}</b>. &#128231; Confirmation email sent to ${em}.`;
+      ['IST','INM','IDG','IEM','IBS','IAC','IRM'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+      document.getElementById('IBK').innerHTML='<option value="">-- Search first --</option>';
+    }
+  );
+}
+
+function rret(){
+  return`<div class="card">
+  <div class="section-title">&#128229; Book Return</div>
+  <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center">
+    <input id="RQ" placeholder="Search by employee name, staff number, or book title..." style="flex:1;min-width:200px" oninput="frr()">
+    <select id="RF" onchange="frr()" style="width:auto;min-width:130px">
+      <option value="all">All Active Issues</option>
+      <option value="ov">Overdue Only</option>
+    </select>
+  </div>
+  <div id="RTB">${rrtb(ISS.filter(i=>!i.rd))}</div>
+  </div>`;
+}
+
+function rrtb(iss){
+  if(!iss.length)return'<p style="color:#888;font-size:13px;text-align:center;padding:20px">No active issues found.</p>';
+  return`<div class="tw"><table><thead><tr><th>Sr No</th><th>Issue Date</th><th>Staff No</th><th>Employee Name</th><th>Designation</th><th>Book Title</th><th>Acc No</th><th>Due Date</th><th>Status</th><th>Action</th></tr></thead><tbody>
+  ${iss.map(i=>`<tr style="${ov(i)?'background:#fff5f5':''}">
+    <td>${i.sr}</td><td>${fd(i.id)}</td><td>${i.sno}</td><td>${i.en}</td><td>${i.dg}</td>
+    <td>${i.bt}</td><td>${i.ba}</td><td>${fd(i.dd)}</td>
+    <td><span class="bdg ${ov(i)?'blt':'bok'}">${ov(i)?'OVERDUE':'Active'}</span></td>
+    <td style="white-space:nowrap">
+      <button class="bg" style="font-size:11px;padding:3px 8px;margin-right:4px" onclick="doRet(${i.sr})">&#128229; Return</button>
+      <button style="font-size:11px;padding:3px 8px;background:#185FA5;color:#fff;border:none;border-radius:6px;cursor:pointer" onclick="sendReturnMail('${i.sr}','${i.en}','${i.sno}','${i.bt}','${i.ba}','${i.id}','${i.dd}','${i.em}')">&#128231;</button>
+    </td>
+  </tr>`).join('')}
+  </tbody></table></div>`;
+}
+
+function frr(){
+  const q=(document.getElementById('RQ').value||'').toLowerCase(),f=document.getElementById('RF').value;
+  let is=ISS.filter(i=>!i.rd);
+  if(q)is=is.filter(i=>i.en.toLowerCase().includes(q)||i.sno.includes(q)||i.bt.toLowerCase().includes(q));
+  if(f==='ov')is=is.filter(i=>ov(i));
+  document.getElementById('RTB').innerHTML=rrtb(is);
+}
+
+function doRet(sr){
+  const i=ISS.find(x=>x.sr===sr);if(!i)return;
+  const days=ov(i)?Math.floor((new Date()-new Date(i.dd))/864e5):0;
+  const emailField=i.em
+    ?`<div style="margin-top:10px;background:#f0f9ff;border-radius:6px;padding:10px;font-size:12px">
+        &#128231; <b>Send return confirmation email?</b><br>
+        <div style="margin-top:8px;display:flex;gap:8px;align-items:center"><input type="radio" name="sendmail" id="SM-YES" value="yes" checked><label for="SM-YES" style="cursor:pointer">Yes &#8212; send to <b>${i.em}</b></label></div>
+        <div style="margin-top:5px;display:flex;gap:8px;align-items:center"><input type="radio" name="sendmail" id="SM-NO" value="no"><label for="SM-NO" style="cursor:pointer">No &#8212; skip email</label></div>
+       </div>`
+    :`<div style="margin-top:10px;background:#f0f9ff;border-radius:6px;padding:10px;font-size:12px">
+        &#128231; <b>Send return confirmation email? (optional)</b><br>
+        <input type="email" id="RET-EM2" placeholder="Enter email address (leave blank to skip)" style="padding:6px 10px;border:1px solid #ccc;border-radius:6px;font-size:12px;width:100%;margin-top:6px">
+       </div>`;
+  showModal(
+    '&#128229; Confirm Book Return',
+    `<b>You are about to mark this book as RETURNED:</b><br><br>
+     &#128214; <b>Book:</b> ${i.bt}<br>
+     &#128278; <b>Accession No:</b> ${i.ba}<br>
+     &#128100; <b>Employee:</b> ${i.en} (${i.sno})<br>
+     &#128197; <b>Issue Date:</b> ${fd(i.id)}<br>
+     &#128197; <b>Due Date:</b> ${fd(i.dd)}<br>
+     &#128197; <b>Return Date (Today):</b> <b>${fd(td())}</b>
+     ${ov(i)?`<br><br><span style="color:#A32D2D;font-weight:700">&#9888;&#65039; WARNING: This book is OVERDUE by ${days} days!</span>`:''}
+     ${emailField}`,
+    'Confirm Return','bg',
+    ()=>{
+      const smYes=document.getElementById('SM-YES');
+      const retEm2=document.getElementById('RET-EM2');
+      let emailToUse=i.em,sendEmail=false;
+      if(smYes){sendEmail=smYes.checked;}
+      else if(retEm2){emailToUse=retEm2.value.trim();sendEmail=!!emailToUse;if(emailToUse){i.em=emailToUse;const s=ST.find(x=>x.no===i.sno);if(s)s.em=emailToUse;}}
+      i.rd=td();const bk=BM[i.ba];if(bk)bk.av=true;
+      if(SHEETS_CONNECTED&&SHEET_URL){saveToSheets('returnBook',{srNo:i.sr,returnDate:i.rd,email:emailToUse||'',sendEmail:sendEmail?'yes':'no'});}
+      go('ret');
+    }
+  );
+}
+
+function rbks(){
+  const avl=BOOKS.filter(b=>b.av).length,iss=BOOKS.filter(b=>!b.av).length;
+  return`<div class="card">
+  <div class="section-title">&#128218; Book Catalogue &#8212; CIBM Manipal Library</div>
+  <div style="display:flex;gap:12px;margin-bottom:12px;flex-wrap:wrap">
+    <span class="bdg bok" style="font-size:12px;padding:5px 12px">&#9989; Available: ${avl}</span>
+    <span class="bdg bis" style="font-size:12px;padding:5px 12px">&#128228; Issued: ${iss}</span>
+    <span class="bdg bbl" style="font-size:12px;padding:5px 12px">&#128218; Total: ${BOOKS.length}</span>
+  </div>
+  <input id="BQ" placeholder="Search by Accession Number or Book Title..." style="margin-bottom:12px" oninput="fbk()">
+  <div id="BLT">${rbtb(BOOKS.slice(0,60))}</div>
+  <p style="font-size:11px;color:#888;margin-top:8px">Showing first 60 books. Use search to find specific titles. Total: <b>${BOOKS.length}</b></p>
+  </div>`;
+}
+
+function rbtb(bks){
+  if(!bks.length)return'<p style="color:#888;font-size:13px;text-align:center;padding:16px">No books found.</p>';
+  return`<div class="tw"><table><thead><tr><th>Sr No</th><th>Acc No</th><th>Book Title</th><th>Status</th></tr></thead><tbody>
+  ${bks.map(b=>`<tr><td>${b.sr}</td><td>${b.acc}</td><td>${b.title}</td><td><span class="bdg ${b.av?'bok':'bis'}">${b.av?'Available':'Issued'}</span></td></tr>`).join('')}
+  </tbody></table></div>`;
+}
+
+function fbk(){
+  const q=(document.getElementById('BQ').value||'').toLowerCase().trim();
+  document.getElementById('BLT').innerHTML=rbtb(q?BOOKS.filter(b=>b.acc.includes(q)||b.title.toLowerCase().includes(q)).slice(0,200):BOOKS.slice(0,60));
+}
+
+function rmbr(){
+  return`<div class="card">
+  <div class="section-title">&#128101; Staff Members &#8212; ${ST.length} Total</div>
+  <input id="MQ" placeholder="Search by name or staff number..." style="margin-bottom:12px" oninput="fmb()">
+  <div id="MBL">${rmbtb(ST.slice(0,50))}</div>
+  <p style="font-size:11px;color:#888;margin-top:8px">Showing first 50 members. Use search to find specific members.</p>
+  </div>`;
+}
+
+function rmbtb(ms){
+  return`<div class="tw"><table><thead><tr><th>Staff No</th><th>Name</th><th>Designation</th><th>Scale</th><th>Books Issued</th><th>Issued Titles</th></tr></thead><tbody>
+  ${ms.map(m=>{
+    const active=ISS.filter(i=>i.sno===m.no&&!i.rd);const c=active.length;
+    return`<tr><td>${m.no}</td><td><b>${m.nm}</b></td><td>${m.dg}</td><td>${m.sc}</td>
+      <td><span class="bdg ${c>=3?'blt':c>0?'bis':'bdn'}">${c}/3</span></td>
+      <td style="font-size:11px;color:#555">${active.map(i=>i.bt).join('; ')||'&#8212;'}</td></tr>`;
+  }).join('')}
+  </tbody></table></div>`;
+}
+
+function fmb(){
+  const q=(document.getElementById('MQ').value||'').toLowerCase();
+  document.getElementById('MBL').innerHTML=rmbtb(ST.filter(m=>m.nm.toLowerCase().includes(q)||m.no.includes(q)).slice(0,100));
+}
+
+function rreg(){
+  return`<div class="card">
+  <div class="section-title">&#128203; Issue Register &#8212; Complete Record</div>
+  <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center">
+    <input id="RGQ" placeholder="Search by name, staff number, or book title..." style="flex:1;min-width:200px" oninput="frg()">
+    <select id="RGF" onchange="frg()" style="width:auto;min-width:130px">
+      <option value="all">All Records</option>
+      <option value="act">Active Only</option>
+      <option value="ov">Overdue Only</option>
+      <option value="ret">Returned Only</option>
+    </select>
+    <button class="bp" onclick="dlCSV()" style="white-space:nowrap">&#11015;&#65039; Download CSV</button>
+  </div>
+  <div id="RGT">${rrgtb([...ISS].reverse())}</div>
+  </div>`;
+}
+
+function rrgtb(iss){
+  if(!iss.length)return'<p style="color:#888;font-size:13px;text-align:center;padding:20px">No records found.</p>';
+  return`<div class="tw"><table><thead><tr><th>Sr No</th><th>Issue Date</th><th>Staff No</th><th>Employee Name</th><th>Designation</th><th>Book Title</th><th>Acc No</th><th>Due Date</th><th>Return Date</th><th>Status</th><th>Issued By</th><th>Remarks</th></tr></thead><tbody>
+  ${iss.map(i=>`<tr style="${i.rd?'background:#f8fff8':ov(i)?'background:#fff5f5':''}">
+    <td>${i.sr}</td><td>${fd(i.id)}</td><td>${i.sno}</td><td>${i.en}</td><td>${i.dg}</td>
+    <td>${i.bt}</td><td>${i.ba}</td><td>${fd(i.dd)}</td>
+    <td style="font-weight:700;color:${i.rd?'#0F6E56':'#aaa'}">${i.rd?fd(i.rd):'&#8212;'}</td>
+    <td><span class="bdg ${i.rd?'bdn':ov(i)?'blt':'bok'}">${i.rd?'Returned':ov(i)?'Overdue':'Active'}</span></td>
+    <td>${i.lib}</td><td>${i.rm||'&#8212;'}</td>
+  </tr>`).join('')}
+  </tbody></table></div>`;
+}
+
+function frg(){
+  const q=(document.getElementById('RGQ').value||'').toLowerCase(),f=document.getElementById('RGF').value;
+  let is=[...ISS].reverse();
+  if(q)is=is.filter(i=>i.en.toLowerCase().includes(q)||i.sno.includes(q)||i.bt.toLowerCase().includes(q));
+  if(f==='act')is=is.filter(i=>!i.rd&&!ov(i));
+  else if(f==='ov')is=is.filter(i=>ov(i));
+  else if(f==='ret')is=is.filter(i=>!!i.rd);
+  document.getElementById('RGT').innerHTML=rrgtb(is);
+}
+
+function dlCSV(){
+  const hdr=['Sr No','Issue Date','Staff No','Employee Name','Designation','Book Title','Acc No','Due Date','Return Date','Status','Issued By','Remarks'];
+  const rows=ISS.map(i=>[i.sr,fd(i.id),i.sno,'"'+i.en+'"',i.dg,'"'+i.bt+'"',i.ba,fd(i.dd),i.rd?fd(i.rd):'',i.rd?'Returned':ov(i)?'Overdue':'Active','"'+i.lib+'"','"'+(i.rm||'')+'"']);
+  const csv=[hdr,...rows].map(r=>r.join(',')).join('\n');
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='CIBM_Library_Register_'+td().replace(/-/g,'')+'.csv';a.click();
+}
+
+function radm(){
+  return`
+  <div class="card">
+    <div class="section-title">&#128100;&#128274; Password Management</div>
+    <div class="row2">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#0F6E56;margin-bottom:8px">&#128218; LIBRARIAN PASSWORD (Emp: 898736)</div>
+        <div class="fi" style="margin-bottom:8px"><label>New Password</label>
+          <div style="position:relative"><input type="password" id="LP1" style="padding-right:36px"><button type="button" onclick="togglePwd('LP1','E1')" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);border:none;background:none;cursor:pointer;font-size:14px" id="E1">&#128065;</button></div>
+        </div>
+        <div class="fi" style="margin-bottom:8px"><label>Confirm Password</label>
+          <div style="position:relative"><input type="password" id="LP2" style="padding-right:36px"><button type="button" onclick="togglePwd('LP2','E2')" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);border:none;background:none;cursor:pointer;font-size:14px" id="E2">&#128065;</button></div>
+        </div>
+        <button class="bg" onclick="chpwd('lib')">&#128274; Update Librarian Password</button>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#1a3a6b;margin-bottom:8px">&#9881;&#65039; ADMIN PASSWORD (Emp: 864559)</div>
+        <div class="fi" style="margin-bottom:8px"><label>New Password</label>
+          <div style="position:relative"><input type="password" id="AP1" style="padding-right:36px"><button type="button" onclick="togglePwd('AP1','E3')" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);border:none;background:none;cursor:pointer;font-size:14px" id="E3">&#128065;</button></div>
+        </div>
+        <div class="fi" style="margin-bottom:8px"><label>Confirm Password</label>
+          <div style="position:relative"><input type="password" id="AP2" style="padding-right:36px"><button type="button" onclick="togglePwd('AP2','E4')" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);border:none;background:none;cursor:pointer;font-size:14px" id="E4">&#128065;</button></div>
+        </div>
+        <button class="bp" onclick="chpwd('adm')">&#128274; Update Admin Password</button>
+      </div>
+    </div>
+    <div class="mwarn" style="margin-top:12px">&#9888; Important: Password changes are session-only in this HTML version. For permanent changes, edit the HTML file to update passwords.</div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">&#128279; Google Sheets Connection &#8212; Permanent Data Storage</div>
+    <p style="font-size:12px;color:#666;margin-bottom:12px">Connect to Google Sheets so all issue/return data is saved permanently. Follow the setup guide to get your URL.</p>
+    <div class="fi" style="margin-bottom:10px">
+      <label>Google Apps Script URL</label>
+      <input id="SH-URL" value="${SHEET_URL}" placeholder="https://script.google.com/macros/s/YOUR_ID/exec">
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px">
+      <button class="bp" onclick="connSh()">&#128279; Connect &amp; Load Data</button>
+      <button onclick="testSh()">&#9989; Test Connection</button>
+      <button class="bo" onclick="sendOvEmail()">&#128231; Send Overdue Emails Now</button>
+    </div>
+    <div id="SH-MSG">${SHEETS_CONNECTED?'<div class="mok">&#9989; Connected to Google Sheets. Data is being saved automatically.</div>':''}</div>
+    <div style="background:#fffbf0;border:1px solid #f0d080;border-radius:8px;padding:14px;font-size:12px;color:#444;margin-top:8px">
+      <b>&#128196; Setup Steps (one-time, 10 minutes):</b><br>
+      1. Go to script.google.com &#8594; New Project<br>
+      2. Delete existing code &#8594; Paste the Apps Script code (given separately)<br>
+      3. Save &#8594; Click <b>Deploy</b> &#8594; <b>New Deployment</b> &#8594; Web App<br>
+      4. Execute as: <b>Me</b> &#8594; Who has access: <b>Anyone</b> &#8594; Deploy<br>
+      5. Copy the URL &#8594; Paste above &#8594; Click Connect
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">&#128218; Book Catalogue Management</div>
+    <p style="font-size:12px;color:#666;margin-bottom:12px">Add new books purchased for the library. All fields marked * are mandatory. Data is saved to Google Sheets.</p>
+    <div id="BC-MSG"></div>
+
+    <div class="row2">
+      <div class="fi"><label>Purchase Date *</label><input type="date" id="BC-PDATE"></div>
+      <div class="fi">
+        <label>Category *</label>
+        <select id="BC-CAT" onchange="toggleCustomCat()">
+          <option value="">-- Select Category --</option>
+          <option value="Banking">Banking</option>
+          <option value="Banking Fraud">Banking Fraud</option>
+          <option value="Children">Children</option>
+          <option value="Computer">Computer</option>
+          <option value="General">General</option>
+          <option value="History">History</option>
+          <option value="IT">IT</option>
+          <option value="Leadership">Leadership</option>
+          <option value="Legal">Legal</option>
+          <option value="Motivational">Motivational</option>
+          <option value="Others">Others (Type below)</option>
+        </select>
+        <input type="text" id="BC-CAT-CUSTOM" placeholder="Type custom category here..." style="margin-top:6px;display:none">
+      </div>
+    </div>
+
+    <div class="row2">
+      <div class="fi"><label>Book Title *</label><input type="text" id="BC-TITLE" placeholder="Full title of the book"></div>
+      <div class="fi"><label>Author *</label><input type="text" id="BC-AUTH" placeholder="Author name"></div>
+    </div>
+
+    <div class="row2">
+      <div class="fi"><label>Publisher</label><input type="text" id="BC-PUB" placeholder="Publisher name (optional)"></div>
+      <div class="fi"><label>Edition Year</label><input type="number" id="BC-EDYR" placeholder="e.g. 2023" min="1900" max="2099"></div>
+    </div>
+
+    <div class="row2">
+      <div class="fi">
+        <label>Language *</label>
+        <select id="BC-LANG" onchange="toggleCustomLang()">
+          <option value="">-- Select Language --</option>
+          <option value="English">English</option>
+          <option value="Hindi">Hindi</option>
+          <option value="Other">Other Language (Type below)</option>
+        </select>
+        <input type="text" id="BC-LANG-CUSTOM" placeholder="Type language here..." style="margin-top:6px;display:none">
+      </div>
+      <div class="fi"><label>Accession No *</label><input type="text" id="BC-ACC" placeholder="e.g. 5727"></div>
+    </div>
+
+    <div class="row3">
+      <div class="fi"><label>Price of Book (&#8377;)</label><input type="number" id="BC-PRICE" placeholder="e.g. 500" min="0" oninput="calcDiscount()"></div>
+      <div class="fi"><label>Discount (%)</label><input type="number" id="BC-DISC" placeholder="e.g. 10" min="0" max="100" oninput="calcDiscount()"></div>
+      <div class="fi"><label>Price After Discount (&#8377;)</label><input type="number" id="BC-FINAL" placeholder="Auto calculated" readonly style="background:#f0f8ff;color:#1a3a6b;font-weight:700"></div>
+    </div>
+
+    <div class="row2">
+      <div class="fi"><label>Subject / Notes</label><input type="text" id="BC-SUBJ" placeholder="Additional notes (optional)"></div>
+    </div>
+
+    <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap">
+      <button class="bp" onclick="addBookCatalogue()">&#10133; Add Book to Catalogue</button>
+      <button class="bg" onclick="downloadBookCatalogue()">&#11015;&#65039; Download Full Catalogue (CSV)</button>
+    </div>
+    <div style="font-size:12px;font-weight:600;color:#1a3a6b;margin-bottom:8px">Recently Added Books (this session):</div>
+    <div id="NEW-BOOKS-LIST"><p style="font-size:12px;color:#aaa">No books added yet in this session.</p></div>
+  </div>
+
+  <div class="card">
+    <div class="section-title">&#128209; Bulk Delete Issue Records</div>
+    <p style="font-size:12px;color:#666;margin-bottom:10px">Select records to delete. Use with caution &#8212; this cannot be undone.</p>
+    <div style="display:flex;gap:8px;margin-bottom:10px;align-items:center">
+      <button onclick="selAll()" style="font-size:12px;padding:5px 10px">&#9745; Select All</button>
+      <button onclick="selNone()" style="font-size:12px;padding:5px 10px">&#9744; Clear</button>
+      <button class="br" onclick="bulkDel()" style="font-size:12px;padding:5px 10px">&#128465; Delete Selected</button>
+    </div>
+    <div id="BDL">${rbdl()}</div>
+  </div>
+
+  <div class="card" id="REV-CARD">
+    <div class="section-title">&#8617;&#65039; Reverse Wrongly Returned Book</div>
+    <p style="font-size:12px;color:#666;margin-bottom:10px">If a return was recorded by mistake, reverse it here. The book will be marked as active again.</p>
+    <div style="display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap;align-items:center">
+      <input id="RVQ" placeholder="Search returned records..." style="flex:1;min-width:200px" oninput="frev()">
+    </div>
+    <div id="RVTB">${rrevtb(ISS.filter(i=>!!i.rd))}</div>
+  </div>`;
+}
+
+function rrevtb(iss){
+  if(!iss.length)return'<p style="color:#888;font-size:13px;padding:10px">No returned records found.</p>';
+  return`<div class="tw"><table><thead><tr><th>Sr No</th><th>Staff No</th><th>Employee</th><th>Book Title</th><th>Acc No</th><th>Issue Date</th><th>Return Date</th><th>Action</th></tr></thead><tbody>
+  ${iss.slice(0,30).map(i=>`<tr><td>${i.sr}</td><td>${i.sno}</td><td>${i.en}</td><td>${i.bt}</td><td>${i.ba}</td><td>${fd(i.id)}</td><td>${fd(i.rd)}</td>
+  <td><button class="bo" style="font-size:11px;padding:3px 8px" onclick="revRet(${i.sr})">&#8617; Reverse</button></td></tr>`).join('')}
+  </tbody></table></div>`;
+}
+
+function frev(){
+  const q=(document.getElementById('RVQ').value||'').toLowerCase();
+  const iss=ISS.filter(i=>!!i.rd&&(i.en.toLowerCase().includes(q)||i.sno.includes(q)||i.bt.toLowerCase().includes(q)));
+  document.getElementById('RVTB').innerHTML=rrevtb(iss);
+}
+
+function revRet(sr){
+  const i=ISS.find(x=>x.sr===sr);if(!i)return;
+  showModal('&#8617; Reverse Return','Are you sure you want to reverse the return of <b>'+i.bt+'</b> ('+i.ba+') for <b>'+i.en+'</b>? The book will be marked as active again.','Reverse','bo',()=>{
+    i.rd='';const bk=BM[i.ba];if(bk)bk.av=false;
+    if(SHEETS_CONNECTED&&SHEET_URL)saveToSheets('reverseReturn',{srNo:i.sr});
+    go('adm');
+  });
+}
+
+function rbdl(){
+  if(!ISS.length)return'<p style="color:#888;font-size:12px">No records to delete.</p>';
+  return`<div class="tw"><table><thead><tr><th style="width:32px"><input type="checkbox" id="CHK-ALL" onchange="chkAll(this)"></th><th>Sr No</th><th>Staff No</th><th>Employee</th><th>Book</th><th>Issue Date</th><th>Status</th></tr></thead><tbody>
+  ${ISS.map(i=>`<tr><td><input type="checkbox" class="del-chk" data-sr="${i.sr}"></td><td>${i.sr}</td><td>${i.sno}</td><td>${i.en}</td><td>${i.bt}</td><td>${fd(i.id)}</td><td><span class="bdg ${i.rd?'bdn':ov(i)?'blt':'bok'}">${i.rd?'Returned':ov(i)?'Overdue':'Active'}</span></td></tr>`).join('')}
+  </tbody></table></div>`;
+}
+
+function chkAll(cb){document.querySelectorAll('.del-chk').forEach(c=>c.checked=cb.checked);}
+function selAll(){const cb=document.getElementById('CHK-ALL');if(cb)cb.checked=true;document.querySelectorAll('.del-chk').forEach(c=>c.checked=true);}
+function selNone(){const cb=document.getElementById('CHK-ALL');if(cb)cb.checked=false;document.querySelectorAll('.del-chk').forEach(c=>c.checked=false);}
+
+function bulkDel(){
+  const srs=Array.from(document.querySelectorAll('.del-chk:checked')).map(c=>parseInt(c.dataset.sr));
+  if(!srs.length){alert('No records selected.');return;}
+  showModal('&#128465; Confirm Bulk Delete','You are about to permanently delete <b>'+srs.length+'</b> issue record(s). This cannot be undone. Are you sure?','Delete All','br',()=>{
+    srs.forEach(sr=>{
+      const idx=ISS.findIndex(i=>i.sr===sr);
+      if(idx>-1){const bk=BM[ISS[idx].ba];if(bk&&!ISS[idx].rd)bk.av=true;ISS.splice(idx,1);}
+    });
+    if(SHEETS_CONNECTED&&SHEET_URL)saveToSheets('bulkDelete',{srNos:srs.join(',')});
+    go('adm');
+  });
+}
+
+function chpwd(role){
+  const p1=document.getElementById(role==='lib'?'LP1':'AP1').value;
+  const p2=document.getElementById(role==='lib'?'LP2':'AP2').value;
+  if(!p1){alert('Please enter a new password.');return;}
+  if(p1!==p2){alert('Passwords do not match. Please re-enter.');return;}
+  if(p1.length<6){alert('Password must be at least 6 characters.');return;}
+  const empNo=role==='lib'?'898736':'864559';
+  USERS[empNo].pass=p1;
+  alert('Password updated for this session. To make it permanent, update the HTML file and re-upload to GitHub.');
+}
+
+function connSh(){
+  const url=document.getElementById('SH-URL').value.trim();
+  const msg=document.getElementById('SH-MSG');
+  if(!url||!url.includes('script.google.com')){msg.className='mer';msg.innerHTML='&#9940; Please enter a valid Google Apps Script URL.';return;}
+  SHEET_URL=url;
+  msg.className='mwarn';msg.innerHTML='&#9203; Connecting to Google Sheets...';
+  loadFromSheets().then(ok=>{
+    SHEETS_CONNECTED=ok;
+    if(ok){msg.className='mok';msg.innerHTML='&#9989; Successfully connected! All data loaded from Google Sheets.';}
+    else{msg.className='mer';msg.innerHTML='&#9940; Connection failed. Please check the URL and try again.';}
+  });
+}
+
+function testSh(){
+  const url=document.getElementById('SH-URL').value.trim();
+  const msg=document.getElementById('SH-MSG');
+  if(!url){msg.className='mer';msg.innerHTML='&#9940; Please enter a URL first.';return;}
+  msg.className='mwarn';msg.innerHTML='&#9203; Testing connection...';
+  sheetsRequest({action:'ping',url}).then(r=>{
+    if(r&&(r.status==='ok'||r.pong)){msg.className='mok';msg.innerHTML='&#9989; Connection successful! Google Sheets is reachable.';}
+    else{msg.className='mer';msg.innerHTML='&#9940; Connection test failed. Check your Apps Script URL.';}
+  });
+}
+
+function sendOvEmail(){
+  if(!SHEETS_CONNECTED||!SHEET_URL){alert('Please connect to Google Sheets first.');return;}
+  const ovr=ISS.filter(i=>ov(i));
+  if(!ovr.length){alert('No overdue books found at this time.');return;}
+  showModal('&#128231; Send Overdue Emails','Send reminder emails to <b>'+ovr.length+'</b> members with overdue books?','Send All Emails','br',()=>{
+    sheetsRequest({action:'sendOverdueEmails'}).then(r=>{
+      alert(r&&r.status==='ok'?'&#9989; Overdue reminder emails sent successfully!':'&#9940; Email sending failed. Please check Google Sheets connection.');
+    });
+  });
+}
+
+function toggleCustomCat(){
+  const sel=document.getElementById('BC-CAT');
+  const custom=document.getElementById('BC-CAT-CUSTOM');
+  if(sel&&custom)custom.style.display=sel.value==='Others'?'':'none';
+}
+
+function toggleCustomLang(){
+  const sel=document.getElementById('BC-LANG');
+  const custom=document.getElementById('BC-LANG-CUSTOM');
+  if(sel&&custom)custom.style.display=sel.value==='Other'?'':'none';
+}
+
+function calcDiscount(){
+  const price=parseFloat(document.getElementById('BC-PRICE').value)||0;
+  const disc=parseFloat(document.getElementById('BC-DISC').value)||0;
+  const final=price-(price*disc/100);
+  document.getElementById('BC-FINAL').value=disc>0?final.toFixed(2):'';
+}
+
+function addBookCatalogue(){
+  const acc=(document.getElementById('BC-ACC').value||'').trim();
+  const title=(document.getElementById('BC-TITLE').value||'').trim();
+  const auth=(document.getElementById('BC-AUTH').value||'').trim();
+  const pub=(document.getElementById('BC-PUB').value||'').trim();
+  const edyr=(document.getElementById('BC-EDYR').value||'').trim();
+  const price=(document.getElementById('BC-PRICE').value||'').trim();
+  const disc=(document.getElementById('BC-DISC').value||'').trim();
+  const finalP=(document.getElementById('BC-FINAL').value||'').trim();
+  const subj=(document.getElementById('BC-SUBJ').value||'').trim();
+  const pdate=(document.getElementById('BC-PDATE').value||'').trim();
+  const catSel=document.getElementById('BC-CAT').value;
+  const catCustom=(document.getElementById('BC-CAT-CUSTOM').value||'').trim();
+  const category=catSel==='Others'?catCustom:catSel;
+  const langSel=document.getElementById('BC-LANG').value;
+  const langCustom=(document.getElementById('BC-LANG-CUSTOM').value||'').trim();
+  const language=langSel==='Other'?langCustom:langSel;
+  const msg=document.getElementById('BC-MSG');
+
+  if(!acc||!title){msg.className='mer';msg.innerHTML='&#9940; Accession No and Book Title are required.';return;}
+  if(!pdate){msg.className='mer';msg.innerHTML='&#9940; Purchase Date is required.';return;}
+  if(!category){msg.className='mer';msg.innerHTML='&#9940; Please select or enter a Category.';return;}
+  if(!language){msg.className='mer';msg.innerHTML='&#9940; Please select Language.';return;}
+  if(BM[acc]){msg.className='mer';msg.innerHTML='&#9940; Accession No <b>'+acc+'</b> already exists in catalogue.';return;}
+
+  const newBook={sr:BOOKS.length+1,acc,title,author:auth,pub,edyr,category,language,price,disc,finalP,subject:subj,pdate,av:true};
+  BOOKS.push(newBook);BM[acc]=newBook;NEW_BOOKS.push(newBook);
+
+  if(SHEETS_CONNECTED&&SHEET_URL){
+    sheetsRequest({action:'addBook',accNo:acc,title,author:auth,publisher:pub,editionYear:edyr,category,language,price,discount:disc,priceAfterDiscount:finalP,subject:subj,purchaseDate:pdate}).then(r=>{
+      if(r&&r.status==='ok'){msg.className='mok';msg.innerHTML='&#9989; Book "<b>'+title+'</b>" (Acc: '+acc+') added and saved to Google Sheets.';}
+      else{msg.className='mwarn';msg.innerHTML='&#9888;&#65039; Book added locally. Sheets save may have failed &#8212; please verify.';}
+    });
+  }else{
+    msg.className='mok';msg.innerHTML='&#9989; Book "<b>'+title+'</b>" (Acc: '+acc+') added to catalogue. Connect Google Sheets to save permanently.';
+  }
+
+  ['BC-ACC','BC-TITLE','BC-AUTH','BC-PUB','BC-EDYR','BC-PRICE','BC-DISC','BC-FINAL','BC-SUBJ','BC-PDATE'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('BC-CAT').value='';
+  document.getElementById('BC-CAT-CUSTOM').style.display='none';
+  document.getElementById('BC-LANG').value='';
+  document.getElementById('BC-LANG-CUSTOM').style.display='none';
+
+  const nbl=document.getElementById('NEW-BOOKS-LIST');
+  if(nbl)nbl.innerHTML=NEW_BOOKS.length===0?'<p style="font-size:12px;color:#aaa">No books added yet.</p>':
+    `<div class="tw"><table><thead><tr><th>Acc No</th><th>Title</th><th>Author</th><th>Category</th><th>Language</th><th>Purchase Date</th><th>Price</th><th>After Discount</th></tr></thead><tbody>
+    ${NEW_BOOKS.map(b=>`<tr><td>${b.acc}</td><td>${b.title}</td><td>${b.author||'&#8212;'}</td><td>${b.category||'&#8212;'}</td><td>${b.language||'&#8212;'}</td><td>${fd(b.pdate)}</td><td>${b.price?'&#8377;'+b.price:'&#8212;'}</td><td>${b.finalP?'&#8377;'+b.finalP:'&#8212;'}</td></tr>`).join('')}
+    </tbody></table></div>`;
+}
+
+function downloadBookCatalogue(){
+  const hdr=['Sr No','Accession No','Book Title','Author','Publisher','Edition Year','Category','Language','Price','Discount %','Price After Discount','Subject/Notes','Purchase Date','Status'];
+  const rows=BOOKS.map(b=>[b.sr,b.acc,'"'+b.title+'"','"'+(b.author||'')+'"','"'+(b.pub||'')+'"',b.edyr||'',b.category||'',b.language||'',b.price||'',b.disc||'',b.finalP||'','"'+(b.subject||'')+'"',b.pdate||fd(b.pdate)||'',b.av?'Available':'Issued']);
+  const csv=[hdr,...rows].map(r=>r.join(',')).join('\n');
+  const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='CIBM_Book_Catalogue_'+td().replace(/-/g,'')+'.csv';a.click();
+}
+
+// BOOKS DATA - Will be loaded from Google Sheets. Placeholder with existing books.
+const BOOKS_RAW=[
+{sr:1,acc:'40',title:'BANKING  -COMP'},
+{sr:2,acc:'144',title:'PSYCHOLOGY IN INDUSTRY'},
+{sr:3,acc:'146',title:'MANAGEMENT LEADERS MANUAL'},
+{sr:4,acc:'162',title:'MANAGEMENT TASK, RESPONSIBILITIES,'},
+{sr:5,acc:'179',title:'PRINCIPLES OF HUMAN RELATIONS-COMP'},
+{sr:6,acc:'184',title:'ADMINISTRATOR- CASES ON HUMAN RELATIONS'},
+{sr:7,acc:'189',title:'HUMAN RELATIONS AT WORK - DYNAMICS OF'},
+{sr:8,acc:'191',title:'HUMAN SIDE OF MANAGEMENT -COMP'},
+{sr:9,acc:'266',title:'CONSTITUTION OF INDIA'},
+{sr:10,acc:'292',title:'ENGLISH GRAMMER, COMPOSITION AND'},
+{sr:11,acc:'317',title:'SWAMI VIVEKANANDA ON UNIVERSAL ETHICS &'},
+{sr:12,acc:'393',title:'BHARGAWA\'S STANDARD ILLUSTRATED DIC-'},
+{sr:13,acc:'395',title:'SERVICE CONDITIONS OF BANK EMPLOYEES'},
+{sr:14,acc:'397',title:'CONCISE OXFORD DICTIONARY OF CURRENT'},
+{sr:15,acc:'488',title:'I AM OK YOU\'RE OK'},
+{sr:16,acc:'489',title:'TRAINING FOR DEVELOPMENT'},
+{sr:17,acc:'496',title:'GAMES PEOPLE PLAY'},
+{sr:18,acc:'519',title:'THE CONSTITUTION OF INDIA UPTO AUG 1977'},
+{sr:19,acc:'520',title:'FORGERIES,CHEATING,CRIMINAL LIABILITY'},
+{sr:20,acc:'535',title:'DEVELOPING HUMAN RESOURCES-COMP'},
+{sr:21,acc:'536',title:'A NEW SELF -COMP'},
+{sr:22,acc:'548',title:'THE CONSTITUTION OF INDIA'},
+{sr:23,acc:'564',title:'CANARA BANK OFFICER EMPLOYEES REGULATION'},
+{sr:24,acc:'607',title:'JOINING TOGETHER'},
+{sr:25,acc:'608',title:'SHISHYAGATHE'},
+{sr:26,acc:'648',title:'CHAMBER\'S 20TH CENTURY DICTIONARY'},
+{sr:27,acc:'665',title:'HANDBOOK OF SOCIAL PSYCHOLOGY - VOL 1'},
+{sr:28,acc:'666',title:'THE HANDBOOK OF SOCIAL PSYCHOLOGY - VOL2'},
+{sr:29,acc:'667',title:'THE HANDBOOK OF SOCIAL PSYCHOLOGY - VOL3'},
+{sr:30,acc:'668',title:'THE HANDBOOK OF SOCIAL PSYCHOLOGY-VOL4'},
+{sr:31,acc:'669',title:'THE HANDBOOK OF SOCIAL PSYCHOLOGY-VOL5'},
+{sr:32,acc:'681',title:'A BANKERS HANDBOOK ON DISCIPLINE AND'},
+{sr:33,acc:'715',title:'ENGLISH GRAMMAR AND CORRESPONDENC'},
+{sr:34,acc:'719',title:'ATMAN AND BRAHMAN IN VEDIC RELIGION'},
+{sr:35,acc:'720',title:'BETWEEN THE LINES'},
+{sr:36,acc:'779',title:'HIGH SHCOOL ENGLISH GRAMMAR AND COMPOSI-'},
+{sr:37,acc:'783',title:'GUIDE TO DISCIPLINARY ACTION-COMP'},
+{sr:38,acc:'787',title:'LEAD BANK SCHEME - CONCEPTS AND PROB-'},
+{sr:39,acc:'805',title:'GUIDE TO DISCIPLINARY ACTION- DELETED'},
+{sr:40,acc:'810',title:'REGULATIONS.-COMP'},
+{sr:41,acc:'811',title:'CANARA BANK (OFFICERS ) SERVICE REGU-'},
+{sr:42,acc:'812',title:'CANARA BANK (OFFICERS) SERVICE REGULA-'},
+{sr:43,acc:'819',title:'MAKING THE TRAINING PROCESS WORK'},
+{sr:44,acc:'844',title:'HAND BOOK OF SERVICE CONDITIONS FOR WORK'},
+{sr:45,acc:'845',title:'SERVICE CONDITIONS OF BANK EMPLOYEES'},
+{sr:46,acc:'852',title:'GUIDE TO DISCIPLINARY ACTION-COMP'},
+{sr:47,acc:'853',title:'GUIDE TO DISCIPLINARY ACTION-COMP'},
+{sr:48,acc:'854',title:'GUIDE TO DISCIPLINARY ACTION- COMP'},
+{sr:49,acc:'883',title:'HANDBOOK OF TRAINING IN PUBLIC SECTOR BA'},
+{sr:50,acc:'884',title:'HANDBOOK OF TRAINING IN PUBLIC SEC BANKS'},
+{sr:51,acc:'885',title:'HANDBOOK OF TRAINING IN PUBLIC SEC BANKS'},
+{sr:52,acc:'912',title:'JUDGEMENT ON BANKING \'N\' SERVICES'},
+{sr:53,acc:'915',title:'THE MANAGEMENT OF MANAGEMENT-COMP'},
+{sr:54,acc:'989',title:'VEDANTA THE SCIENCE OF LIFE I'},
+{sr:55,acc:'990',title:'VEDANTA THE SCIENCE OF LIFE II'},
+{sr:56,acc:'991',title:'VEDANTA THE SCIENCE OF LIFE III'},
+{sr:57,acc:'998',title:'A HANDBOOK OF TRAINING MANAGEMENT'},
+{sr:58,acc:'1003',title:'TEACHING & TRAINING METHODS FOR MANAGEMENT DEVELOPMENT'},
+{sr:59,acc:'1004',title:'WRITE BETTER, SPEAK BETTER- COMP'},
+{sr:60,acc:'1005',title:'HOW TO INCREASE YOUR WORD POWER-COMP'},
+{sr:61,acc:'1009',title:'WELFARE STATE AND BANK NATIONALISATION'},
+{sr:62,acc:'1013',title:'GUIDE TO DISCIPLINARY ACTION'},
+{sr:63,acc:'1021',title:'LEGAL DECISIONS AFFECTING BANKERS'},
+{sr:64,acc:'1031',title:'CUSTOMER SERVICE IN BANKS FINAL REPORT'},
+{sr:65,acc:'1046',title:'DICTIONARY OF BANKING TERMS'},
+{sr:66,acc:'1142',title:'HOW TO MEASURE HUMAN RESOURCES'},
+{sr:67,acc:'1151',title:'THE WINNINK STREAK'},
+{sr:68,acc:'1152',title:'MANAGING THE DIVIDE  - COMP'},
+{sr:69,acc:'1171',title:'SUPERBOSS'},
+{sr:70,acc:'1179',title:'A BANKER\'S HANDBOOK ON DISCIPLINE &'},
+{sr:71,acc:'1183',title:'BANK MECHANISATION'},
+{sr:72,acc:'1192',title:'BANKING LAW LEADING INDIAN CASES'},
+{sr:73,acc:'1193',title:'KEY NOTE'},
+{sr:74,acc:'1197',title:'UNDERSTANDING HUMAN BEHAVIOUR'},
+{sr:75,acc:'1199',title:'WINNING STRATEGIES FOR MANAGING PEOPLE'},
+{sr:76,acc:'1211',title:'WHOLESOME DIET'},
+{sr:77,acc:'1213',title:'HEADACHES'},
+{sr:78,acc:'1216',title:'BONES & MUSCLES'},
+{sr:79,acc:'1217',title:'THE PRUDENT USE OF MEDICINES'},
+{sr:80,acc:'1218',title:'FIGHTING CANCER'},
+{sr:81,acc:'1219',title:'COPING WITH THE COMMON COLD'},
+{sr:82,acc:'1226',title:'SSI-ESSENTIALS OF MARKETING'},
+{sr:83,acc:'1230',title:'20TH CENTURY  - COMP'},
+{sr:84,acc:'1233',title:'WHY THINGS GO WRONG'},
+{sr:85,acc:'1234',title:'VIVERKANANDA HIS GOSPEL OF MAN-MAKING'},
+{sr:86,acc:'1239',title:'CRIMES AND SECURITY IN BANKS'},
+{sr:87,acc:'1241',title:'JONATHAN LIVINGSTON SEAGULL'},
+{sr:88,acc:'1259',title:'MULTIPLE UNIONISM IN BANKS'},
+{sr:89,acc:'1263',title:'SANJIVA ROW\'S COMMENTARIES ON'},
+{sr:90,acc:'1274',title:'MARKETING KEY TO BUSINESS SUCCESS TO-DAY'},
+{sr:91,acc:'1275',title:'MARKETING WAREFARE'},
+{sr:92,acc:'1276',title:'REALISATION IN MANAGEMENT'},
+{sr:93,acc:'1286',title:'TRAINING OF DEVELOPMENT'},
+{sr:94,acc:'1301',title:'METHODS AND TECHNIQUES OF TEACHING'},
+{sr:95,acc:'1307',title:'HOW TO STOP WORRYING AND START LIVING'},
+{sr:96,acc:'1308',title:'EXCELLENCE IN MANAGEMENT'},
+{sr:97,acc:'1311',title:'ENTHUSIASM MAKES THE DIFFERENCE'},
+{sr:98,acc:'1313',title:'ARE YOU KILLING YOUR SELF, MR.EXECUTIVE'},
+{sr:99,acc:'1314',title:'THE PRACTICE OF MANAGEMENT'},
+{sr:100,acc:'1316',title:'PRACTICLE NATURE CURE'},
+{sr:101,acc:'1317',title:'MADE IN JAPAN - COMP'},
+{sr:102,acc:'1322',title:'A PASSION FOR EXCELLENCE'},
+{sr:103,acc:'1323',title:'REALITIES IN MANAGEMENT'},
+{sr:104,acc:'1325',title:'IN SEARCH OF EXCELLENCE'},
+{sr:105,acc:'1326',title:'FOURTH EYE'},
+{sr:106,acc:'1329',title:'PEOPLE MANAGEMENT'},
+{sr:107,acc:'1331',title:'TRAINING FOR MANAGEMENT DEVELOPMENT'},
+{sr:108,acc:'1336',title:'BASIC MANAGERIAL SKILLS FOR ALL'},
+{sr:109,acc:'1338',title:'IN SEARCH OF LEADERSHIP'},
+{sr:110,acc:'1339',title:'PUBLIC SPEAKING PAINLESS PATH TO THE'},
+{sr:111,acc:'1341',title:'PULLING YOUR OWN STRINGS'},
+{sr:112,acc:'1342',title:'HOW TO READ A PERSON LIKE A BOOK'},
+{sr:113,acc:'1343',title:'THE USE OF LATERAL THINKING'},
+{sr:114,acc:'1348',title:'MANAGEMENT  - THE RING SIDE VIEW'},
+{sr:115,acc:'1350',title:'1000 WAYS TO INCREASE YOUR SALES'},
+{sr:116,acc:'1360',title:'SEARCH AND RESEARCH'},
+{sr:117,acc:'1367',title:'WEBSLERS COLLEGIATE THESEURUS'},
+{sr:118,acc:'1370',title:'PRINCIPLES OF MANAGEMENT'},
+{sr:119,acc:'1371',title:'PARKINSON : THE LAW'},
+{sr:120,acc:'1372',title:'THE FRONTIERS OF MANAGEMENT'},
+{sr:121,acc:'1373',title:'HOW TO ENJOY YOUR LIFE AND YOUR JOB'},
+{sr:122,acc:'1374',title:'THE POWER OF POSITIVE THINKING'},
+{sr:123,acc:'1376',title:'ENTHUSIASM MAKES THE DIFFERENCE'},
+{sr:124,acc:'1377',title:'ALL ABOUT PR'},
+{sr:125,acc:'1378',title:'FRAUDS AND BANKERS - PREVENTION AND'},
+{sr:126,acc:'1382',title:'A CRITICAL COMMENTARY ON PHILOSOPHY OF'},
+{sr:127,acc:'1385',title:'MARKETING MANAGEMENT'},
+{sr:128,acc:'1386',title:'MAGERIAL EFFECTIVENESS AND QUALITY OF'},
+{sr:129,acc:'1389',title:'TIME MANAGEMENT FOR EXECUTIVES'},
+{sr:130,acc:'1391',title:'THE IBM WAY'},
+{sr:131,acc:'1406',title:'MISCONDUCT IN EMPLOYMENT'},
+{sr:132,acc:'1407',title:'LAW AND PROCEDURE OF DEPARTMENTAL'},
+{sr:133,acc:'1408',title:'LAW AND PROCEDURE OF'},
+{sr:134,acc:'1416',title:'THE WORLDS GREAT ACHIEVEMENTS AND'},
+{sr:135,acc:'1417',title:'WATCH YOUR FIGURES'},
+{sr:136,acc:'1424',title:'CONSERVATION CONTROL SKILLS FOR MANAGERS'},
+{sr:137,acc:'1425',title:'WHO CARES WINS'},
+{sr:138,acc:'1426',title:'CREATING THE HANDS ON MANAGER'},
+{sr:139,acc:'1428',title:'THE BASIC ESSENTIALS OF COUNSELLING'},
+{sr:140,acc:'1429',title:'CONFLICTS - A BETTER WAY TO RESOLVE THEM'},
+{sr:141,acc:'1430',title:'IN PURSUIT OF EXCELLENCE - INDIAN WAY'},
+{sr:142,acc:'1446',title:'THE ART OF SUPPORTIVE LEADERSHIP'},
+{sr:143,acc:'1453',title:'MITRAS LEGAL AND COMMERCIAL DICTIONARY'},
+{sr:144,acc:'1457',title:'BODY LANGUAGE'},
+{sr:145,acc:'1461',title:'DISCIPLINARY ACTION IN BANKS'},
+{sr:146,acc:'1465',title:'CONCEPTUAL SELLING'},
+{sr:147,acc:'1466',title:'PERSONNEL - THE HUMAN PROBLEMS OF'},
+{sr:148,acc:'1467',title:'PERSONAL MANAGEMENT'},
+{sr:149,acc:'1468',title:'THE DYNAMICS OF HUMAN COMMUNICATIONS'},
+{sr:150,acc:'1469',title:'HUMAN MEMORY AND COGNITION'},
+{sr:151,acc:'1470',title:'CONSUMER BEHAVIOUR CONCEPTS AND'},
+{sr:152,acc:'1471',title:'ORGANISATION THEORY AND BEHAVIOUR'},
+{sr:153,acc:'1472',title:'MARKETING MANAGEMENT IN'},
+{sr:154,acc:'1473',title:'IMPROVING LEADERSHIP PERFORMANCE'},
+{sr:155,acc:'1475',title:'ACHIEVING MANAGERIAL EXCELLANCE'},
+{sr:156,acc:'1480',title:'UNDERSTANDING MANAGEMENT'},
+{sr:157,acc:'1481',title:'GREAT INDECISION MANAGEMENT'},
+{sr:158,acc:'1482',title:'THE ONE MINUTE MANAGER GETS FIT'},
+{sr:159,acc:'1498',title:'THE WORLD BOOK ENCYCLOPEDIA VOL -1'},
+{sr:160,acc:'1499',title:'THE WORLD BOOK ENCYCLOPEDIA VOL II'},
+{sr:161,acc:'1500',title:'THE WORLDBOOK ENCYCLOPEDIA VOL III'},
+{sr:162,acc:'1501',title:'THE WORLD BOOK ENCYCLOPEDIA  VOL-4'},
+{sr:163,acc:'1502',title:'THE WORLDBOOK ENCYCLOPEDIA  VOL-5'},
+{sr:164,acc:'1503',title:'THE WORLDBOOK ENCYCLOPEDIA   VOL-6'},
+{sr:165,acc:'1504',title:'THE WORLDBOOK ENCYCLOPEDIA  VOL-7'},
+{sr:166,acc:'1505',title:'THE WORLDBOOK OF ENCYCLOPEDIA VOL-8'},
+{sr:167,acc:'1506',title:'THE WORLDBOOK ENCYCLOPEDIA  VOL-9'},
+{sr:168,acc:'1507',title:'THE WORLDBOOK ENCYCLOPEDIA  VOL-9'},
+{sr:169,acc:'1508',title:'THE WORLDBOOK ENCYCLOPEDIA  VOL-10'},
+{sr:170,acc:'1509',title:'THE WORLDBOOK ENCYCLOPEDIA  VOL-12'},
+{sr:171,acc:'1510',title:'THE WORLD BOOK OF ENCYCLOPEDIA  13'},
+{sr:172,acc:'1511',title:'THE WORLD BOOK OF ENCYCLOPEDIA  VOL.14'},
+{sr:173,acc:'1512',title:'THE WORLD BOOK OF ENCYCLOPEDIA VOL.15'},
+{sr:174,acc:'1513',title:'THE WORLD BOOK OF ENCYCLOPEDIA VOL. 16'},
+{sr:175,acc:'1514',title:'THE WORLD BOOK OF ENCYCLOPEDIA VOL. 17'},
+{sr:176,acc:'1515',title:'THE WORLD BOOK OF ENCYCLOPEDIA VOL 18'},
+{sr:177,acc:'1516',title:'THE WORLD BOOK OF ENCYCLOPEDIA VOL. 19'},
+{sr:178,acc:'1517',title:'THE WORLD BOOK OF ENCYCLOPEDIA VOL. 20'},
+{sr:179,acc:'1518',title:'THE WORLD BOOK OF ENCYCLOPEDIA VOL. 21'},
+{sr:180,acc:'1519',title:'THE WORLD BOOK OF ENCYCLOPEDIA VOL.22'},
+{sr:181,acc:'1525',title:'GRAMMER & STYLE GUIDE - COMP'},
+{sr:182,acc:'1526',title:'THE SYSTEMETIC DESIGN OF TRAINING COURSE'},
+{sr:183,acc:'1528',title:'METHODS OF TRAINING INDIVIDUALISED'},
+{sr:184,acc:'1529',title:'METHODS OF TRAINING RESOURCE BASED &'},
+{sr:185,acc:'1530',title:'LEARNER PSYCHOLOGY'},
+{sr:186,acc:'1531',title:'ASSESSMENT AND EVALUATION IN TRAINING'},
+{sr:187,acc:'1532',title:'THE MANAGEMENT OF TRAINING'},
+{sr:188,acc:'1533',title:'GRAPHICS IN TRAINING'},
+{sr:189,acc:'1534',title:'AUDIO TECHNIQUES IN TRAINING'},
+{sr:190,acc:'1535',title:'PROJECTED STILL IMAGES IN TRAINING'},
+{sr:191,acc:'1536',title:'USING VIDEO IN TRAINING'},
+{sr:192,acc:'1537',title:'COMPUTER BASED TRAINING'},
+{sr:193,acc:'1538',title:'INTERACTIVE VIDEO IN TRAINING'},
+{sr:194,acc:'1541',title:'BASICS OF MAN MANAGEMENT'},
+{sr:195,acc:'1542',title:'MANAGEMENT TRAINING IN ORGANISATIONS'},
+{sr:196,acc:'1545',title:'BANKING SYSTEMS OF THE WORLD'},
+{sr:197,acc:'1558',title:'HOW TO DELEGATE'},
+{sr:198,acc:'1563',title:'ANGER.  HOW TO LIVE WITH & WITHOUT IT'},
+{sr:199,acc:'1564',title:'CHAMBERS 20TH CENTURY DICTIONERY'},
+{sr:200,acc:'1565',title:'SPEEKING OF: FITNESS OVER 40'},
+{sr:201,acc:'1569',title:'THE MENOPAUSE'},
+{sr:202,acc:'1570',title:'MENTAL TENSION AND ITS CURE'},
+{sr:203,acc:'1571',title:'SENIORS AND NUTRITION'},
+{sr:204,acc:'1577',title:'ORGANISATIONAL BEHAVIOUR TEXT AND CASES'},
+{sr:205,acc:'1578',title:'HUMAN BEHAVIOUR AT WORK'},
+{sr:206,acc:'1584',title:'YOU CAN NEGOTIATE ANYTHING'},
+{sr:207,acc:'1591',title:'MOTION AND TIME STUDY'},
+{sr:208,acc:'1592',title:'THE MECHANISM OF MIND'},
+{sr:209,acc:'1593',title:'ATLAS OF MANAGEMENT THINKING'},
+{sr:210,acc:'1594',title:'THE ART OF THE DEAL'},
+{sr:211,acc:'1596',title:'THE EXECUTIVE WHIRL'},
+{sr:212,acc:'1597',title:'PEAK PERFORMERS'},
+{sr:213,acc:'1598',title:'SWIM WITH THE SHARKS WITHOUT BEING'},
+{sr:214,acc:'1599',title:'THE ART OF DAMAGING'},
+{sr:215,acc:'1601',title:'TALKING STRAIGHT'},
+{sr:216,acc:'1622',title:'DEVELOPING LEADERS'},
+{sr:217,acc:'1632',title:'BUSINESS CORRESPONDENCE REPORT'},
+{sr:218,acc:'1635',title:'BRAIN TEASERS'},
+{sr:219,acc:'1641',title:'MANAGEMENT INFORMATION SYSTEM'},
+{sr:220,acc:'1646',title:'GETTING THE BEST OUT OF YOURSELF AND'},
+{sr:221,acc:'1647',title:'SUCCESS SECRETS'},
+{sr:222,acc:'1650',title:'LEGAL THESAURUS'},
+{sr:223,acc:'1651',title:'DICTIONARY OF FINANCE'},
+{sr:224,acc:'1652',title:'THE PERFECT COVER LETTER'},
+{sr:225,acc:'1654',title:'HOW HOT A MANAGER ARE YOU'},
+{sr:226,acc:'1655',title:'WHAT THEY STILL DON\'T TEACH YOU AT'},
+{sr:227,acc:'1659',title:'PRINCIPLES OF MANAGEMENT INFORMATION'},
+{sr:228,acc:'1673',title:'THE PAPER WORK JUNGLE HOW TO GET'},
+{sr:229,acc:'1675',title:'WELL MADE IN AMERICA'},
+{sr:230,acc:'1677',title:'BANKING LAW AND PRACTICE IN INDIA'},
+{sr:231,acc:'1678',title:'HINDU LAW PRINCIPLES AND PRECEDINGS'},
+{sr:232,acc:'1679',title:'LAW OF MORTGAGE'},
+{sr:233,acc:'1684',title:'HUMOUR PRODUCTIVITY VOL I  - COMP'},
+{sr:234,acc:'1685',title:'HUMOUR PRODUCTIVITY  VOL. II - COMP'},
+{sr:235,acc:'1689',title:'UNDERSTANDING EXECUTIVE STRESS'},
+{sr:236,acc:'1700',title:'EFFECTIVE PSYCHOLOGY FOR MANAGERS'},
+{sr:237,acc:'1701',title:'ARE YOU COMMUNICATING'},
+{sr:238,acc:'1703',title:'THE MONEY MASTERS'},
+{sr:239,acc:'1705',title:'THE MANAGER\'S PROBLEM SOLVER'},
+{sr:240,acc:'1706',title:'GETTING THINGS DONE'},
+{sr:241,acc:'1709',title:'DIGESTIVE DISORDERS'},
+{sr:242,acc:'1710',title:'STRESS AND ITS MANAGEMENT BY YOGA'},
+{sr:243,acc:'1712',title:'DEVELOPMENT'},
+{sr:244,acc:'1715',title:'THE ART OF MANAGING'},
+{sr:245,acc:'1716',title:'IMPROVING INTERPERSONAL RELATIONS'},
+{sr:246,acc:'1717',title:'THE SKILLS OF MANGEMENT'},
+{sr:247,acc:'1718',title:'THE SKILLS OF LEADERSHIP'},
+{sr:248,acc:'1719',title:'THE SKILLS OF TRAINING'},
+{sr:249,acc:'1722',title:'MANAGING PEOPLE AND PROBLEMS'},
+{sr:250,acc:'1749',title:'SELF LETTER DRAFTING COURSE'},
+{sr:251,acc:'1753',title:'PETER\'S QUOTATION\'S IDEAS FOR OUR TIME'},
+{sr:252,acc:'1755',title:'THE 44 MOST COMMON MANAGEMENT MISTAKES'},
+{sr:253,acc:'1757',title:'COMMON SENSE TRAINING'},
+{sr:254,acc:'1758',title:'HIGH PERFORMANCE LEADERSHIP'},
+{sr:255,acc:'1758',title:'HIGH PERFORMANCE LEADERSHIP'},
+{sr:256,acc:'1759',title:'HOW TO ZIG IN A ZGGING WORLD'},
+{sr:257,acc:'1760',title:'THE MANAGER\'S HANDBOOK'},
+{sr:258,acc:'1763',title:'MANAGEMENT TRAINING FOR PRODUCTIVITY'},
+{sr:259,acc:'1765',title:'TAKING CHARGE'},
+{sr:260,acc:'1767',title:'MANAGING PEOPLE AT WORK'},
+{sr:261,acc:'1768',title:'EXCELLENCE THROUGH PARTICIPATION'},
+{sr:262,acc:'1769',title:'TRAINING FOR DEVELOPMENT'},
+{sr:263,acc:'1770',title:'BUSINESS MANAGEMENT AND POLICY'},
+{sr:264,acc:'1772',title:'PEPTIC ULCERS'},
+{sr:265,acc:'1776',title:'HYSTERECTOMEY'},
+{sr:266,acc:'1785',title:'BACK PAIN'},
+{sr:267,acc:'1786',title:'YOGASANAS AND SADHANA'},
+{sr:268,acc:'1806',title:'ENCYCLOPEDIA OF PROFESSIONAL MGT VOL I'},
+{sr:269,acc:'1807',title:'ENCYCLOPEDIA OF PROFESSIONAL MGT VOL 1'},
+{sr:270,acc:'1808',title:'INFORMATION SYSTEMS'},
+{sr:271,acc:'1829',title:'THE CHIPMAKERS'},
+{sr:272,acc:'1830',title:'THE PUZZLE MASTER'},
+{sr:273,acc:'1831',title:'THE SOFTWARE CHALLENGE'},
+{sr:274,acc:'1832',title:'COMPUTERS AND COSMOS'},
+{sr:275,acc:'1834',title:'THE HUMAN BODY'},
+{sr:276,acc:'1838',title:'CHARACTER'},
+{sr:277,acc:'1849',title:'MENTAL HEALTH'},
+{sr:278,acc:'1850',title:'THE MIRACLE OF MOTIVATION'},
+{sr:279,acc:'1863',title:'HIGH SCHOOL ENGLISH GRAMMER AND'},
+{sr:280,acc:'1875',title:'MANAGEMENT'},
+{sr:281,acc:'1879',title:'TREATIES ON F E RS (LAW &PRACTICE)'},
+{sr:282,acc:'1885',title:'PERSONNEL/HUMAN RESOURCES MANAGEMENT'},
+{sr:283,acc:'1886',title:'THE TRANSCENDENTAL MEDITITION - TM BOOK'},
+{sr:284,acc:'1887',title:'FOUNDATIONS OF MANEGERIAL WORK:'},
+{sr:285,acc:'1890',title:'STRESS MANAGEMENT'},
+{sr:286,acc:'1891',title:'LEARNING & BEHAVIOUR'},
+{sr:287,acc:'1902',title:'THE NEW ILLUSTRATED MEDICAL'},
+{sr:288,acc:'1903',title:'THE NEW ILLUSTRATED MEDICAL ENCYLOPEDIA'},
+{sr:289,acc:'1904',title:'THE NEW ILLUSTRATED MEDICAL ENCYCLOPEDIA'},
+{sr:290,acc:'1905',title:'THE NEW ILLUSTRATED MEDICAL ENCYCLOPEDIA'},
+{sr:291,acc:'1906',title:'LABOUR LAWS FOR THE EMPLOYER'},
+{sr:292,acc:'1923',title:'NEUROLOGY AND WHAT LIES BEYOND'},
+{sr:293,acc:'1924',title:'BHAGAVADGITA AND MODERN LIFE'},
+{sr:294,acc:'1925',title:'FOUNDATIONS OF INDIAN CULTURE'},
+{sr:295,acc:'1926',title:'OUR CULTURE'},
+{sr:296,acc:'1927',title:'BHAGAVADGITA'},
+{sr:297,acc:'1928',title:'UPANISHADS'},
+{sr:298,acc:'1929',title:'LIVING BIOGRAPHIES OF GREAT'},
+{sr:299,acc:'1932',title:'LIVING BIOGRAPHIES OF GREAT PHILOSPHERS'},
+{sr:300,acc:'1934',title:'RELEVANCE OF OUR CULTURAL HERITAGE TO'},
+{sr:301,acc:'1935',title:'WHAT LIFE HAS TAUGHT ME'},
+{sr:302,acc:'1936',title:'YOGA FOR STUDENTS'},
+{sr:303,acc:'1938',title:'LAWS OF HEALTH'},
+{sr:304,acc:'1939',title:'NEHRU MEMORIAL LECTURES 1967-72-DELETED'},
+{sr:305,acc:'1940',title:'NEHRU MEMORIAL LECTURES 1973-79-DELETED'},
+{sr:306,acc:'1945',title:'RESEARCH METHODOLOGY METHODS &'},
+{sr:307,acc:'1948',title:'MANAGING ORGANISATIONAL BEHAVIOUR'},
+{sr:308,acc:'1949',title:'ORGANISATION THEORY AND MANAGEMENT'},
+{sr:309,acc:'1950',title:'GRENTHASTHA GEDEGALU (PROVERBS &'},
+{sr:310,acc:'1951',title:'GRENTHASTHA GEDEGALU'},
+{sr:311,acc:'1952',title:'DISCOVER YOUR POSSIBILITIES'},
+{sr:312,acc:'1958',title:'HUMAN RESOURCE DEVELOPMENT CONCEPTUAL'},
+{sr:313,acc:'1961',title:'ORGANISATIONAL BEHAVIOUR'},
+{sr:314,acc:'1962',title:'ABNORMAL PSYCHOLOGY'},
+{sr:315,acc:'1965',title:'DEVELOPING ENGLISH COMPREHENSION'},
+{sr:316,acc:'1965',title:'DEVELOPING ENGLISH COMPREHENSION'},
+{sr:317,acc:'1967',title:'SPEAKING OF YOGA AND PRACTICAL GUIDE'},
+{sr:318,acc:'1998',title:'MANAGING THE DIVIDE'},
+{sr:319,acc:'1999',title:'SELECT READINGS IN LEADERSHIP'},
+{sr:320,acc:'2012',title:'IRRECONCILABLE DIFFERENCES'},
+{sr:321,acc:'2014',title:'MODERN MANAGEMENT & MACHIAVELLI'},
+{sr:322,acc:'2021',title:'THE MC GRAW HILL 36, HOUR MANAGEMENT'},
+{sr:323,acc:'2025',title:'INSPIRING INCIDENTS IN THE LIVES OF THE'},
+{sr:324,acc:'2027',title:'MEMORABLE WIT WISDOM & HUMOUR'},
+{sr:325,acc:'2028',title:'INDIAN EDUCATION'},
+{sr:326,acc:'2029',title:'MANAGING QUALITY'},
+{sr:327,acc:'2030',title:'ON LEADERSHIP'},
+{sr:328,acc:'2084',title:'ENGLISH GRAMMER COMPOSITION & CORRESPONDENCE'},
+{sr:329,acc:'2085',title:'VIVEKANANDA'},
+{sr:330,acc:'2087',title:'SERVANTS NOT MASTERS'},
+{sr:331,acc:'2088',title:'WELFARE STATE AND BANK NATIONALISATION'},
+{sr:332,acc:'2091',title:'BEHAVIOURAL EXERCISES & GAMES- DELETED'},
+{sr:333,acc:'2093',title:'IN SEARCH OF TOMORROW'},
+{sr:334,acc:'2095',title:'THE NEW MANAGEMENT'},
+{sr:335,acc:'2097',title:'DECISION TRAPS'},
+{sr:336,acc:'2098',title:'WHAT THEY REALLY TEACH YOU AT THE'},
+{sr:337,acc:'2099',title:'SUPER BOSS'},
+{sr:338,acc:'2101',title:'MANAGEMENT POLICY AND STRATEGY'},
+{sr:339,acc:'2105',title:'THE BODY'},
+{sr:340,acc:'2106',title:'HEALTH AND DISEASE'},
+{sr:341,acc:'2107',title:'MYSTERIOUS CREATURES'},
+{sr:342,acc:'2108',title:'HAUNTING'},
+{sr:343,acc:'2109',title:'COSMIC CONNECTIONS'},
+{sr:344,acc:'2110',title:'MIND AND MATTER'},
+{sr:345,acc:'2111',title:'PSYCHIC POWERS'},
+{sr:346,acc:'2112',title:'PHANTOM ENCOUNTERS'},
+{sr:347,acc:'2113',title:'PSYCHIC VOYAGES'},
+{sr:348,acc:'2114',title:'THE UFO PHENOMENON'},
+{sr:349,acc:'2115',title:'VISIONS AND PROPHECIES'},
+{sr:350,acc:'2134',title:'MANAGING YOUR OWN CAREER'},
+{sr:351,acc:'2135',title:'MANAGING YOUR TIME'},
+{sr:352,acc:'2139',title:'THE MIND'},
+{sr:353,acc:'2140',title:'FOOD AND NUTRITION'},
+{sr:354,acc:'2142',title:'PSYCHOLOGY AN INTRODUCTION TO HUMNA'},
+{sr:355,acc:'2143',title:'SYSTEMS APPROACH TO TRAINING AND'},
+{sr:356,acc:'2157',title:'EDUCATIONAL PSYCHOLOGY'},
+{sr:357,acc:'2161',title:'WHEN GIANTS LEARN TO DANCE'},
+{sr:358,acc:'2162',title:'LEADERSHIP'},
+{sr:359,acc:'2163',title:'BEWARE THE NAKED MAN WHO OFFERS YOU'},
+{sr:360,acc:'2164',title:'MANAGING BY INFLUENCE'},
+{sr:361,acc:'2165',title:'MANAGING PEOPLE'},
+{sr:362,acc:'2174',title:'THEORIES OF PERSONALITY'},
+{sr:363,acc:'2175',title:'UNLOCKING CREATIVITY IN THE WORK PLACE'},
+{sr:364,acc:'2176',title:'PERSONALITY DEVELOPMENT'},
+{sr:365,acc:'2178',title:'PERSONALITY THEORIES'},
+{sr:366,acc:'2179',title:'HUMAN RELATIONS AND ORGANISTIONAL'},
+{sr:367,acc:'2180',title:'MANAGEMENT SELF DEVELOPMENT'},
+{sr:368,acc:'2183',title:'CORPORATE IDENTITY'},
+{sr:369,acc:'2212',title:'BRAND POSITIONING'},
+{sr:370,acc:'2213',title:'AIRCRAFT AND ENGINE PERFECT'},
+{sr:371,acc:'2232',title:'WINNING WAYS'},
+{sr:372,acc:'2244',title:'HUMAN RESOURCES DEVELOPMENT IN BANKS'},
+{sr:373,acc:'2247',title:'MANAGING PEOPLE, NOT PERSONNEL'},
+{sr:374,acc:'2248',title:'THE LEADERSHIP FACTOR'},
+{sr:375,acc:'2252',title:'THE RISE AND FALL OF THE GREAT POWERS'},
+{sr:376,acc:'2293',title:'A BANKING ODYSSEY THE STORY OF CANARA'},
+{sr:377,acc:'2295',title:'STUDIES IN MGT PRACTICES'},
+{sr:378,acc:'2301',title:'QUANTUM HEALING'},
+{sr:379,acc:'2322',title:'MICROSOFT MS DOS OPERATING SYSTEM VER-'},
+{sr:380,acc:'2332',title:'MANAGEMENT FOR MANAGERS'},
+{sr:381,acc:'2342',title:'INDUSTRIAL AND ORGANISATIONAL PSYCHOLOGY'},
+{sr:382,acc:'2347',title:'SELLING TO WIN'},
+{sr:383,acc:'2348',title:'SILK PRODUCTION PROCESSING & MARKETING'},
+{sr:384,acc:'2349',title:'EMERGING TRENDS IN THE CAPITAL'},
+{sr:385,acc:'2352',title:'CREATIVITY AND PROBLEM SOLVING AT WORK'},
+{sr:386,acc:'2357',title:'EVALUATING TEACHING EFFECTIVENESS'},
+{sr:387,acc:'2364',title:'THE ART & SCIENCE OF BUSINESS MANAGEMENT'},
+{sr:388,acc:'2365',title:'VOL II LEADERSHIP'},
+{sr:389,acc:'2366',title:'VOL-III CREATIVITY'},
+{sr:390,acc:'2367',title:'VOL IV PERFORMANCE'},
+{sr:391,acc:'2368',title:'VOL-V MANAGING PEOPLE'},
+{sr:392,acc:'2369',title:'VOL VI PRODUCTIVITY'},
+{sr:393,acc:'2370',title:'VOL II MARKETING'},
+{sr:394,acc:'2371',title:'ONE MINUTE FOR MYSELF'},
+{sr:395,acc:'2372',title:'NARASIMHAM COMMITTEE REPORT ON THE'},
+{sr:396,acc:'2380',title:'COMPUTER ARCHITECTURE AND ORGANISATION'},
+{sr:397,acc:'2381',title:'ALTERNATIVE APPRAOCHES & STRATEGIES OF'},
+{sr:398,acc:'2382',title:'TOWARDS ORGANISATIONAL EFFECTIVENESS'},
+{sr:399,acc:'2395',title:'SUCCESSFUL ORGANISTION MANAGEMENT'},
+{sr:400,acc:'2400',title:'STRESS & COPING'},
+{sr:401,acc:'2401',title:'PO: BEYOND YES AND NO'},
+{sr:402,acc:'2407',title:'MASTERING FOX PRO.2'},
+{sr:403,acc:'2417',title:'DON\'T SHOOT THE DOG'},
+{sr:404,acc:'2419',title:'SIX ACTION SHOES'},
+{sr:405,acc:'2428',title:'IBM PC AND CLONES'},
+{sr:406,acc:'2435',title:'MANAGING PERFORMANCE'},
+{sr:407,acc:'2436',title:'COMMON SENSE TIME MANAGEMENT FOR'},
+{sr:408,acc:'2437',title:'MANAGING A BANK BRANCH'},
+{sr:409,acc:'2443',title:'BANKS AND CUSTOMERS A BEHAVIOURAL'},
+{sr:410,acc:'2445',title:'HUMAN SIDE OF TATA STEEL'},
+{sr:411,acc:'2454',title:'BANKING IN THE 1990S'},
+{sr:412,acc:'2456',title:'FACETS OF VIGILANCE'},
+{sr:413,acc:'2464',title:'5 EPS FOR SUCCESS'},
+{sr:414,acc:'2465',title:'MANAGING FOR INNOVATION'},
+{sr:415,acc:'2473',title:'EFFECTIVE BUSINESS COMMUNICATION'},
+{sr:416,acc:'2480',title:'INDUSTRIAL SECTOR DEVELOPMENT'},
+{sr:417,acc:'2492',title:'MARKETING'},
+{sr:418,acc:'2497',title:'SECRETS OF EXECUTIVE SUCCESS'},
+{sr:419,acc:'2510',title:'MANAGEMENT BY EFFECTIVE LISTENING'},
+{sr:420,acc:'2511',title:'STRESS BUSTERS'},
+{sr:421,acc:'2512',title:'HOW TO WIN CUSTOMERS'},
+{sr:422,acc:'2516',title:'MANAGING TO HAVE PROFITS'},
+{sr:423,acc:'2520',title:'FROM CRISIS TO CONVERTIBILITY'},
+{sr:424,acc:'2521',title:'CREATING CUSTOMERS'},
+{sr:425,acc:'2522',title:'MANAGEMENT IDEA IN ACTION'},
+{sr:426,acc:'2531',title:'THE COMPUTER VIRUS PROTECTION'},
+{sr:427,acc:'2534',title:'BANK SECURITY'},
+{sr:428,acc:'2538',title:'HAND BOOK OF MANAGEMENT SKILLS'},
+{sr:429,acc:'2541',title:'LAUGHING BYTES'},
+{sr:430,acc:'2548',title:'MAN WATCHING'},
+{sr:431,acc:'2549',title:'ZEN AND THE ART OF MAKING A LIVING'},
+{sr:432,acc:'2554',title:'CULTURE AND ANARCHY'},
+{sr:433,acc:'2575',title:'FOX PRO 3.6 FOR DOS THE COMPLETE'},
+{sr:434,acc:'2581',title:'ENCYCLOPEDIA'},
+{sr:435,acc:'2594',title:'TRAINING WITH NLP'},
+{sr:436,acc:'2596',title:'FIRST THINGS FIRST'},
+{sr:437,acc:'2602',title:'THE PENGUIN BOOK OF INTERVIEWS'},
+{sr:438,acc:'2603',title:'HOW TO MANAGE PEOPLE'},
+{sr:439,acc:'2608',title:'3151 OBJECTIVE QUESTIONS ON BANKING LAW'},
+{sr:440,acc:'2613',title:'UNDERSTANDING ORACLE'},
+{sr:441,acc:'2614',title:'COLLINS CO BUILD ENGLISH LANGUAGE'},
+{sr:442,acc:'2615',title:'ENCYCLOPEDIA OF BANKING & FINANCE'},
+{sr:443,acc:'2625',title:'MOTIVATION AND LEADERSHIP'},
+{sr:444,acc:'2627',title:'CONSUMER BEHAVIOUR'},
+{sr:445,acc:'2629',title:'THE A TO Z MANAGERIAL EXCELLENCE'},
+{sr:446,acc:'2630',title:'THE PROCESS OF MANAGEMENT'},
+{sr:447,acc:'2631',title:'HRD THROUGH IN-HOUSE TRAINING'},
+{sr:448,acc:'2632',title:'HUMAN ASPECTS OF MANAGEMENT'},
+{sr:449,acc:'2634',title:'TOTAL QUALITY'},
+{sr:450,acc:'2651',title:'MANUAL OF MERCHANT BANKING'},
+{sr:451,acc:'2652',title:'PRACTICAL COUNSELLING & HELPING SKILLS'},
+{sr:452,acc:'2653',title:'LEADERSHIP'},
+{sr:453,acc:'2655',title:'MANAGING DIFFERENCES'},
+{sr:454,acc:'2656',title:'HOW TO USE YOUR COMPLEXES'},
+{sr:455,acc:'2657',title:'TRINITY READY RECKONER'},
+{sr:456,acc:'2658',title:'INNOVATIONS IN BANKING SERVICES'},
+{sr:457,acc:'2660',title:'O LEVEL MADE SIMPLE'},
+{sr:458,acc:'2663',title:'CREATIVE LEADERSHIP'},
+{sr:459,acc:'2664',title:'MANAGEMENT BY VALUES'},
+{sr:460,acc:'2665',title:'ACTIVE TRAINING'},
+{sr:461,acc:'2667',title:'FEARLESS AND FLOWERS PUBLIC SPEAKING'},
+{sr:462,acc:'2668',title:'WINNING IN THE OPTIONS MARKET'},
+{sr:463,acc:'2669',title:'THE + 10 PERCENT PRINCIPLE'},
+{sr:464,acc:'2670',title:'ASSET/LIABILITY MANAGEMENT'},
+{sr:465,acc:'2672',title:'MASTERING ORACLE 7 AND CLIENT/'},
+{sr:466,acc:'2676',title:'INSIGHTS OF AN INDIAN MANAGER'},
+{sr:467,acc:'2677',title:'THE FIVE PILLARS OF TQM'},
+{sr:468,acc:'2678',title:'CHANGING THE MIND SET'},
+{sr:469,acc:'2679',title:'THE CUSTOMER IS KEY'},
+{sr:470,acc:'2680',title:'EXCELLENCE THROUGH HUMAN RESOURCE DEV.'},
+{sr:471,acc:'2684',title:'ORACLE-7'},
+{sr:472,acc:'2687',title:'MOTIVATION AND WORK BEHAVIOUR'},
+{sr:473,acc:'2692',title:'AGELESS BODY TIMELESS MIND'},
+{sr:474,acc:'2694',title:'TEAM PROBLEM SOLVING'},
+{sr:475,acc:'2695',title:'DEVELOPING POSITIVE ASSERTIVENESS'},
+{sr:476,acc:'2698',title:'MANAGING A BANK\'S BRANCH'},
+{sr:477,acc:'2699',title:'MANAGING'},
+{sr:478,acc:'2700',title:'THE BRAVE NEW MANAGER'},
+{sr:479,acc:'2701',title:'CHANGING THE MIND SET'},
+{sr:480,acc:'2702',title:'THE CHANGE AGENTS\' H/B'},
+{sr:481,acc:'2703',title:'THE DEGENERATION OF INDIA'},
+{sr:482,acc:'2704',title:'HINDI DHARMA'},
+{sr:483,acc:'2706',title:'HUMAN RESOURCE DEVELOPMENT'},
+{sr:484,acc:'2709',title:'THE REGENERATION OF INDIA'},
+{sr:485,acc:'2711',title:'PERFECT HEALTH'},
+{sr:486,acc:'2713',title:'HOW TO GIVE QUALITY SERVICE TO YOUR'},
+{sr:487,acc:'2716',title:'INTERPERSONAL SKILLS TRAINING'},
+{sr:488,acc:'2717',title:'COUNSELLING SKILLS TRAINING'},
+{sr:489,acc:'2718',title:'LEARNING INTO THE FUTURE'},
+{sr:490,acc:'2719',title:'BIO ENERGETICS'},
+{sr:491,acc:'2721',title:'DISCIPLINE WITHOUT PUNISHMENT'},
+{sr:492,acc:'2722',title:'CREATING A CUSTOMER CENTERED CULTURE'},
+{sr:493,acc:'2723',title:'ORGANISATIONAL BEHAVIOUR'},
+{sr:494,acc:'2727',title:'ELEMENTS OF MANAGEMENT ACCOUNTING'},
+{sr:495,acc:'2731',title:'RE ENGINEERING MANAGEMENT'},
+{sr:496,acc:'2732',title:'SIMPLE WAYS TO MAKE YOUR CUSTOMERS'},
+{sr:497,acc:'2737',title:'ORGANISATIONAL BEHAVIOUR'},
+{sr:498,acc:'2738',title:'MARKETING MANAGEMENT'},
+{sr:499,acc:'2740',title:'TOTAL QUALITY MANAGEMENT'},
+{sr:500,acc:'2741',title:'MANAGEMENT THOUGHTS'},
+{sr:501,acc:'2747',title:'PEOPLE AND PERFORMANCE'},
+{sr:502,acc:'2750',title:'ADVENTURES OF A BYSTANDER'},
+{sr:503,acc:'2752',title:'SARKAR\'S LAW OF CIVIL PROCEDURE VOL I'},
+{sr:504,acc:'2753',title:'SARKAR\'S LAW OF CIVIL PROCEDURE VOL II'},
+{sr:505,acc:'2757',title:'TRANSFER OF PROPERTY ACT'},
+{sr:506,acc:'2760',title:'HINDU LAW'},
+{sr:507,acc:'2764',title:'BEYOND ENTREPRENEURSHIP'},
+{sr:508,acc:'2768',title:'BANK MANAGEMENT'},
+{sr:509,acc:'2771',title:'PRINCIPLE CENTERED LEADERSHIP'},
+{sr:510,acc:'2774',title:'THE CAPABLE EXECUTIVE'},
+{sr:511,acc:'2778',title:'GENERAL KNOWLEDGE'},
+{sr:512,acc:'2781',title:'MODERN4HUMAN RELATIONS AT WORK'},
+{sr:513,acc:'2786',title:'TEAM GAMES FOR TRAINERS'},
+{sr:514,acc:'2788',title:'SUCCESSFULLY MANAGING THE TEAM'},
+{sr:515,acc:'2790',title:'SUSTAINING CUSTOMER SERVICE'},
+{sr:516,acc:'2791',title:'ROLE OF COMPUTERS IN BANKING OPERATION'},
+{sr:517,acc:'2794',title:'STRATEGIC PEOPLE MANAGEMENT'},
+{sr:518,acc:'2795',title:'CREATING A WORLD CLASS QUALITY'},
+{sr:519,acc:'2796',title:'50 ESSENTIAL MANAGEMENT TECHNIQUES'},
+{sr:520,acc:'2798',title:'COACHING YOUR EMPLOYEES'},
+{sr:521,acc:'2801',title:'ESSENCE OF TIME MANAGEMENT'},
+{sr:522,acc:'2804',title:'FINANCIAL MANAGEMENT H/B'},
+{sr:523,acc:'2807',title:'FRAUDS & MISTAKE IN LAW'},
+{sr:524,acc:'2809',title:'LAW OF LIMITATION & PRESCRIPTION VOL-I'},
+{sr:525,acc:'2810',title:'LAW OF LIMITATION & PRESCRIPTION VOL-II'},
+{sr:526,acc:'2811',title:'LAW LEXICON'},
+{sr:527,acc:'2812',title:'DEEDS & DOCUMENTS'},
+{sr:528,acc:'2813',title:'DIGEST OF CONSUMER PROTECTION CASES'},
+{sr:529,acc:'2813',title:'DIGEST OF CONSUMER PROTECTION CASES'},
+{sr:530,acc:'2817',title:'LAW OF BANKING BANKERS'},
+{sr:531,acc:'2818',title:'LAW OF CONTEMPT OF COURT ACT'},
+{sr:532,acc:'2819',title:'SARKAR ON CRIMINAL PROCEDURE'},
+{sr:533,acc:'2825',title:'NEW ARBITRATION LAW'},
+{sr:534,acc:'2826',title:'LAW OF EVIDENCE IN INDIA'},
+{sr:535,acc:'2828',title:'50 POWERFUL IDEAS YOU CAN USE TO KEEP'},
+{sr:536,acc:'2829',title:'STRESS MANAGEMENT FOR WELLNESS'},
+{sr:537,acc:'2830',title:'RIGHT ON TIME'},
+{sr:538,acc:'2831',title:'TACTICS'},
+{sr:539,acc:'2832',title:'HOW TO MAKE A GREAT PRESENTATION'},
+{sr:540,acc:'2834',title:'MULTINATIONAL FINANCIAL MANAGEMENT'},
+{sr:541,acc:'2835',title:'GLOBAL FINANCIAL MANAGEMENT'},
+{sr:542,acc:'2836',title:'ACHIEVING EXCELLENCE THROUGH CUSTOMER'},
+{sr:543,acc:'2837',title:'TIPS FOR CUSTOMER SATISFACTION'},
+{sr:544,acc:'2838',title:'SUCCESSFUL TRAINING PRACTICE FOR'},
+{sr:545,acc:'2839',title:'TECHNIQUES OF INSTRUCTION'},
+{sr:546,acc:'2840',title:'THE EXCELLENT TRAINER'},
+{sr:547,acc:'2841',title:'THE HAND BOOK OF EXECUTIVE LEADERSHIP'},
+{sr:548,acc:'2842',title:'FIRST THINGS FIRST'},
+{sr:549,acc:'2844',title:'THE NEW POSITIONING'},
+{sr:550,acc:'2845',title:'CREATING EXCELLENCE'},
+{sr:551,acc:'2846',title:'HOW TO WIN CUSTOMERS AND KEEP THEM FOR'},
+{sr:552,acc:'2847',title:'TOTAL QUALITY SERVICE'},
+{sr:553,acc:'2848',title:'100 MANAGEMENT IDEAS'},
+{sr:554,acc:'2849',title:'INTERNATIONAL FINANCE'},
+{sr:555,acc:'2854',title:'WHAT THEY STILL DON\'T TEACH YOU AT'},
+{sr:556,acc:'2855',title:'NLP FOR MANAGERS'},
+{sr:557,acc:'2857',title:'MANAGEMENT A GLOBAL PERSPECTIVE'},
+{sr:558,acc:'2867',title:'ANALYSIS AND INTERPRETATION OF'},
+{sr:559,acc:'2870',title:'MANAGEMENT PARABLES'},
+{sr:560,acc:'2871',title:'BUSINESS MAHARAJAS'},
+{sr:561,acc:'2872',title:'THE ROAD AHEAD'},
+{sr:562,acc:'2875',title:'SIMPLE WAYS TO MANAGE STRESS'},
+{sr:563,acc:'2876',title:'TOUGH TIMES NEVER LAST BUT TOUGH PEOPLE'},
+{sr:564,acc:'2877',title:'REAL CHANGE LEADERS'},
+{sr:565,acc:'2878',title:'SUCCESS IS A CHOICE'},
+{sr:566,acc:'2880',title:'MULTIFACETED APPROACHES TO INVST'},
+{sr:567,acc:'2882',title:'EMOTIONAL INTELLIGENCE'},
+{sr:568,acc:'2883',title:'FUNDAMENTALS OF FINANCIAL MANAGEMENT'},
+{sr:569,acc:'2884',title:'FINANCIAL INSTITUTIONS MARKERS & MONEY'},
+{sr:570,acc:'2885',title:'SRI RAMAKRISHNA BHAGAVATA'},
+{sr:571,acc:'2886',title:'VIVEKANANDA DIVINITY ON EARTH'},
+{sr:572,acc:'2887',title:'MY INDIA THE INDIA ETERNAL'},
+{sr:573,acc:'2889',title:'RIGHT ON TIME'},
+{sr:574,acc:'2890',title:'STRATEGIC HUMAN RESOURCE MANAGEMENT'},
+{sr:575,acc:'2893',title:'STRIKES'},
+{sr:576,acc:'2894',title:'DECISION TRAPS'},
+{sr:577,acc:'2895',title:'13 SECRETS OF POWER PERFORMANCE'},
+{sr:578,acc:'2896',title:'SUPER CHARGED'},
+{sr:579,acc:'2897',title:'ENCYCLOPAEDIA OF PRCTICAL MANAGEMENT'},
+{sr:580,acc:'2898',title:'DESIGNING COMPETENCE VOL-2- COMP'},
+{sr:581,acc:'2899',title:'MATERIALS VOL-3   - COMP'},
+{sr:582,acc:'2900',title:'THE LONE TRAINER VOL-4  - COMP'},
+{sr:583,acc:'2901',title:'QUALITY AND COMPETENCE VOL-5 - COMP'},
+{sr:584,acc:'2902',title:'ANALYSIS VOL-6 - COMP'},
+{sr:585,acc:'2903',title:'ASSESSMENT VOL-7   - COMP'},
+{sr:586,acc:'2904',title:'TOTAL QUALITY VOL-8   - COMP'},
+{sr:587,acc:'2905',title:'FEED BACK VOL-9  - COMP'},
+{sr:588,acc:'2906',title:'COACHING SKILLS VOL-10  - COMP'},
+{sr:589,acc:'2907',title:'TRAINER AS CONSULTANT VOL II  - COMP'},
+{sr:590,acc:'2908',title:'TRAINING PROGRAMMES VOL-12- COMP'},
+{sr:591,acc:'2909',title:'TRAINING AUDIT VOL-13   - COMP'},
+{sr:592,acc:'2910',title:'MANAGING TRAINING VOL 14- COMP'},
+{sr:593,acc:'2911',title:'COST EFFECTIVE TRAINING VOL 15 - COMP'},
+{sr:594,acc:'2912',title:'OPPORTUNITIES - VOL 16 - COMP'},
+{sr:595,acc:'2913',title:'QUALITY SERVICE VOL-17    - COMP'},
+{sr:596,acc:'2914',title:'GROUPS TRAINING VOL 18  - COMP'},
+{sr:597,acc:'2915',title:'DEVELOPMENT PROGRAMMES VOL 19 - COMP'},
+{sr:598,acc:'2916',title:'VALIDATING YOUR TRAINING VOL-20 - COMP'},
+{sr:599,acc:'2917',title:'BODY TALK'},
+{sr:600,acc:'2920',title:'TRADE PAYMENTS'},
+{sr:601,acc:'2921',title:'MANUAL FOREIGN EXCHANGE'},
+{sr:602,acc:'2924',title:'HOW COMPUTERS WORK'},
+{sr:603,acc:'2927',title:'POWER POINT FOR BUSY PEOPLE'},
+{sr:604,acc:'2936',title:'BANKING STRATEGY CREDIT APPRAISAL AND'},
+{sr:605,acc:'2938',title:'BANK MANAGEMENT'},
+{sr:606,acc:'2939',title:'FUTURES AND OPTIONS'},
+{sr:607,acc:'2942',title:'LAW OF SPECIFIC RELIEF'},
+{sr:608,acc:'2946',title:'LAW OF INJUNCTIONS'},
+{sr:609,acc:'2948',title:'LAW OF ADVERSE POSSESSION'},
+{sr:610,acc:'2951',title:'CONTEMPT OF COURT'},
+{sr:611,acc:'2952',title:'LAW OF MORTGAGE'},
+{sr:612,acc:'2953',title:'LAW RELATING TO NEGOTIABLE INSTRUMENTS'},
+{sr:613,acc:'2954',title:'DOMESTIC ENQUIRY'},
+{sr:614,acc:'2956',title:'LIMITATION AND CRIMINAL LAW'},
+{sr:615,acc:'2957',title:'LAW OF EASEMENT AND LICENSES'},
+{sr:616,acc:'2962',title:'TIME MANAGEMENT FOR EXECUTIVES'},
+{sr:617,acc:'2966',title:'KEEPING CUSTOMERS HAPPY'},
+{sr:618,acc:'2969',title:'THE DILBERT PRINCIPLE'},
+{sr:619,acc:'2969',title:'THE DILBERT PRINCIPLE'},
+{sr:620,acc:'2970',title:'COURAGE & CONFIDENCE                  4'},
+{sr:621,acc:'2972',title:'MANAGING PRESSURE AT WORK'},
+{sr:622,acc:'2973',title:'THE QUICK AND EASY WAY TO EFFECTIVE'},
+{sr:623,acc:'2974',title:'EFFECTIVE SPEAKING FOR BUSINESS SUCCESS'},
+{sr:624,acc:'2976',title:'BODY LANGUAGE'},
+{sr:625,acc:'2977',title:'DESIGNING TRAINING'},
+{sr:626,acc:'2978',title:'EVALUATING TRAINING'},
+{sr:627,acc:'2979',title:'IDENTIFYING TRAINING NEEDS'},
+{sr:628,acc:'2980',title:'INTRODUCTION TO TRAINING'},
+{sr:629,acc:'2981',title:'DEVELOPING LEARNING MATERIALS'},
+{sr:630,acc:'2982',title:'CULTIVATING SELF DEVELOPMENT'},
+{sr:631,acc:'2983',title:'101 MORE GAMES FOR TRAINERS -2 VOL'},
+{sr:632,acc:'2984',title:'THE 7 HABITS OF HIGHLY EFFECTIVE   4'},
+{sr:633,acc:'2987',title:'TEAM BUILDER'},
+{sr:634,acc:'2991',title:'NEGOTIATOR'},
+{sr:635,acc:'2992',title:'REPORTS & PROPOSALS'},
+{sr:636,acc:'2993',title:'COMMUNICATOR'},
+{sr:637,acc:'2996',title:'MOTIVATING PEOPLE'},
+{sr:638,acc:'2997',title:'PROJECT MANAGER'},
+{sr:639,acc:'2999',title:'SUPER CONFIDENCE                  4'},
+{sr:640,acc:'3000',title:'IN THE WONDERLAND OF INDIAN MANAGERS'},
+{sr:641,acc:'3001',title:'HERBS THAT HEAL'},
+{sr:642,acc:'3002',title:'BE YOUR OWN DOCTOR WITH ACCUPRESSURE'},
+{sr:643,acc:'3003',title:'HOMEOPATHY FOR COMMAN DISEASES'},
+{sr:644,acc:'3004',title:'THE POWER OF YOUR SUB-CONSCIOUS MIND'},
+{sr:645,acc:'3005',title:'FOODS THAT HEAL'},
+{sr:646,acc:'3008',title:'101 GAMES FOR TRAINERS-2 VOL'},
+{sr:647,acc:'3015',title:'THE BANKERS - THE NEXT GENERATION'},
+{sr:648,acc:'3016',title:'BANK MANAGEMENT - TEXT AND CASES'},
+{sr:649,acc:'3017',title:'IMAGIN.I.ZATION'},
+{sr:650,acc:'3018',title:'THE CIRCLE OF INNOVATION'},
+{sr:651,acc:'3019',title:'THE FIFTH DISCIPLINE'},
+{sr:652,acc:'3020',title:'THE SMART ORGANIZATION'},
+{sr:653,acc:'3025',title:'MOTIVATION AND LEADERSHIP'},
+{sr:654,acc:'3026',title:'PROJECT FINANCING'},
+{sr:655,acc:'3031',title:'CAPITAL MARKETS ,INSTITUTIONS'},
+{sr:656,acc:'3033',title:'THE INSIDER'},
+{sr:657,acc:'3037',title:'INNOVATE'},
+{sr:658,acc:'3039',title:'THE MANAGER\'S SHORT COURSE'},
+{sr:659,acc:'3041',title:'OFFICE 97-ONE STEP AT A TIME'},
+{sr:660,acc:'3042',title:'WORD 97-ONE STEP AT A TIME'},
+{sr:661,acc:'3043',title:'OUTLOOK 97-ONE STEP AT A TIME'},
+{sr:662,acc:'3045',title:'DEAR BOSS'},
+{sr:663,acc:'3049',title:'COMPETITIVE ADVANTAGE'},
+{sr:664,acc:'3066',title:'FINANCIAL ACCOUNTING - A BUSINESS'},
+{sr:665,acc:'3073',title:'TEACH YOURSELF VISUAL BASIC 5 IN 21 DAYS'},
+{sr:666,acc:'3077',title:'THE COMPLETE IDIOT\'S GUIDE'},
+{sr:667,acc:'3081',title:'CASES IN STRATEGIC MANAGEMENT'},
+{sr:668,acc:'3085',title:'MANAGEMENT STYLES'},
+{sr:669,acc:'3086',title:'ON SITE INSPECTION OF BANKS - ON LINES4'},
+{sr:670,acc:'3087',title:'COMPETING THROUGH KNOWLEDGE'},
+{sr:671,acc:'3089',title:'MANAGING PROJECTS AND PUBLIC'},
+{sr:672,acc:'3093',title:'COMPUTERS IN YOUR FUTURE'},
+{sr:673,acc:'3094',title:'YOU CAN WIN'},
+{sr:674,acc:'3096',title:'OVER THE TOP'},
+{sr:675,acc:'3097',title:'CUSTOMER SERVICE FOR DUMMIES'},
+{sr:676,acc:'3098',title:'THE GOD OF SMALL THINGS'},
+{sr:677,acc:'3102',title:'INTRODUCTION TO ARTIFICIAL INTELLIGENCE'},
+{sr:678,acc:'3103',title:'COMPUTER CONCEPT AND APPLICATIONS'},
+{sr:679,acc:'3104',title:'THE ESSENTIAL POWER POINT - 97 BOOK'},
+{sr:680,acc:'3105',title:'MICROSOFT OFFICE IN EASY STEPS'},
+{sr:681,acc:'3115',title:'101 STUPID THINGS TRAINERS DO TO'},
+{sr:682,acc:'3117',title:'COACHING THROUGH EFFECTIVE FEEDBACK'},
+{sr:683,acc:'3119',title:'HOW TO MANAGE COMPUTERS AT WORK'},
+{sr:684,acc:'3140',title:'THE CRISIS OF GLOBAL COMPETITION'},
+{sr:685,acc:'3150',title:'GEARING UP FOR PATENTS - THE INDIAN'},
+{sr:686,acc:'3151',title:'HARD DRIVE'},
+{sr:687,acc:'3153',title:'INTERNATIONAL FINANCIAL MANAGEMENT'},
+{sr:688,acc:'3161',title:'THE GE WAY  -COMP'},
+{sr:689,acc:'3162',title:'MANAGING FROM THE HEART -COMP'},
+{sr:690,acc:'3164',title:'BANKERS CREDIT DECISIONS'},
+{sr:691,acc:'3169',title:'FINANCIAL INSTITUTIONS AND MARKETS'},
+{sr:692,acc:'3172',title:'BIG BOOK OF PRESENTATION GAMES'},
+{sr:693,acc:'3173',title:'ICEBREAKERS'},
+{sr:694,acc:'3180',title:'MANAGEMENT IDEAS IN BRIEF              4'},
+{sr:695,acc:'3181',title:'WHAT CUSTOMERS LIKE ABOUT YOU'},
+{sr:696,acc:'3182',title:'CONFLICT MANAGEMENT'},
+{sr:697,acc:'3183',title:'TRANSFORMING CORPORATE LEADERSHIP'},
+{sr:698,acc:'3185',title:'SOLVE THAT PROBLEM'},
+{sr:699,acc:'3187',title:'WINNING AT CHANGE'},
+{sr:700,acc:'3188',title:'HUMAN RESOURCE DEVELOPMENT AND TRAINING'},
+{sr:701,acc:'3189',title:'DECISION MAKING - AN INTEGRATED APPROACH'},
+{sr:702,acc:'3190',title:'RETHINKING THE CORPORATION'},
+{sr:703,acc:'3191',title:'THE FIRST TIME MANAGER'},
+{sr:704,acc:'3192',title:'MASTERING THE CHALLENGES OF CHANGE'},
+{sr:705,acc:'3193',title:'THE NORTHBOUND TRAIN'},
+{sr:706,acc:'3194',title:'REACHING THE PEAK PERFORMANCE'},
+{sr:707,acc:'3195',title:'STRAIGHT FROM THE CEO -COMP'},
+{sr:708,acc:'3197',title:'SUPREME COURT ON DISCIPLINARY'},
+{sr:709,acc:'3198',title:'LAW OF INSOLVENCY'},
+{sr:710,acc:'3208',title:'COMPETING ON THE EDGE'},
+{sr:711,acc:'3209',title:'WORKING KNOWLEDGE'},
+{sr:712,acc:'3210',title:'VALUES - BASED LEADERSHIP'},
+{sr:713,acc:'3211',title:'BUSINESS AT THE SPEED OF THOUGHT'},
+{sr:714,acc:'3212',title:'APPRAISAL : ROUTES TO IMPROVED'},
+{sr:715,acc:'3213',title:'WINGS OF FIRE : AN AUTOBIOGRAPHY'},
+{sr:716,acc:'3214',title:'THE SINGAPORE STORY'},
+{sr:717,acc:'3215',title:'PERFORMANCE APPRAISALS'},
+{sr:718,acc:'3217',title:'HUMAN RESOURCE MANAGEMENT'},
+{sr:719,acc:'3218',title:'CASES IN MARKETING MAMAGEMENT'},
+{sr:720,acc:'3220',title:'STRATEGIC COMMUNICATIONS MANAGEMENT'},
+{sr:721,acc:'3225',title:'ROLE PLAYS : A SOURCE BOOK OF ACTIVITIES'},
+{sr:722,acc:'3232',title:'A DICTIONARY OF SYNONYMS AND ANTONYMS'},
+{sr:723,acc:'3236',title:'SCIENTIFIC MANAGEMENT - THE'},
+{sr:724,acc:'3237',title:'STRATEGIC MANAGEMENT'},
+{sr:725,acc:'3239',title:'WHY DIDNOT I SAY THAT'},
+{sr:726,acc:'3240',title:'FACILITATION SKILLS'},
+{sr:727,acc:'3241',title:'CREATING A TRAINING AND DEVELOPMENT'},
+{sr:728,acc:'3252',title:'HIGH SCHOOL ENGLISH GRAMMER'},
+{sr:729,acc:'3256',title:'TEST OF REASONING (VERBAL)'},
+{sr:730,acc:'3257',title:'LIVING THE 7 HABITS'},
+{sr:731,acc:'3262',title:'RE-ENGINEERING THE ORGANIZATION'},
+{sr:732,acc:'3264',title:'FUTURE AND OPTIONS'},
+{sr:733,acc:'3265',title:'SELECTED READINGS IN HRD'},
+{sr:734,acc:'3267',title:'FINANCIAL MANAGEMENT'},
+{sr:735,acc:'3268',title:'MANAGEMENT CHALLOENGES IN TWENTY-FIRST'},
+{sr:736,acc:'3269',title:'HUMAN RESOURCES MANAGEMENT'},
+{sr:737,acc:'3270',title:'QUALITY SAMURAI'},
+{sr:738,acc:'3273',title:'ERP - A MANAGERIAL PERSPECTIVE'},
+{sr:739,acc:'3275',title:'DELIVERING QUALITY SERVICE IN BANKS'},
+{sr:740,acc:'3276',title:'SERVICE QUALITY MANAGEMENT IN BANKS'},
+{sr:741,acc:'3277',title:'DIRECT FROM DELL'},
+{sr:742,acc:'3278',title:'NUTS'},
+{sr:743,acc:'3282',title:'THE EFFECTIVE USE OF ROLE PLAY'},
+{sr:744,acc:'3283',title:'HOW TO BECOME A GOOD LEADER'},
+{sr:745,acc:'3285',title:'ACTION MANAGEMENT'},
+{sr:746,acc:'3286',title:'GUERRILA NEGOTIATING'},
+{sr:747,acc:'3288',title:'CROSSING THE MINEFIELD'},
+{sr:748,acc:'3290',title:'ESSENTIAL MANAGERS'},
+{sr:749,acc:'3291',title:'ESSENTIAL MANAGERS'},
+{sr:750,acc:'3292',title:'ESSENTIAL MANAGERS'},
+{sr:751,acc:'3293',title:'ESSENTIAL MANAGERS'},
+{sr:752,acc:'3294',title:'ESSENTIAL MANAGERS'},
+{sr:753,acc:'3295',title:'ESSENTIAL MANAGERS'},
+{sr:754,acc:'3296',title:'ESSENTIAL MANAGERS'},
+{sr:755,acc:'3297',title:'ESSENTIAL MANAGERS'},
+{sr:756,acc:'3298',title:'ESSENTIAL MANAGERS'},
+{sr:757,acc:'3299',title:'ESSENTIAL MANAGERS'},
+{sr:758,acc:'3300',title:'ESSENTIAL MANAGERS'},
+{sr:759,acc:'3301',title:'ESSENTIAL MANAGERS'},
+{sr:760,acc:'3302',title:'SUPER MIND'},
+{sr:761,acc:'3310',title:'STEPPING UP PERFORMANCE'},
+{sr:762,acc:'3312',title:'PROGRAMMES,BANKS AND DEVELOPMENT'},
+{sr:763,acc:'3313',title:'PRACTICAL GUIDE TO INSTRUCTIONS OF'},
+{sr:764,acc:'3314',title:'PRACTICAL GUIDE TO INSTRUCTIONS OF RBIR'},
+{sr:765,acc:'3316',title:'FIRST AID MANUAL'},
+{sr:766,acc:'3321',title:'THE GOAL'},
+{sr:767,acc:'3322',title:'INTERNATIONAL FINANCIAL MANAGEMENT'},
+{sr:768,acc:'3328',title:'CREATING A SUCCESSFUL CV'},
+{sr:769,acc:'3330',title:'MANAGING PEOPLE'},
+{sr:770,acc:'3332',title:'EFFECTIVE LEADERSHIP'},
+{sr:771,acc:'3334',title:'EXCELLENCE IN BANK BRANCH MANAGEMENT'},
+{sr:772,acc:'3347',title:'DYNAMIC HTML'},
+{sr:773,acc:'3360',title:'WORKING WITH EMOTIONAL INTELLIGENCE'},
+{sr:774,acc:'3362',title:'PRACTICAL UNIX & INTERNET SECURITY'},
+{sr:775,acc:'3364',title:'RESULT ORIENTED BUSINESS POLICY'},
+{sr:776,acc:'3367',title:'FLEXIBILITY IN MANAGEMENT'},
+{sr:777,acc:'3368',title:'ORGANIZATIONAL BEHAVIOUS & PROCESS'},
+{sr:778,acc:'3369',title:'PRINCIPLES OF CORPORATE FINANCE'},
+{sr:779,acc:'3371',title:'COACHING FOR STAFF DEVELOPMENT'},
+{sr:780,acc:'3373',title:'ORACLE 8 - A BEGINNER\'S GUIDE'},
+{sr:781,acc:'3375',title:'ENTREPRENEUR\'S GUIDE TO EXPORT'},
+{sr:782,acc:'3376',title:'CREATIVE THINKING AND BRAINSTORMING'},
+{sr:783,acc:'3378',title:'EMPOWERING PEOPLE AT WORK'},
+{sr:784,acc:'3381',title:'THE WORLD ACCORDING TO DRUCKER'},
+{sr:785,acc:'3383',title:'CREDIT AND BANKING'},
+{sr:786,acc:'3384',title:'MANAGING CORPORATE CULTURE'},
+{sr:787,acc:'3390',title:'MERGERS ET AL'},
+{sr:788,acc:'3391',title:'FOXPRO 2.5 MADE SIMPLE'},
+{sr:789,acc:'3392',title:'THE ROLE AND CONTRIBUTION OF R B I'},
+{sr:790,acc:'3396',title:'THE CREATIVE PROBLEM SOLVER\'S TOOL BOX'},
+{sr:791,acc:'3397',title:'20 WAYS TO MANAGE BETTER'},
+{sr:792,acc:'3398',title:'MANAGEMENT CHALLENGES FOR THE'},
+{sr:793,acc:'3400',title:'QUESTIONS & ANSWERS ON COMPUTERS'},
+{sr:794,acc:'3401',title:'THE ILLUSTRATED COMPUTER DICTIONARY'},
+{sr:795,acc:'3403',title:'PRACTICE MANAGEMENT'},
+{sr:796,acc:'3407',title:'FINANCIAL STATEMENT ANALYSIS'},
+{sr:797,acc:'3410',title:'ENCYCLOPAEDIA OF WORKING CAPITAL'},
+{sr:798,acc:'3411',title:'ENCYCLOPAEDIA OF WORKING CAPITAL'},
+{sr:799,acc:'3413',title:'MANAGERIAL TRANSFORMATION BY VALUES'},
+{sr:800,acc:'3415',title:'MOTIVATION & PERSONALITY'},
+{sr:801,acc:'3416',title:'ORGANIZATIONS AND THE PSYCHOLOGICAL'},
+{sr:802,acc:'3418',title:'MASTERING DERIVATIVES MARKETS'},
+{sr:803,acc:'3419',title:'THE NEW BUSINESS VALUES FOR SUCCESS'},
+{sr:804,acc:'3420',title:'STRATEGIC HUMAN RESOURCE LEADER'},
+{sr:805,acc:'3422',title:'PSYCHOLOGICAL TESTING'},
+{sr:806,acc:'3423',title:'HANDBOOK OF PRACTICAL COMMUNICATION'},
+{sr:807,acc:'3424',title:'COMMUNICATION IN ORGANIZATIONS'},
+{sr:808,acc:'3430',title:'THE EAGLE\'S SECRET'},
+{sr:809,acc:'3431',title:'MANKU THIMMANA KAGGA'},
+{sr:810,acc:'3435',title:'KEY MANAGEMENT IDEAS'},
+{sr:811,acc:'3438',title:'FOREIGN EXCHANGE MANAGEMENT ACT WITH'},
+{sr:812,acc:'3439',title:'SUPPLEMENT TO FEMA'},
+{sr:813,acc:'3441',title:'THE INFORMATION TECHNOLOGY ACT 2000'},
+{sr:814,acc:'3443',title:'ANALYSIS AND INTERPRETATION OF'},
+{sr:815,acc:'3444',title:'BANKERS\' CREDIT DECISIONS'},
+{sr:816,acc:'3445',title:'STRATEGIES FOR INTEGRATING WOMEN'},
+{sr:817,acc:'3446',title:'PERFORMANCE MANAGEMENT'},
+{sr:818,acc:'3450',title:'PRACTICAL PROBLEMS ON BANKING'},
+{sr:819,acc:'3453',title:'THE FIFTH DISCIPLINE FIELD BOOK'},
+{sr:820,acc:'3479',title:'THINK LIKE A GENIUS'},
+{sr:821,acc:'3480',title:'COSTING HUMAN RESOURCES'},
+{sr:822,acc:'3481',title:'THE DANCE OF CHANGE'},
+{sr:823,acc:'3482',title:'THE POWER LAWS'},
+{sr:824,acc:'3483',title:'SIMPLICITY -'},
+{sr:825,acc:'3484',title:'BREAKING THROUGH CULTURE SHOCK'},
+{sr:826,acc:'3485',title:'MANAGEMENT MASTERCLASS'},
+{sr:827,acc:'3486',title:'REAL CHANGE LEADERS'},
+{sr:828,acc:'3499',title:'THE HUMAN RESOURCE DEVELOPMENT'},
+{sr:829,acc:'3500',title:'FAST FORWARD LEADERSHIP'},
+{sr:830,acc:'3501',title:'CONSUMER BEHAVIOUR'},
+{sr:831,acc:'3503',title:'FACILITATING EMPOWERMENT'},
+{sr:832,acc:'3507',title:'THE EFFECTIVE EXECUTIVE'},
+{sr:833,acc:'3508',title:'PUTTING STRATEGY TO WORK'},
+{sr:834,acc:'3509',title:'BE YOUR BEST'},
+{sr:835,acc:'3513',title:'LEADERSHIP SKILLS'},
+{sr:836,acc:'3514',title:'NEGOTIATING PERSUADING AND INFLUENCING'},
+{sr:837,acc:'3515',title:'ASSERTIVENESS'},
+{sr:838,acc:'3516',title:'THE MANAGER AS COACH AND MENTOR'},
+{sr:839,acc:'3520',title:'MANAGING SERVICES MARKETING'},
+{sr:840,acc:'3522',title:'MANAGEMENT INFORMATION SYSTEMS'},
+{sr:841,acc:'3523',title:'MANAGING CHANGE'},
+{sr:842,acc:'3524',title:'MANAGING FOR TOTAL QUALITY'},
+{sr:843,acc:'3531',title:'NOW, DISCOVER YOUR STRENGTHS'},
+{sr:844,acc:'3536',title:'LEADERSHIP GAMES'},
+{sr:845,acc:'3537',title:'VALUATION OF FINANCIAL ASSETS'},
+{sr:846,acc:'3538',title:'MANAGING INDIAN BANKS'},
+{sr:847,acc:'3541',title:'MANAGEMENT PARABLES'},
+{sr:848,acc:'3544',title:'THE SECRETS OF SUCCESS'},
+{sr:849,acc:'3545',title:'ONE MINUTE MANAGER'},
+{sr:850,acc:'3545',title:'ONE MINUTE MANAGE'},
+{sr:851,acc:'3547',title:'EFFECTIVE COMMUNICATION'},
+{sr:852,acc:'3547',title:'EFFECTIVE COMMUNICATION'},
+{sr:853,acc:'3547',title:'EFFECTIVE COMMUNICATION'},
+{sr:854,acc:'3547',title:'EFFECTIVE COMMUNICATION'},
+{sr:855,acc:'3547',title:'EFFECTIVE COMMUNICATION'},
+{sr:856,acc:'3547',title:'EFFECTIVE COMMUNICATION'},
+{sr:857,acc:'3547',title:'EFFECTIVE COMMUNICATION'},
+{sr:858,acc:'3547',title:'EFFECTIVE COMMUNICATION'},
+{sr:859,acc:'3547',title:'EFFECTIVE COMMUNICATION'},
+{sr:860,acc:'3548',title:'TALK YOUR WAY TO THE TOP'},
+{sr:861,acc:'3550',title:'CONTEXTUAL MANAGEMENT'},
+{sr:862,acc:'3552',title:'BANK C L R -COMP'},
+{sr:863,acc:'3553',title:'HOW TO GIVE A DAMN GOOD SPEECH'},
+{sr:864,acc:'3553',title:'HOW TO GIVE A DAMN GOOD SPEECH'},
+{sr:865,acc:'3553',title:'HOW TO GIVE A DAMN GOOD SPEECH'},
+{sr:866,acc:'3553',title:'HOW TO GIVE A DAMN GOOD SPEECH'},
+{sr:867,acc:'3553',title:'HOW TO GIVE A DAMN GOOD SPEECH'},
+{sr:868,acc:'3553',title:'HOW TO GIVE A DAMN GOOD SPEECH'},
+{sr:869,acc:'3554',title:'CREATIVITY'},
+{sr:870,acc:'3557',title:'WONDERLAND OF INDIAN MANAGERS'},
+{sr:871,acc:'3558',title:'EXECUTIVE DEVPT & ORGANISATIONAL LEARNING FOR GL.BUS'},
+{sr:872,acc:'3558',title:'EXECUTIVE DEVPT & ORGANISATIONAL LEARNING FOR GL.BUS'},
+{sr:873,acc:'3560',title:'THE ARC OF AMBITION - DEFINING THE'},
+{sr:874,acc:'3561',title:'CALM AT WORK'},
+{sr:875,acc:'3562',title:'LEADING CHANGE'},
+{sr:876,acc:'3563',title:'PREPARING FOR 21ST CENTURY'},
+{sr:877,acc:'3564',title:'ESSENTIAL MANAGERS MANUAL'},
+{sr:878,acc:'3567',title:'BANK FRAUDS PRECENTATION & DETECTION -'},
+{sr:879,acc:'3568',title:'EMOTION MARKETING - HALL MARK CARDS, INC'},
+{sr:880,acc:'3569',title:'VALUE SPACE WINNING THE BATTLE FOR'},
+{sr:881,acc:'3571',title:'WAR  AND  PEACE'},
+{sr:882,acc:'3572',title:'SERIOUS CREATIVITY'},
+{sr:883,acc:'3575',title:'THE HORSE THAT FLEW'},
+{sr:884,acc:'3576',title:'THE POWER OF ETHICAL MANAGEMENT'},
+{sr:885,acc:'3577',title:'LEADERSHIP BY THE BOOK'},
+{sr:886,acc:'3580',title:'COURT & THEIR JUDGEMENTS'},
+{sr:887,acc:'3583',title:'DEBT RECOVERY CASES - 2000'},
+{sr:888,acc:'3585',title:'CHEQUES IN LAW & PRACTICE'},
+{sr:889,acc:'3587',title:'HAND BOOK OF MANAGING CUSTOMER'},
+{sr:890,acc:'3588',title:'THE HEART OF A LEADER'},
+{sr:891,acc:'3589',title:'INDIA\'S ECONOMY IN THE 21ST CENTURY'},
+{sr:892,acc:'3590',title:'BANKING BRIEF - STATE BANK STAFF'},
+{sr:893,acc:'3591',title:'MANUAL OF RBI NOTIFICATIONS'},
+{sr:894,acc:'3592',title:'DERIVATIVE SECURITIES -'},
+{sr:895,acc:'3594',title:'COMDEX COMPUTER COURSE KIT'},
+{sr:896,acc:'3595',title:'MANAGING RADICAL CHANGE'},
+{sr:897,acc:'3596',title:'THE FUTURE MANAGER'},
+{sr:898,acc:'3598',title:'QUALITY IS EVERYBODY\'S BUSINESS'},
+{sr:899,acc:'3599',title:'CONSUMER ACTIVISM IN INDIA'},
+{sr:900,acc:'3600',title:'HUMAN RIGHTS - 2001'},
+{sr:901,acc:'3601',title:'BANK CLR - VOL 32 - 2001(3)'},
+{sr:902,acc:'3602',title:'W T O & INTERNATIONAL TRADE'},
+{sr:903,acc:'3603',title:'A DECADE OF ECONOMIC REFORMS IN INDIA'},
+{sr:904,acc:'3604',title:'PRINCIPLIES OF TOTAL QUALITY- SECOND'},
+{sr:905,acc:'3605',title:'WHO MOVED MY CHEESE'},
+{sr:906,acc:'3606',title:'CONVERSIONS WITH INDIAN ECONOMISTS'},
+{sr:907,acc:'3607',title:'THE PERFECT LEADER'},
+{sr:908,acc:'3608',title:'THE PERFECT APPRAISAL'},
+{sr:909,acc:'3611',title:'PERFECT CUSTOMER CARE'},
+{sr:910,acc:'3611',title:'PERFECT CUSTOMER CARE'},
+{sr:911,acc:'3612',title:'PERFECT COUNSELLING'},
+{sr:912,acc:'3614',title:'GRAMMAR'},
+{sr:913,acc:'3615',title:'COMPUTERS'},
+{sr:914,acc:'3616',title:'THESAURUS'},
+{sr:915,acc:'3618',title:'SPELLING'},
+{sr:916,acc:'3619',title:'DICTIONARY'},
+{sr:917,acc:'3620',title:'THE ENTERPRENEURIAL CONNECTION'},
+{sr:918,acc:'3621',title:'THOUGHT LEADERS'},
+{sr:919,acc:'3622',title:'FINANCIAL SECTOR REFORMS VOL I & II  AND'},
+{sr:920,acc:'3623',title:'MANUAL OF SEBI NOTIFICATIONS &'},
+{sr:921,acc:'3625',title:'CRM AT THE SPEED OF LIGHT'},
+{sr:922,acc:'3626',title:'CRM - EMERGING CONCEPTS, TOOLS &'},
+{sr:923,acc:'3629',title:'BUSINESS LAW INCLUDING COMPANY LAW'},
+{sr:924,acc:'3633',title:'DHARMIC VALUES HUMAN & RESOURCE'},
+{sr:925,acc:'3635',title:'CUSTOMER SERVICE FOR THE NEW MILLENIUM'},
+{sr:926,acc:'3636',title:'THE 8 CORE VALUES OF THE JAPANESE'},
+{sr:927,acc:'3641',title:'THE COMPLETE IDIOT\'S GUIDE TO LEADERSHIP'},
+{sr:928,acc:'3642',title:'THE COMPLETE IDIOT\'S GUIDE TO'},
+{sr:929,acc:'3644',title:'SHAPING THE FUTURE'},
+{sr:930,acc:'3645',title:'BANK CLR VOL 33 - 2002(1)'},
+{sr:931,acc:'3646',title:'BANK CLR VOL 31- 2001(2)'},
+{sr:932,acc:'3647',title:'BANKING LAW DIGEST - 1985-2000'},
+{sr:933,acc:'3648',title:'THE CONSTITUTION AND CRIMINAL JUSTICE'},
+{sr:934,acc:'3649',title:'MANAGING INFORMATION TECHNOLOGY'},
+{sr:935,acc:'3650',title:'BANKING FUTURE'},
+{sr:936,acc:'3651',title:'THE NEW LEADERS'},
+{sr:937,acc:'3652',title:'LESSONS FROM THE HEART OF AMERICAL'},
+{sr:938,acc:'3653',title:'GEORGE SOROS ON GLOBALISATION - COMP'},
+{sr:939,acc:'3654',title:'SELF MATTERS - COMP'},
+{sr:940,acc:'3656',title:'ONCE A CUSTOMER ALWAYS A CUSTOMER'},
+{sr:941,acc:'3656',title:'ONCE A CUSTOMER ALWAYS A CUSTOMER'},
+{sr:942,acc:'3657',title:'MEDITATION THE ULTIMATE FLOWERING'},
+{sr:943,acc:'3659',title:'OH LIFE RELAX PLEASE'},
+{sr:944,acc:'3660',title:'UNCONDITIONAL SUCCESS'},
+{sr:945,acc:'3662',title:'THE ART OF EFFECTIVE COMMUINICATION'},
+{sr:946,acc:'3664',title:'TRAINING IN ORGANISATIONS'},
+{sr:947,acc:'3665',title:'CLASSICS OF ORGANISATION THEORY'},
+{sr:948,acc:'3665',title:'CLASSICS OF ORGANISATION THEORY'},
+{sr:949,acc:'3667',title:'FUTURE SUCCESS'},
+{sr:950,acc:'3669',title:'MANAGING FOR SHOR;T TERM'},
+{sr:951,acc:'3670',title:'PROBLEM SOLVING TECHNIQUES'},
+{sr:952,acc:'3672',title:'QUALITY CIRCLE CONCEPT AND'},
+{sr:953,acc:'3673',title:'SHACKLETONS WAY'},
+{sr:954,acc:'3681',title:'PEOPLE MANAGEMENT CHANGING PERCEPTIONS'},
+{sr:955,acc:'3686',title:'BUSINESS STRATEGY'},
+{sr:956,acc:'3687',title:'MERGERS AND ACQUISITIONS NEW'},
+{sr:957,acc:'3688',title:'MANAGING IN THE NEXT SOCIETY'},
+{sr:958,acc:'3689',title:'KNOWLEDGE MANAGEMENT - A NEW DAWN'},
+{sr:959,acc:'3694',title:'SECRETS OF MIND POWER'},
+{sr:960,acc:'3696',title:'MANAGING NPA IN BANKS'},
+{sr:961,acc:'3697',title:'TREATISE ON FEMA(LAW AND PRACTICE)VOL-I'},
+{sr:962,acc:'3698',title:'TREATISE ON FEMA(LAW & PRACTICE)VOL-II'},
+{sr:963,acc:'3699',title:'INDIAS ECONOMY IN THE NEW MILLENNIUM'},
+{sr:964,acc:'3700',title:'CONSUMER BEHAVIOUR'},
+{sr:965,acc:'3701',title:'NETWORK MANAGEMENT'},
+{sr:966,acc:'3702',title:'MANAGING INVESTMENTS'},
+{sr:967,acc:'3706',title:'EW EXPORT IMPORT POLICY 2002-2007-VOL I'},
+{sr:968,acc:'3707',title:'IGNITED MINDS'},
+{sr:969,acc:'3711',title:'INDUSTRIAL RELATIONS'},
+{sr:970,acc:'3712',title:'MANAGING DIFFICULT PEOPLE'},
+{sr:971,acc:'3713',title:'VIJAYADA HADI'},
+{sr:972,acc:'3714',title:'VIJAYAKKE AIDU METTILU'},
+{sr:973,acc:'3715',title:'NIMMANNU NIVE GELLABALLIRI'},
+{sr:974,acc:'3716',title:'YASHASSINATTA PAYANA'},
+{sr:975,acc:'3717',title:'WINGS OF FIRE'},
+{sr:976,acc:'3718',title:'THE COLLECTED NOVELS'},
+{sr:977,acc:'3719',title:'THE COMPLETE NOVELS'},
+{sr:978,acc:'3720',title:'THE WORLDS GREATEST SHORT STORIES'},
+{sr:979,acc:'3721',title:'SELECTED STORIES'},
+{sr:980,acc:'3722',title:'BANK CLR VOL(2)-34-2002 - COMP'},
+{sr:981,acc:'3723',title:'SIX SIGMA FOR MANAGERS'},
+{sr:982,acc:'3725',title:'CORPORATE CREDIT ANALYSIS'},
+{sr:983,acc:'3726',title:'CASH FLOW FORECASTING AND LIQUIDITY'},
+{sr:984,acc:'3727',title:'IN THE DOCK'},
+{sr:985,acc:'3729',title:'FOLLOW THIS PATH'},
+{sr:986,acc:'3731',title:'ORGANISATIONAL DVELOPMENT'},
+{sr:987,acc:'3732',title:'STRATEGIC MANAGEMENT CONCEPTS & CASES'},
+{sr:988,acc:'3734',title:'MARKETING RESEARCH'},
+{sr:989,acc:'3735',title:'WORKING CAPITAL MANAGEMENT'},
+{sr:990,acc:'3736',title:'ENGLISNH FOR COMPETITIVE EXAMINATIONS'},
+{sr:991,acc:'3738',title:'TEST OF REASONING'},
+{sr:992,acc:'3744',title:'EXCELL 2000 FORMULAS'},
+{sr:993,acc:'3747',title:'BANK CLR VOL 35 2002(3)- COMP'},
+{sr:994,acc:'3748',title:'BANK CLR VOL-36 2003(1) - COMP'},
+{sr:995,acc:'3750',title:'BANKING BRIEFS'},
+{sr:996,acc:'3757',title:'A MODERN APPROACH TO NON VERBAL'},
+{sr:997,acc:'3758',title:'A MODERN APPROACH TO LOGIC REASONING'},
+{sr:998,acc:'3759',title:'A MODERN APPROACH TO VERBAL REASONING'},
+{sr:999,acc:'3760',title:'HAND BOOK OF NEON VERBAL REASONING'},
+{sr:1000,acc:'3761',title:'TEST OF VERBAL REASONING'},
+{sr:1001,acc:'3763',title:'EFFECTIVE PUBLIC RELATIONS IN PUBLIC AND'},
+{sr:1002,acc:'3764',title:'THE THEORY AND PRACTICE OF MANAGERIAL'},
+{sr:1003,acc:'3766',title:'HUMAN RESOURCE MANAGEMENT'},
+{sr:1004,acc:'3767',title:'MARKETING YOUR PRODUCT'},
+{sr:1005,acc:'3768',title:'THE CRM HAND BOOK'},
+{sr:1006,acc:'3770',title:'MARKETING RESEARCH'},
+{sr:1007,acc:'3771',title:'TRANSFORM YOUR LIFE WITH REKHI'},
+{sr:1008,acc:'3773',title:'ORGANISATION DEVELOPMENT AND CHANGE'},
+{sr:1009,acc:'3774',title:'MANAGERIAL CHALLENGES IN BANKING'},
+{sr:1010,acc:'3775',title:'WOMEN ENTREPRENEUR'},
+{sr:1011,acc:'3776',title:'CRAFTING CUSTOMER VALUE'},
+{sr:1012,acc:'3777',title:'CAPITALIZING ON CONFLICT'},
+{sr:1013,acc:'3778',title:'A MANAGERS GUIDE TO CREATIVE COST CUTTIG'},
+{sr:1014,acc:'3779',title:'THE CUSTOMER CENTRED ENTERPRISE'},
+{sr:1015,acc:'3780',title:'KELLOG ON INTEGRATED MARKETING'},
+{sr:1016,acc:'3781',title:'THE CUSTOMER COMES SECOND'},
+{sr:1017,acc:'3782',title:'THE HEART OF CHANGE'},
+{sr:1018,acc:'3783',title:'LEADERSHIP SKILLS FOR MANAGERS'},
+{sr:1019,acc:'3784',title:'THE ONE MINUTE MANAGER'},
+{sr:1020,acc:'3786',title:'PRINCIPLE CENTRED LEADERSHIP'},
+{sr:1021,acc:'3787',title:'WHAT IS YOUR EMOTIONAL IQ'},
+{sr:1022,acc:'3788',title:'THE NEW ART OF THE LEADER'},
+{sr:1023,acc:'3789',title:'GOOD TO GREAT'},
+{sr:1024,acc:'3790',title:'HRD AUDIT'},
+{sr:1025,acc:'3791',title:'JACK STRAIGHT FROM THE GUT'},
+{sr:1026,acc:'3792',title:'A WHACK ON THE SIDE OF THE HEAD'},
+{sr:1027,acc:'3793',title:'ORGANISATIONAL LEARNING'},
+{sr:1028,acc:'3794',title:'THE UNOFFICIAL GUIDE TO FACING THE'},
+{sr:1029,acc:'3796',title:'CHANGE YOUR ATTITUDE'},
+{sr:1030,acc:'3797',title:'THE ONE MINUTE MILLIONAIRE'},
+{sr:1031,acc:'3798',title:'FISH TALES'},
+{sr:1032,acc:'3800',title:'THE ESSENTIAL GUIDE TO KNOWLEDGE'},
+{sr:1033,acc:'3801',title:'THE P R PRACTIONERS - A HAND BOPOK'},
+{sr:1034,acc:'3802',title:'THE TRAINING MANAGERS HANDBOOK'},
+{sr:1035,acc:'3803',title:'COMPANIES THAT CHANGED THE WORLD'},
+{sr:1036,acc:'3804',title:'WORK WITH ME'},
+{sr:1037,acc:'3805',title:'ASCENDING VALUE SPIRAL'},
+{sr:1038,acc:'3806',title:'NEGOTIATING SKILLS FOR MANAGERS'},
+{sr:1039,acc:'3807',title:'A FRAME WORK FOR MARKETING MANAGERIAL'},
+{sr:1040,acc:'3808',title:'FINANCIAL RISK MANAGEMENT, CASH FLOW'},
+{sr:1041,acc:'3812',title:'ADVERTISING MANAGEMENT'},
+{sr:1042,acc:'3815',title:'ALL NEW TRICKS FOR TRAINERS-DELETED'},
+{sr:1043,acc:'3816',title:'50 ACTIVITIES FOR CONFLICT RESOLUTION'},
+{sr:1044,acc:'3817',title:'50 ACTIVITIES FOR DIVERSITY TRAINING'},
+{sr:1045,acc:'3818',title:'GLOBALIZATION THE EXTERNAL PRESSURES'},
+{sr:1046,acc:'3819',title:'MONETARY MANAGEMENT AND INSTITUTIONALS'},
+{sr:1047,acc:'3820',title:'CAMBRIDGE LEARNERS DICTIONERY-COMPLIMENT'},
+{sr:1048,acc:'3821',title:'MARKETING BUSINESS COMMUNICATIONS-COMP'},
+{sr:1049,acc:'3825',title:'THE CUSTOMER DIFFERENTIAL'},
+{sr:1050,acc:'3826',title:'TEST YOUR OWN APTITUTDE'},
+{sr:1051,acc:'3827',title:'HOW TO PASS VERBAL REASONING TESTS'},
+{sr:1052,acc:'3828',title:'TEST PREP YOUR IQ -DELETED'},
+{sr:1053,acc:'3829',title:'ULTIMATE VISUAL DICTIONARY'},
+{sr:1054,acc:'3833',title:'MANAGEMENT THROUGH INTERPERSONAL'},
+{sr:1055,acc:'3842',title:'QUALITY CIRCLES CONCKEPT AND'},
+{sr:1056,acc:'3850',title:'ASTRONOMICAL APPLICATIONS OF VEDIC MATHE'},
+{sr:1057,acc:'3851',title:'THE NATURAL CALCULATOR'},
+{sr:1058,acc:'3852',title:'TRIPLES'},
+{sr:1059,acc:'3853',title:'THE ESSENTIAL DRUCKER'},
+{sr:1060,acc:'3855',title:'LIVING WITH HONOUR'},
+{sr:1061,acc:'3856',title:'A UNIVERSITY GRAMMAR OF ENGLISH'},
+{sr:1062,acc:'3858',title:'OBJECTIVE GENERAL ENGLISH'},
+{sr:1063,acc:'3859',title:'THINK WITHOUT INK'},
+{sr:1064,acc:'3862',title:'EVERY TRAINERS HANDBOOK'},
+{sr:1065,acc:'3865',title:'MANAGIANG CREATIVITY AND INNOVATION'},
+{sr:1066,acc:'3866',title:'THE 80/20 INDIVIDUAL'},
+{sr:1067,acc:'3867',title:'FAST FORWARD'},
+{sr:1068,acc:'3868',title:'REVISIONING AN EMPOWERED NATION'},
+{sr:1069,acc:'3869',title:'MANAGING STRESS'},
+{sr:1070,acc:'3870',title:'WORKING RELATIONSHIPS'},
+{sr:1071,acc:'3871',title:'THE COWARD\'S GUIDE TO CONFLICT'},
+{sr:1072,acc:'3873',title:'ATTITUDE 101 WHAT EVERY LEADER NEEDS TO'},
+{sr:1073,acc:'3874',title:'LIFE BY DESIGN'},
+{sr:1074,acc:'3875',title:'EAT THAT FROG'},
+{sr:1075,acc:'3876',title:'MOTIVATION AND GOAL SETTING'},
+{sr:1076,acc:'3878',title:'LEADERSHIP BY ENCOURAGEMENT'},
+{sr:1077,acc:'3880',title:'ABRAHAM LINCOLN'},
+{sr:1078,acc:'3882',title:'FREEDON IS NOT FREE'},
+{sr:1079,acc:'3883',title:'MAKING TEAMS WORK'},
+{sr:1080,acc:'3884',title:'PERSONALITY DEVELOPMENT'},
+{sr:1081,acc:'3885',title:'THE SALES SUCCESS HANDBOOK'},
+{sr:1082,acc:'3886',title:'DEALING WITH DIFFICULT PEOPLE'},
+{sr:1083,acc:'3887',title:'KUMAR\'S GROUP DISCUSSIONS'},
+{sr:1084,acc:'3888',title:'HOW TO FACE INTERVIEWS'},
+{sr:1085,acc:'3890',title:'GROUP DISCUSSION FOR ADMISSION AND JOBS'},
+{sr:1086,acc:'3900',title:'MANAGING ANGER'},
+{sr:1087,acc:'3901',title:'COACHING AND COUNSELLING'},
+{sr:1088,acc:'3902',title:'WHY EMPLOYEES DONOT DO WHAT THEYARE SUPP'},
+{sr:1089,acc:'3905',title:'LEADING WITH NLP'},
+{sr:1090,acc:'3906',title:'TALKING THE WINNERS WAY'},
+{sr:1091,acc:'3907',title:'GET BETTER OR GET BEATEN'},
+{sr:1092,acc:'3908',title:'LOOKING AT LIFE DIFFERENTLY'},
+{sr:1093,acc:'3909',title:'SMART STRATEGIES CONNECTED A GLOBAL APPR'},
+{sr:1094,acc:'3911',title:'MANAGING FOR THE FUTURE'},
+{sr:1095,acc:'3913',title:'MANAGEMENT WISDOM'},
+{sr:1096,acc:'3914',title:'313 WAYS TO SLASH YOUR BUSINESS OVERHEAD'},
+{sr:1097,acc:'3915',title:'THE ULTIMATE CRM HANDBOOK'},
+{sr:1098,acc:'3916',title:'EVA AND VALUE BASED MANAGEMENT'},
+{sr:1099,acc:'3918',title:'LEADERS WHO CHANGED THE WORLD'},
+{sr:1100,acc:'3919',title:'THE MANAGEMENT SKILLS MANUAL'},
+{sr:1101,acc:'3920',title:'SERVANT LEADERSHIP'},
+{sr:1102,acc:'3921',title:'THE LEADERSHIP SPECTRUM'},
+{sr:1103,acc:'3922',title:'THE DREAM EXECUTIVE THE VISION THINKING'},
+{sr:1104,acc:'3923',title:'HANDBOOK OF AGRICULTURE'},
+{sr:1105,acc:'3924',title:'THE FUTURE OF COMPETION CO-CREATING UNIQ'},
+{sr:1106,acc:'3925',title:'BRAINSTORMING FOR CREATIVITY AND INNOVAT'},
+{sr:1107,acc:'3926',title:'MANAGEMENT THOUGHT STARTERS'},
+{sr:1108,acc:'3927',title:'CRUCIAL CONVERSATIONS'},
+{sr:1109,acc:'3929',title:'CLOSING SALES AND WINNING THE CUSTOMERS'},
+{sr:1110,acc:'3930',title:'POWERFUL COMMUNICATION SKILLS'},
+{sr:1111,acc:'3931',title:'SIX WEEKS TO STRATEGIC EXCELLENCE'},
+{sr:1112,acc:'3932',title:'ARTFUL PRESUASION'},
+{sr:1113,acc:'3933',title:'INTERPERSONAL SKILLS AT WORK'},
+{sr:1114,acc:'3934',title:'THE GE WORK OUT -COMP'},
+{sr:1115,acc:'3937',title:'HOW TO BE A BETTER NEGOTIATOR-COMP'},
+{sr:1116,acc:'3938',title:'MANAGEMENT IDEAS IN ACTION'},
+{sr:1117,acc:'3939',title:'INTERNET IN EASY STEPS'},
+{sr:1118,acc:'3941',title:'CUSTOMER BEHAVIOR'},
+{sr:1119,acc:'3942',title:'HACK PROOFING YOUR WIRELESS NETWORK'},
+{sr:1120,acc:'3943',title:'FACILITATING LEARNING'},
+{sr:1121,acc:'3944',title:'ASSERTIVENESS SKILLS TRAINING'},
+{sr:1122,acc:'3945',title:'A COMPLAINT IS A GIFT'},
+{sr:1123,acc:'3946',title:'MARKETING THE E BUSINESS'},
+{sr:1124,acc:'3947',title:'TRAINING IN ORGANISATIONS-COMP'},
+{sr:1125,acc:'3951',title:'WINDOWS 2000'},
+{sr:1126,acc:'3952',title:'AN INTRODUCTION TO COMPUTER NETWORKING'},
+{sr:1127,acc:'3954',title:'RETAIL MARKETING MANAGEMENT'},
+{sr:1128,acc:'3956',title:'MAKE TIME , PRACTICAL TIME MANAGEMENT TH'},
+{sr:1129,acc:'3957',title:'THE INTERNET COMPLETE REFERENCE'},
+{sr:1130,acc:'3959',title:'CRASH COURSE MANAGING PEOPLE'},
+{sr:1131,acc:'3960',title:'GET BETTER OR GET GEATEN'},
+{sr:1132,acc:'3962',title:'THE NEW LEADERS'},
+{sr:1133,acc:'3963',title:'THE LEADERSHIP SOLUTION'},
+{sr:1134,acc:'4002',title:'BANK EMPLOYEES SERVICE RULES AND DISCIPL'},
+{sr:1135,acc:'4003',title:'LAW RELATING TO EXECUTION OF DECREES AND'},
+{sr:1136,acc:'4004',title:'LAW OF WILLS -COMP'},
+{sr:1137,acc:'4006',title:'MULLA HINDU LAW'},
+{sr:1138,acc:'4007',title:'MULLA HINDU LAW'},
+{sr:1139,acc:'4008',title:'CONTEXTUAL MANAGEMENT'},
+{sr:1140,acc:'4009',title:'INFORMATION TECHNOLOGY AND MANAGEMENT'},
+{sr:1141,acc:'4010',title:'STEPPING UP TO SUPERVISOR'},
+{sr:1142,acc:'4017',title:'LOW BUDGET ONLINE MARKETING'},
+{sr:1143,acc:'4018',title:'BORN TO WIN'},
+{sr:1144,acc:'4019',title:'DO WHAT YOU DON\'T WANT TO DO'},
+{sr:1145,acc:'4020',title:'COWS DON\'T GIVE MILK'},
+{sr:1146,acc:'4021',title:'THE PROBLEMS OF WORK'},
+{sr:1147,acc:'4022',title:'INDIA - MY DREAM'},
+{sr:1148,acc:'4023',title:'CONFIDENCE IN SELF SPEAKING'},
+{sr:1149,acc:'4025',title:'SELF CONFIDENCE'},
+{sr:1150,acc:'4026',title:'MANMOHAN SINGH'},
+{sr:1151,acc:'4028',title:'BULL\'S EYE'},
+{sr:1152,acc:'4029',title:'LIFE & DREAMS OF KALPANA CHAWLA'},
+{sr:1153,acc:'4030',title:'READY SET GOAL'},
+{sr:1154,acc:'4032',title:'GIVING & RECEIVING FEEDBACK'},
+{sr:1155,acc:'4033',title:'MENTORING'},
+{sr:1156,acc:'4034',title:'MEASURING CUSTOMER SATISFACTION'},
+{sr:1157,acc:'4035',title:'CREATING A LEARNING ORGANISATION'},
+{sr:1158,acc:'4036',title:'UNDERSTANDING LEADERSHIP COMPETENCIES'},
+{sr:1159,acc:'4037',title:'PARTNERS IN PERFORMANCE'},
+{sr:1160,acc:'4038',title:'BEYOND CUSTOMER SERVICE'},
+{sr:1161,acc:'4039',title:'50 ONE MINUTE TIPS TO BETTER COMMUNICATN'},
+{sr:1162,acc:'4041',title:'MANAGING FOR COMMITMENT'},
+{sr:1163,acc:'4043',title:'HOW TO GET MORE DONE IN LESS TIME'},
+{sr:1164,acc:'4044',title:'SALES TRAINING BASICS'},
+{sr:1165,acc:'4045',title:'THE BIG BOOK OF STRESS RELIEF GAMES'},
+{sr:1166,acc:'4047',title:'MORE GAMES TRAINERS PLAY'},
+{sr:1167,acc:'4048',title:'SALES GAMES &ACTIVITIES FOR TRAINERS'},
+{sr:1168,acc:'4049',title:'BASIC PRESENTATION SKILLS'},
+{sr:1169,acc:'4050',title:'THE BIG BOOK OF HUMOROUS TRAINING GAMES'},
+{sr:1170,acc:'4051',title:'TEAM GAMES FOR TRAINERS'},
+{sr:1171,acc:'4072',title:'MASTERING CREDIT DERIVATIVES'},
+{sr:1172,acc:'4076',title:'DISCOVER YOUR DESTINY'},
+{sr:1173,acc:'4077',title:'NEGOTIATING SKILLS'},
+{sr:1174,acc:'4078',title:'TIME MANAGEMENT'},
+{sr:1175,acc:'4079',title:'INTERVIEWING SKILLS'},
+{sr:1176,acc:'4082',title:'EXCUSES  EXCUSES EXCUSES..........'},
+{sr:1177,acc:'4083',title:'TIME MANAGEMENT'},
+{sr:1178,acc:'4084',title:'HEART MIND OVER MATTER'},
+{sr:1179,acc:'4086',title:'BANKING BRIEF'},
+{sr:1180,acc:'4091',title:'INVESTMENT BANKING- AN ODYSSY'},
+{sr:1181,acc:'4093',title:'INDIAN BANKING IN THE NEW MILLENNIUM'},
+{sr:1182,acc:'4096',title:'SAY IT PRESENTATION'},
+{sr:1183,acc:'4100',title:'THE RISING INDIA PRENEUR'},
+{sr:1184,acc:'4101',title:'EXECUTING ACQUISITION AND INCREASING'},
+{sr:1185,acc:'4102',title:'THE BIG B OOK OF BUSINESS GAMES'},
+{sr:1186,acc:'4103',title:'EMPOWERING EMPLOYEES'},
+{sr:1187,acc:'4104',title:'MANAGER\'S SURVIVAL GUIDE'},
+{sr:1188,acc:'4106',title:'100 WAYS TO MAKE YOUR BUSINESS A SUCCESS'},
+{sr:1189,acc:'4107',title:'MANAGERS GUIDE FOR PERFORMANCE REVIEW'},
+{sr:1190,acc:'4108',title:'INTERVIEWING TECHNIQUES FOR MANAGERX'},
+{sr:1191,acc:'4109',title:'RECOGNISING AND REWARDING EMPLOYEES'},
+{sr:1192,acc:'4110',title:'CUSTOMER SERVICE EXCELLENCE'},
+{sr:1193,acc:'4111',title:'INDIAN ECONOMY UNDER GLOBALISATION PROCE'},
+{sr:1194,acc:'4116',title:'ECONOMIC REFORMANCE AND PERSPECTIVES'},
+{sr:1195,acc:'4117',title:'PERFORMANCE APPRAISAL'},
+{sr:1196,acc:'4118',title:'STRATEGIC MANAGEMENT'},
+{sr:1197,acc:'4121',title:'ESSAYS OF WARREN BUFFETT- LESSONS FOR IN'},
+{sr:1198,acc:'4122',title:'TRUMP HOW TO GET RICH'},
+{sr:1199,acc:'4124',title:'ASSERTIVENESS'},
+{sr:1200,acc:'4125',title:'HOW TO BE A GREAT COACH'},
+{sr:1201,acc:'4126',title:'HOW TO MOTIVATE EVERY EMPLOYEE'},
+{sr:1202,acc:'4127',title:'MAKING TEAMS WORK'},
+{sr:1203,acc:'4128',title:'THE SALES SUCCESS HANDBOOK'},
+{sr:1204,acc:'4129',title:'WHY CUSTOMERS DONT DO WHAT YOU WANT THEM'},
+{sr:1205,acc:'4133',title:'GLOBALISATION'},
+{sr:1206,acc:'4140',title:'ENCYCLOPEDIA OFCOMPUTER KNOWLEDGE-DTP'},
+{sr:1207,acc:'4143',title:'CUSTOMER CULTURE'},
+{sr:1208,acc:'4144',title:'THE ART OF MANAGING EVERYDAY CONFLICT'},
+{sr:1209,acc:'4145',title:'SIX SIGMA &PRODUCT'},
+{sr:1210,acc:'4146',title:'ALL IS CLOUDED BY DESIRE GLOBAL BANKING'},
+{sr:1211,acc:'4147',title:'E- COMMERCE'},
+{sr:1212,acc:'4150',title:'SUCCESSFUL MANAGERS HANDBOOK'},
+{sr:1213,acc:'4151',title:'KINGFISHER WORLD ATLAS'},
+{sr:1214,acc:'4155',title:'BUSINESS ORGANISATION& MANAGEMENT'},
+{sr:1215,acc:'4161',title:'WHO MOVED MY CHEESE'},
+{sr:1216,acc:'4162',title:'WHO MOVED MY CHEESE-DELETED CLC'},
+{sr:1217,acc:'4163',title:'WHO MOVED MY CHEESE-DELETED CLC'},
+{sr:1218,acc:'4164',title:'WHO MOVED MY CHEESE -DELETED CLC'},
+{sr:1219,acc:'4165',title:'WHO MOVED MY CHEESE-DELETED CLC'},
+{sr:1220,acc:'4219',title:'REVVED'},
+{sr:1221,acc:'4224',title:'OXFORD DICTIONARY'},
+{sr:1222,acc:'4227',title:'MACRO ECONOMIC POLICY ENVIRONMENT'},
+{sr:1223,acc:'4228',title:'THE KARNATAKA RENT ACT'},
+{sr:1224,acc:'4229',title:'KARNATAKA EDUCATION ACT 1983'},
+{sr:1225,acc:'4233',title:'CREATIVE LEARNING'},
+{sr:1226,acc:'4234',title:'MODERN HUMAN RELATIONS'},
+{sr:1227,acc:'4235',title:'JALIBI MANAGEMENT'},
+{sr:1228,acc:'4236',title:'GLOBAL REMIX'},
+{sr:1229,acc:'4237',title:'MANAGING PROJECTS IN HR TRAINING DEVELOP'},
+{sr:1230,acc:'4238',title:'THE ESSENTIAL GUIDE TO MANAGING TALENT'},
+{sr:1231,acc:'4240',title:'TOP NET WORKING'},
+{sr:1232,acc:'4242',title:'YOU AND YOUR NECK'},
+{sr:1233,acc:'4243',title:'KNOW HOW'},
+{sr:1234,acc:'4245',title:'WHY THINGS GO WRONG'},
+{sr:1235,acc:'4246',title:'TRUST BASED FEELING'},
+{sr:1236,acc:'4247',title:'4 SECRETS OF HIGH PERFORMING'},
+{sr:1237,acc:'4249',title:'EFFECTIVE TIME MANAGEMENT'},
+{sr:1238,acc:'4250',title:'CANAKYA ON MANAGEMENT'},
+{sr:1239,acc:'4251',title:'LEADERSHIP WISDOM FROM THE MONK'},
+{sr:1240,acc:'4251',title:'LEADERSHIP WISDOM FROM THE MONK'},
+{sr:1241,acc:'4252',title:'INTRODUCTION TO TOURISM & HOSPITALITY'},
+{sr:1242,acc:'4267',title:'AGRARIAN CRISIS IN INDIA'},
+{sr:1243,acc:'4268',title:'THE VALUE CHAIN REVOLUTION'},
+{sr:1244,acc:'4269',title:'TOTAL MANAGEMENT & RATIOS'},
+{sr:1245,acc:'4270',title:'WHAT WENT WRONG IN INDIA & HOW TO SET'},
+{sr:1246,acc:'4276',title:'DABAWALAS'},
+{sr:1247,acc:'4277',title:'FIRST BREAK ALL THE RULES'},
+{sr:1248,acc:'4278',title:'HIGH FIVE'},
+{sr:1249,acc:'4279',title:'HOW TO WIN ANY ARGUMENT'},
+{sr:1250,acc:'4280',title:'HOW TO WIN ANY ARGUMENT'},
+{sr:1251,acc:'4281',title:'THE BE HAPPY ATTITUDES'},
+{sr:1252,acc:'4282',title:'THE CASE OF THE BONSAI MANAGER'},
+{sr:1253,acc:'4283',title:'THE OBVIOUS'},
+{sr:1254,acc:'4284',title:'THE  TOYOTA WAY'},
+{sr:1255,acc:'4285',title:'THE WORLDS GREATEST COMEBACKS'},
+{sr:1256,acc:'4286',title:'THE SECRET'},
+{sr:1257,acc:'4287',title:'WHALE DONE'},
+{sr:1258,acc:'4288',title:'COLLATERALISED DEBT OBLIGATIONS - AN INT'},
+{sr:1259,acc:'4290',title:'INDIA\'S CONSTITUTION'},
+{sr:1260,acc:'4305',title:'HUMAN RESOURCE MANAGEMENT IN BANKS'},
+{sr:1261,acc:'4308',title:'DO THE RIGHT THING'},
+{sr:1262,acc:'4309',title:'THE GREATNESS GUIDE'},
+{sr:1263,acc:'4310',title:'THE FREE MIND'},
+{sr:1264,acc:'4311',title:'TUESDAYS WITH MORRIE'},
+{sr:1265,acc:'4316',title:'OBJECTIVE ENGLISH'},
+{sr:1266,acc:'4332',title:'DYNAMICS OF INDIAN BANKING'},
+{sr:1267,acc:'4333',title:'INDIA\'S TRANSFORMING FINANCIAL SECTOR'},
+{sr:1268,acc:'4336',title:'INDIA & THE GLOBAL FINANCIAL CRISIS'},
+{sr:1269,acc:'4337',title:'GLOBAL ECONOMIC & FINANCIAL CRISIS'},
+{sr:1270,acc:'4339',title:'PERFORMANCE MANAGEMENT & DEVELOPMENT'},
+{sr:1271,acc:'4342',title:'BANKING PRINCIPLES & OPERATIONS'},
+{sr:1272,acc:'4348',title:'BANKING PRINCIPLES & OPERATIONS'},
+{sr:1273,acc:'4360',title:'IFRS MANUAL OF ACCOUNTING 2008'},
+{sr:1274,acc:'4361',title:'STARKE\'S INTERNATIONAL LAW'},
+{sr:1275,acc:'4362',title:'CIVIL COURT PRACTICE & PROCEDURE MANUAL'},
+{sr:1276,acc:'4363',title:'GENERAL & COMMERCIAL LAW'},
+{sr:1277,acc:'4364',title:'INTRODUCTION TO JURISPRUDENCE'},
+{sr:1278,acc:'4367',title:'ENCYCLOPEDIA OF INDIA (5 VOLS.)'},
+{sr:1279,acc:'4369',title:'THE CORPORATE SUFI'},
+{sr:1280,acc:'4370',title:'LIFE BALANCE IN SUFI WAY'},
+{sr:1281,acc:'4371',title:'LEADERSHIP DEVELOPMENT ACTIVITIES'},
+{sr:1282,acc:'4374',title:'THE SECRET TO GES SUCCESS'},
+{sr:1283,acc:'4394',title:'FUNDAMENTALS OF MODERN BANKING'},
+{sr:1284,acc:'4398',title:'THE PROTECTION OF WOMEN FROM DOM.VOILENC'},
+{sr:1285,acc:'4401',title:'MARRIAGE & DIVORCE LAWS'},
+{sr:1286,acc:'4403',title:'CONSTITUTIONAL LAW OF INDIA'},
+{sr:1287,acc:'4406',title:'INDIAN RURAL BANKING'},
+{sr:1288,acc:'4411',title:'MONEY LAUNDERING'},
+{sr:1289,acc:'4412',title:'RURAL CREDIT & MICRO FINANCE'},
+{sr:1290,acc:'4413',title:'CRM IN FINANCIAL SERVICES'},
+{sr:1291,acc:'4414',title:'HOUSEHOLD SAVINGS - PERSPECTS'},
+{sr:1292,acc:'4428',title:'THE MANAGER AS COACH AND MENTOR'},
+{sr:1293,acc:'4429',title:'KNOWLEDGE MANAGEMENT'},
+{sr:1294,acc:'4430',title:'TRAINING NEEDS ANALYSIS AND EVALUATION'},
+{sr:1295,acc:'4431',title:'THE WORLD BANK IN INDIA'},
+{sr:1296,acc:'4432',title:'PSYCHOLOGY FOR TRAINERS'},
+{sr:1297,acc:'4433',title:'FUNDAMENTALS OF MODERN BANKING'},
+{sr:1298,acc:'4434',title:'WORKING CAPITAL MANAGEMENT'},
+{sr:1299,acc:'4435',title:'BANK LENDING'},
+{sr:1300,acc:'4439',title:'RBI\'S INSTRUCTIONS FOR BANKS & BKG OPERA'},
+{sr:1301,acc:'4441',title:'PRESENTATIONS - PROVEN TECHNIQUES'},
+{sr:1302,acc:'4442',title:'TRAINING SKILLS'},
+{sr:1303,acc:'4450',title:'CORPORATE CHANAKYA'},
+{sr:1304,acc:'4480',title:'TREASURY MANAGEMENT'},
+{sr:1305,acc:'4485',title:'INFORMATION TECHNOLOGY'},
+{sr:1306,acc:'4490',title:'RESEARCH METHODOLOGY'},
+{sr:1307,acc:'4492',title:'HANDBOOK OF BANKING INFORMATION'},
+{sr:1308,acc:'4536',title:'ROMANCING THE BALANCE SHEET'},
+{sr:1309,acc:'4537',title:'MARKETING WHITEBOOK 2011-12 ONE STOP GUI'},
+{sr:1312,acc:'4540',title:'INDIA MICRO SMALL AND MEDIUM ENTRPRISE R'},
+{sr:1313,acc:'4541',title:'THE TCS STORY .....& BEYOND'},
+{sr:1314,acc:'4542',title:'MS OFFICE 2007 BIBLE'},
+{sr:1315,acc:'4543',title:'SUCCESS PRINCIPLES -HOW TO GET FROM WHER'},
+{sr:1316,acc:'4544',title:'OPTIONS FUTURES & OTHER DERIVATIVES'},
+{sr:1317,acc:'4545',title:'OXFOR ADVANCED LEARNERS DICTIONARY W/CDH'},
+{sr:1318,acc:'4546',title:'OXFORD ADVANCED LEARNERS DICTIONARY W/CD'},
+{sr:1319,acc:'4547',title:'EMPLOYEES FIRST,CUSTOMERS SECOND'},
+{sr:1320,acc:'4548',title:'STRATEGIC LEADERSHIP'},
+{sr:1321,acc:'4553',title:'CAMBRIDGE ADVANCED LEARNERS\' DICTIONARY'},
+{sr:1322,acc:'4554',title:'CAMBRIDGE PHRASAL VERBS DICTIONARY'},
+{sr:1323,acc:'4555',title:'OXFORD DICTIONARY OF ENGLISH IDIOMS'},
+{sr:1324,acc:'4557',title:'INVESTMENT BANKING'},
+{sr:1325,acc:'4558',title:'NOVEL & CONVENTIONAL METHODS OF AUDITS, INVESTIGATION AND FRAUD DETECTION'},
+{sr:1326,acc:'4564',title:'COMPANY LAW'},
+{sr:1327,acc:'4567',title:'SPEEDING FINANCIAL INCLUSION'},
+{sr:1328,acc:'4574',title:'HRD'},
+{sr:1329,acc:'4575',title:'HRD'},
+{sr:1330,acc:'4576',title:'HRD'},
+{sr:1331,acc:'4578',title:'HEALTH IN YOUR HANDS - VOL-I'},
+{sr:1332,acc:'4579',title:'HRD'},
+{sr:1333,acc:'4580',title:'HRD'},
+{sr:1334,acc:'4583',title:'MKTG'},
+{sr:1335,acc:'4584',title:'GEN'},
+{sr:1336,acc:'4585',title:'HRD'},
+{sr:1337,acc:'4586',title:'THE SUPREME QUEST'},
+{sr:1338,acc:'4589',title:'HRD'},
+{sr:1339,acc:'4590',title:'COMPUTER'},
+{sr:1340,acc:'4591',title:'PROJECT FINANCING - APPRAISAL & FOLLOW-UP FOR TERM LOANS & WORKING CAPITAL'},
+{sr:1341,acc:'4592',title:'PROJECT FINANCING - APPRAISAL & FOLLOW-UP FOR  TERM LOANS & WORKING CAPITAL'},
+{sr:1342,acc:'4594',title:'LESSONS FOR SUCCESS'},
+{sr:1343,acc:'4595',title:'Practical Approach to NPA Management'},
+{sr:1344,acc:'4595',title:'Practical Approach to NPA Management'},
+{sr:1345,acc:'4597',title:'Anti Money Launderin/Anti Terrorisom Funding & Know your customer'},
+{sr:1346,acc:'4598',title:'Anti Money Launderin/Anti Terrorisom Funding & Know your customer'},
+{sr:1347,acc:'4599',title:'HOW TO MAKE BETTER CHOICES IN LIFE & WORKS'},
+{sr:1348,acc:'4600',title:'PLANTS THAT HEAL VOL-I'},
+{sr:1349,acc:'4602',title:'PLANTS THAT HEAL VOL-II'},
+{sr:1350,acc:'4603',title:'FEMA - VOLUME - I'},
+{sr:1351,acc:'4604',title:'FEMA - VOLUME - II'},
+{sr:1352,acc:'4605',title:'FOREIGN TRADE POLICY - VOLUME - I'},
+{sr:1353,acc:'4609',title:'THE IMPACT OF THE HIGHLY IMPROBABLE- THE BLACK SWANN'},
+{sr:1354,acc:'4610',title:'THE TCS STORY AND BEYOND'},
+{sr:1355,acc:'4611',title:'NOW, DISCOVER YOUR STRENGTHS'},
+{sr:1356,acc:'4612',title:'Innovative Best Practises in HRD & Training'},
+{sr:1357,acc:'4614',title:'TRAINERS\' HANDBOOK'},
+{sr:1358,acc:'4623',title:'THREE TRUST OF WELL BEINGS'},
+{sr:1359,acc:'4627',title:'G FRANCIS XAVIER'},
+{sr:1360,acc:'4629',title:'VIVEK BINDRA'},
+{sr:1361,acc:'4631',title:'KANNADA-KANNADA-ENG DICTIONARY'},
+{sr:1362,acc:'4632',title:'PROF. SHRIKANT PRASOON & VISHJAL BHANDARI'},
+{sr:1363,acc:'4636',title:'ENGLISH-ENGLISH-KANNADA DICTIONARY'},
+{sr:1364,acc:'4637',title:'PHIL BAGULEY'},
+{sr:1365,acc:'4638',title:'BEN CARSON & M D CICIL MURPHEY'},
+{sr:1366,acc:'4656',title:'Reserve Bank of India Act'},
+{sr:1367,acc:'4657',title:'Reserve Bank of India Act'},
+{sr:1368,acc:'4658',title:'Banking Regulation Act'},
+{sr:1369,acc:'4659',title:'Banking Regulation Act'},
+{sr:1370,acc:'4660',title:'Contract Act'},
+{sr:1371,acc:'4661',title:'Contract Act'},
+{sr:1372,acc:'4662',title:'Limitation Act'},
+{sr:1373,acc:'4663',title:'Limitation Act'},
+{sr:1374,acc:'4664',title:'Negotiable Instruments Act'},
+{sr:1375,acc:'4665',title:'Negotiable Instruments Act'},
+{sr:1376,acc:'4666',title:'Transfer of Property Act'},
+{sr:1377,acc:'4667',title:'Transfer of Property Act'},
+{sr:1378,acc:'4668',title:'Stamp Act'},
+{sr:1379,acc:'4669',title:'Stamp Act'},
+{sr:1380,acc:'4670',title:'Partnership Act'},
+{sr:1381,acc:'4671',title:'Partnership Act'},
+{sr:1382,acc:'4677',title:'TIME MANAGEMENT'},
+{sr:1383,acc:'4678',title:'MANAGER\'S HANDBOOK'},
+{sr:1384,acc:'4679',title:'MANAGER\'S TOOLKIT'},
+{sr:1385,acc:'4681',title:'HBR GUIDE TO LEADING TEAMS'},
+{sr:1386,acc:'4684',title:'HBR\'s 10 MUST READS - For New Managers'},
+{sr:1387,acc:'4686',title:'HBR\'s 10 MUST READS - On Strategy'},
+{sr:1388,acc:'4688',title:'HBR\'s 10 MUST READS - On Change Management'},
+{sr:1389,acc:'4689',title:'HBR\'s 10 MUST READS - Management Ideas'},
+{sr:1390,acc:'4690',title:'HANDBOOK ON BANKING'},
+{sr:1391,acc:'4698',title:'Soft Skills for Success'},
+{sr:1392,acc:'4699',title:'MARKETING AN INTRODUCTION'},
+{sr:1393,acc:'4700',title:'THE LAW OF NPAsWITH OTD SCHEME'},
+{sr:1394,acc:'4701',title:'BANKERS\' HANDBOOK ON ACCOUNTING'},
+{sr:1395,acc:'4702',title:'PRACTIONERS\' BOOK ON TRADE FINANCE'},
+{sr:1396,acc:'4703',title:'BANKERS\' HANDBOOK ON AUDITING'},
+{sr:1397,acc:'4704',title:'TRAINERS\' HANDBOOK'},
+{sr:1398,acc:'4705',title:'FOREIGN EXCHANGE OPERATIONS UNDER FEMA'},
+{sr:1399,acc:'4706',title:'GUIDE TO INSOLVANCY & BANKRUPTCY CODE'},
+{sr:1400,acc:'4708',title:'CREDIT MONITORING, LEGAL ASPECTS & RECOVERY OF BANK LOAN'},
+{sr:1401,acc:'4709',title:'MANUAL ON EXPORT DOCUMENTATION'},
+{sr:1402,acc:'4710',title:'ENGLISH HINDI DICTIONARY OF TECHNICAL TERMS'},
+{sr:1403,acc:'4711',title:'GENERAL KNOWLEDGE ENCYCLOPEDIA'},
+{sr:1404,acc:'4712',title:'KARVAN GUJAR GAYA'},
+{sr:1405,acc:'4713',title:'HINDI-HINDI KANNAND RATHNA KOSHA'},
+{sr:1406,acc:'4714',title:'GST'},
+{sr:1407,acc:'4715',title:'JITNE KA NAZARIYA'},
+{sr:1408,acc:'4716',title:'SAFL SOCH KA SAFAL JADOO'},
+{sr:1409,acc:'4717',title:'CHUNI HUYI KAVITHAYEN'},
+{sr:1410,acc:'4718',title:'TARAKASH'},
+{sr:1411,acc:'4719',title:'151 SARVOTTHAM NIBANDH'},
+{sr:1412,acc:'4720',title:'AAVARA SAJDE'},
+{sr:1413,acc:'4721',title:'KARYALAYI ANUBVAD NIDESHAKA'},
+{sr:1414,acc:'4722',title:'ADARSH JEEVAN KI PRERAK KAHANIYA'},
+{sr:1415,acc:'4723',title:'BRUHAT HINDI ENLGISH KOSH'},
+{sr:1416,acc:'4724',title:'BHUHAT ENGILISH-ENGLISH HINDI KOSH'},
+{sr:1417,acc:'4725',title:'ADVANCED DICTIONARY HINDI-HINDI-ENGLISH'},
+{sr:1418,acc:'4726',title:'ANTARASHTRIYA VYAKTI KOSH'},
+{sr:1419,acc:'4727',title:'HINDI MUHAVARE AUR LOKOKTI KOSH'},
+{sr:1420,acc:'4728',title:'HINDI PARYAYAVACHI KOSH'},
+{sr:1421,acc:'4729',title:'SHAKTI'},
+{sr:1422,acc:'4730',title:'LOK VYAVAHAR'},
+{sr:1423,acc:'4731',title:'SAMPANNATHA KE CHIPE HUE RAHASYA'},
+{sr:1424,acc:'4732',title:'DIGITAL INDIA'},
+{sr:1425,acc:'4733',title:'LEADERSHIP KE 52 SUTRA'},
+{sr:1426,acc:'4734',title:'SAFALTA KE  LIYE KYA KAREN'},
+{sr:1427,acc:'4735',title:'SABI KE LIYE YOGA'},
+{sr:1428,acc:'4736',title:'YOGA DWARA SWASTYA JEEVAN'},
+{sr:1429,acc:'4737',title:'AYURVEDA VA YOGA DWARA VAJAN GHATAYEN'},
+{sr:1430,acc:'4738',title:'PHAL, SABJI MEVO DWARA ROG NIVARAN'},
+{sr:1431,acc:'4739',title:'TANAV RAHIT JEEVAN'},
+{sr:1432,acc:'4740',title:'ANMOL PRERAK PRASANGA'},
+{sr:1433,acc:'4741',title:'GALIB KI SHAYARI'},
+{sr:1434,acc:'4742',title:'SANKALP SHAKTI'},
+{sr:1435,acc:'4743',title:'HINDI MAHAVARA KOSH'},
+{sr:1436,acc:'4744',title:'SAMANYA GYAN EVAM BHAKTI PARICHAY'},
+{sr:1437,acc:'4745',title:'BHARATH KE PARYATAN STHAL'},
+{sr:1438,acc:'4746',title:'BHARATH KE NOBEL PURASKAR VIJETHA'},
+{sr:1439,acc:'4747',title:'AKBAR BIRBAL KI MANORANJAK KAHINIYA'},
+{sr:1440,acc:'4748',title:'SAMPOORNA SACHITRA PANCHATANTRA'},
+{sr:1441,acc:'4749',title:'Soojh Boojh ki kahani'},
+{sr:1442,acc:'4751',title:'VYAVAHARIK URDU-HINDI SHABDHAKOSH'},
+{sr:1443,acc:'4752',title:'SHRESHTA HASYA VYANG KAHANIYA'},
+{sr:1444,acc:'4753',title:'SWASAMVAD KA JADOO'},
+{sr:1445,acc:'4754',title:'ANMOL VACHAN'},
+{sr:1446,acc:'4755',title:'SABSE MUSHKIL KAM SABSE PAHALE'},
+{sr:1447,acc:'4756',title:'SAVAL HI JAVAB HAI'},
+{sr:1448,acc:'4757',title:'JEET AAPKI'},
+{sr:1449,acc:'4758',title:'KUCH TO KAHIYE'},
+{sr:1450,acc:'4759',title:'SAKARATMAK SOCH KI SHAKTI'},
+{sr:1451,acc:'4761',title:'I DO WHAT I DO'},
+{sr:1452,acc:'4763',title:'YOU CAN SELL: RESULTS ARE REWARDED EFFORTS ARE NOT'},
+{sr:1453,acc:'4767',title:'THE WISDOM OF FINANCE'},
+{sr:1454,acc:'4768',title:'FINANCIAL MANAGEMENT'},
+{sr:1455,acc:'4770',title:'THE 5 AM CLUB OWN YOUR MORNING ELEVATE YOUR LIFE'},
+{sr:1456,acc:'4772',title:'HOW TO STOP WORRYING AND START LIVING'},
+{sr:1457,acc:'4773',title:'COMPLIANCE IN BANKS'},
+{sr:1458,acc:'4775',title:'DOCUMENTARY: LETTER OF CREDIT'},
+{sr:1459,acc:'4779',title:'IF GOD WAS A BANKER'},
+{sr:1460,acc:'4780',title:'BANKERS\' HANDBOOK ON AUDITING'},
+{sr:1461,acc:'4782',title:'AGRICULTURAL BANKING'},
+{sr:1462,acc:'4783',title:'DERIVATIVES AND RISK MANAGEMENT'},
+{sr:1463,acc:'4785',title:'RURAL INDIA PERSPECTIVE 2017'},
+{sr:1464,acc:'4786',title:'FOREIGN EXCHANGE MANAGEMENT ACT WITH RULES'},
+{sr:1465,acc:'4788',title:'RESCUE THE PROBLEM: A COMPLETE GUIDE TO IDENTIFY, PREVENTING AND REOCVERING FROM PROJECT FAILURE'},
+{sr:1466,acc:'4790',title:'THE EFFECTIVE EXECUTIVE: THE DEFINITIVE GUIDE  TO GETTING THE RIGHT THINGS DONE'},
+{sr:1467,acc:'4791',title:'RURAL BANKING & AGRICULTURAL FINANCE IN INDIA'},
+{sr:1468,acc:'4794',title:'HR IN VUCA WORLD: A VIEW POINT & INSIGHT'},
+{sr:1469,acc:'4795',title:'THE HIGH PERFORMANCE ENTREPRENEUR'},
+{sr:1470,acc:'4796',title:'THE CASE OF THE BONSAI MANAGER: LESSONS FOR MANAGERS ON INNTUITION'},
+{sr:1471,acc:'4797',title:'21 LESSONS FOR THE 21ST CENTURY'},
+{sr:1472,acc:'4798',title:'EXPORT & IMPORT: WINNING IN THE GLOBAL  MARKET PLACE'},
+{sr:1473,acc:'4800',title:'THE FIFTH DISCIPLINE'},
+{sr:1474,acc:'4801',title:'THE 8TH HABIT FROM EFFECTIVENESS TO GREATNESS'},
+{sr:1475,acc:'4805',title:'HOMO DEUS'},
+{sr:1476,acc:'4806',title:'ANALYSIS OF BALANCE SHEET'},
+{sr:1477,acc:'4807',title:'THE BASIC OF UNDERSTANDING FINANCIAL STATEMENT'},
+{sr:1478,acc:'4808',title:'THE THIRD PILLAR: HOW MARKETS AND THE STATE LEAVE THE COMMUNITY BEHIND'},
+{sr:1479,acc:'4809',title:'MIND WITHOUT FEAR'},
+{sr:1480,acc:'4810',title:'THE GREAT DISAPPOINTMENT'},
+{sr:1481,acc:'4812',title:'ECONOMICS FOR MANAGERS - PART I'},
+{sr:1482,acc:'4813',title:'LIFE\'S AMAZING SECRETS'},
+{sr:1483,acc:'4814',title:'90 SECONDS TO LIFE YOU LOVE'},
+{sr:1484,acc:'4815',title:'KRISHNA: THE MAN AND HIS PHILOSOPHY'},
+{sr:1485,acc:'4819',title:'TREASURY MANAGEMENT'},
+{sr:1486,acc:'4820',title:'THE HANDBOOK OF FIXED INCOME SECURITIES'},
+{sr:1487,acc:'4821',title:'IT SURAKSHA'},
+{sr:1488,acc:'4822',title:'IT SURAKSHA'},
+{sr:1489,acc:'4823',title:'GRAHAK SEVA TATHA BANKING CODES & MANAK'},
+{sr:1490,acc:'4824',title:'GRAHAK SEVA TATHA BANKING CODES & MANAK'},
+{sr:1491,acc:'4825',title:'ROLES AND RULES OF FEDAI 1. FOREIGN EXCHANGE RATES AND RISK MANAGEMENT 2. REGULATORY REQUIREMENTS UNDER FEMA (VOL-I) 1999 (FOR RESIDENT &NON-RESIDENT ENTITIES) 3. REGULATORY REQUIREMENTS UNDER FEMA (VOL-II) 1999 (FOR RESIDENT &NON-RESIDENT ENTITIES) 4. DOCUMENTARY CREDITS AND STANDBY CREDITS 5. EXPORT FINANCE 6. FOREIGN TRADE POLICY 2015-20'},
+{sr:1492,acc:'4826',title:'BEYOND BULLET POINTS: USING MICROSOFT POWERPOINT TO CREATE PRESENTATIONS THAT INFORM, MOTIVATE AND INSPIRE'},
+{sr:1493,acc:'4827',title:'START WHERE YOU ARE: A JOURNAL FOR SELF-EXPLORATION'},
+{sr:1494,acc:'4828',title:'SLIDE:OLOGY'},
+{sr:1495,acc:'4829',title:'FOUR LEVELS OF TRAINING EVALUATION'},
+{sr:1496,acc:'4830',title:'SAPIENS: A BRIEF HISTORY OF HUMANKIND'},
+{sr:1497,acc:'4831',title:'IKIGAI'},
+{sr:1498,acc:'4832',title:'EMPLOYEE TRAINING AND DEVELOPMENT'},
+{sr:1499,acc:'4833',title:'HBR GUIDE TO PERSUASIVE PRESENTATIONS'},
+{sr:1500,acc:'4834',title:'SILENT SPRING'},
+{sr:1501,acc:'4835',title:'THE INTELIGENCE TRAP'},
+{sr:1502,acc:'4836',title:'THE DECISION BOOK'},
+{sr:1503,acc:'4837',title:'TELLING AIN\'T TRAINING'},
+{sr:1504,acc:'4838',title:'DESIGN FOR HOW PEOPLE LEARN'},
+{sr:1505,acc:'4839',title:'THE WOMEN WHO RULED INDIA: LEADERS WARRIORS ICONS'},
+{sr:1506,acc:'4840',title:'GABAN'},
+{sr:1507,acc:'4841',title:'TEACH YOURSELF HINDI'},
+{sr:1508,acc:'4842',title:'GEETANJALI'},
+{sr:1509,acc:'4843',title:'MADHUSHALA'},
+{sr:1510,acc:'4844',title:'RASHMIRATHI'},
+{sr:1511,acc:'4845',title:'SHARE MARKET SHABDKOSH'},
+{sr:1512,acc:'4846',title:'SATYA KE PRAYOG'},
+{sr:1513,acc:'4847',title:'NAMKEEN'},
+{sr:1514,acc:'4848',title:'21 SARVSHRESHTH KAHANIYA'},
+{sr:1515,acc:'4849',title:'THAKUR KA KUAN TATHA ANYA KAHANIYA'},
+{sr:1516,acc:'4850',title:'KAUTILYA ARTHASHASTRA'},
+{sr:1517,acc:'4851',title:'PLUTO'},
+{sr:1518,acc:'4852',title:'SAAMVED'},
+{sr:1519,acc:'4853',title:'YAJURVED'},
+{sr:1520,acc:'4854',title:'ATHARVAVED PART I'},
+{sr:1521,acc:'4855',title:'ATHARVAVED PART II'},
+{sr:1522,acc:'4856',title:'RIGVED PART I'},
+{sr:1523,acc:'4857',title:'RIGVED PART II'},
+{sr:1524,acc:'4858',title:'RIGVED PART III'},
+{sr:1525,acc:'4859',title:'RIGVED PART IV'},
+{sr:1526,acc:'4860',title:'GAALIB'},
+{sr:1527,acc:'4861',title:'KABULIWALA TATHA ANYA KAHANIYA'},
+{sr:1528,acc:'2270',title:'EXCELLENCE THROUGH PEOPLE THE CANBANK'},
+{sr:1529,acc:'3749',title:'BACK CLR VOL-37 2003(1)- COMP'},
+{sr:1530,acc:'4862',title:'Good Economics For Hard Times : Better Answers To Our Biggest Problems'},
+{sr:1531,acc:'4863',title:'What The Economy Needs Now'},
+{sr:1532,acc:'4864',title:'Poor Economics: Rethinking Poverty & the Ways to End it'},
+{sr:1533,acc:'4865',title:'Mind Master: Winning Lessons from a Champion\'s Life'},
+{sr:1534,acc:'4866',title:'Overdraft: Saving the Indian Saver'},
+{sr:1535,acc:'4867',title:'The Presidential Years: 2012-2017'},
+{sr:1536,acc:'4868',title:'Reset: Regaining India’s Economic Legacy'},
+{sr:1537,acc:'4869',title:'Fault Lines : How Hidden Fractures Still Threaten The World Economy'},
+{sr:1538,acc:'4870',title:'Just Transferred: The Untold Story of Ashok Khemka'},
+{sr:1539,acc:'4871',title:'The Essential Paulo Coelho Boxset : Six Inspiring Classics, Including the International Bestselling Phenomenon The Alchemist by Paulo Coelho'},
+{sr:1540,acc:'4872',title:'The Essential Paulo Coelho Boxset : Six Inspiring Classics, Including the International Bestselling Phenomenon The Alchemist by Paulo Coelho'},
+{sr:1541,acc:'4873',title:'The Essential Paulo Coelho Boxset : Six Inspiring Classics, Including the International Bestselling Phenomenon The Alchemist by Paulo Coelho'},
+{sr:1542,acc:'4874',title:'The Essential Paulo Coelho Boxset : Six Inspiring Classics, Including the International Bestselling Phenomenon The Alchemist by Paulo Coelho'},
+{sr:1543,acc:'4875',title:'The Essential Paulo Coelho Boxset : Six Inspiring Classics, Including the International Bestselling Phenomenon The Alchemist by Paulo Coelho'},
+{sr:1544,acc:'4876',title:'The Essential Paulo Coelho Boxset : Six Inspiring Classics, Including the International Bestselling Phenomenon The Alchemist by Paulo Coelho'},
+{sr:1545,acc:'4877',title:'India After Gandhi: The History of the World\'s Largest Democracy'},
+{sr:1546,acc:'4878',title:'Building Social Business: The New Kind of Capitalism that Serves Humanity\'s Most Pressing Needs'},
+{sr:1547,acc:'4879',title:'India Unlimited: Reclaiming the Lost Glory'},
+{sr:1548,acc:'4880',title:'(ISC)2 CISSP Certified Information Systems Security Professional Official Study Guide'},
+{sr:1549,acc:'4881',title:'(ISC)2 CISSP Certified Information Systems Security Professional Practice Tests Bundle'},
+{sr:1550,acc:'4882',title:'CISSP All-in-One Exam Guide, Eighth Edition'},
+{sr:1551,acc:'4883',title:'CISSP For Dummies (For Dummies (Computer/Tech))'},
+{sr:1552,acc:'4884',title:'Security Analysis & Portfolio Management Text and Cases (July 2019 Edition)'},
+{sr:1553,acc:'4885',title:'खुदरा बैंकिंग (Khudra Banking)  (2019 Edition)'},
+{sr:1554,acc:'4886',title:'Information System for Banks'},
+{sr:1555,acc:'4887',title:'Handbook on Debt Recovery'},
+{sr:1556,acc:'4888',title:'5 Cs & Beyond: Differential approach to Credit'},
+{sr:1557,acc:'4889',title:'Free Trade and Prosperity: How Openness Helps Developing Countries Grow Richer and Combat Poverty'},
+{sr:1558,acc:'4890',title:'Risk Analysis,Insurance and Retirement Planning'},
+{sr:1559,acc:'4891',title:'Creating a World Without Poverty: Social Business and the Future of Capitalism: 0'},
+{sr:1560,acc:'4892',title:'Public Sector Risk Management'},
+{sr:1561,acc:'4893',title:'Principles of Business Organisation'},
+{sr:1562,acc:'4894',title:'GST TDS & TCS'},
+{sr:1563,acc:'4895',title:'The Hard Thing About Hard Things'},
+{sr:1564,acc:'4896',title:'The White Tiger: Booker Prize Winner 2008'},
+{sr:1565,acc:'4897',title:'Zen: The Art of Simple Living'},
+{sr:1566,acc:'4898',title:'The World as I See it (Hardcover Library Edition)'},
+{sr:1567,acc:'4899',title:'Thoughts and Reflections'},
+{sr:1568,acc:'4900',title:'Jannayak Atalji (Sampoorn Jeevani)'},
+{sr:1569,acc:'4901',title:'Truth, Love and a Little Malice'},
+{sr:1570,acc:'4902',title:'Atlas Shrugged'},
+{sr:1571,acc:'4903',title:'THE CONSTITUTION OF INDIA BARE ACT'},
+{sr:1572,acc:'4904',title:'Taxmann\'s Students\' Guide to GST & Customs Law (5th Edition January 2020)'},
+{sr:1573,acc:'4905',title:'Governance Ethics and Social Responsibility of Business (University Edition)'},
+{sr:1574,acc:'4906',title:'उन्नत बैंक प्रबंधन (Unnat Bank Prabandhan) (2020 Edition)'},
+{sr:1575,acc:'4907',title:'Retirement Adviser(XVII)(August 2019 Edition)'},
+{sr:1576,acc:'4908',title:'माल और सेवा कर Goods and Services Tax (G.S.T) 5th Revised and updated Edition 2020'},
+{sr:1577,acc:'4909',title:'2021 FRM Part 1 Financial Risk Manager (CORE books Complete set)'},
+{sr:1578,acc:'4910',title:'Handbook for Insolvency Professional’s Examination'},
+{sr:1579,acc:'4911',title:'2021 CFA Level 1 Curriculum Books - Institute book covers entire syllabus (Volume 1 to 6)'},
+{sr:1580,acc:'4912',title:'रंगभूमि-प्रेमचंद के उपन्यास (Set of 8 Books) (Hindi)'},
+{sr:1581,acc:'4913',title:'प्रेमाश्रम-प्रेमचंद के उपन्यास (Set of 8 Books) (Hindi)'},
+{sr:1582,acc:'4914',title:'निर्मला-प्रेमचंद के उपन्यास (Set of 8 Books) (Hindi)'},
+{sr:1583,acc:'4915',title:'वरदान-प्रेमचंद के उपन्यास (Set of 8 Books) (Hindi)'},
+{sr:1584,acc:'4916',title:'कर्मभूमि-प्रेमचंद के उपन्यास (Set of 8 Books) (Hindi)'},
+{sr:1585,acc:'4917',title:'प्रतिज्ञा-प्रेमचंद के उपन्यास (Set of 8 Books) (Hindi)'},
+{sr:1586,acc:'4918',title:'गोदान-प्रेमचंद के उपन्यास (Set of 8 Books) (Hindi)'},
+{sr:1587,acc:'4919',title:'गबन-प्रेमचंद के उपन्यास (Set of 8 Books) (Hindi)'},
+{sr:1588,acc:'4920',title:'मझली दीदी एवं अन्य कहानियाँ -शरत चंद्र साहित्य (Set of 10 Books) (Hindi)'},
+{sr:1589,acc:'4921',title:'चंद्रनाथ-शरत चंद्र साहित्य (Set of 10 Books) (Hindi)'},
+{sr:1590,acc:'4922',title:'विप्रदास-शरत चंद्र साहित्य (Set of 10 Books) (Hindi)'},
+{sr:1591,acc:'4923',title:'गृहदाह-शरत चंद्र साहित्य (Set of 10 Books) (Hindi)'},
+{sr:1592,acc:'4924',title:'पथ के दावेदार-शरत चंद्र साहित्य (Set of 10 Books) (Hindi)'},
+{sr:1593,acc:'4925',title:'शेष परिचय-शरत चंद्र साहित्य (Set of 10 Books) (Hindi)'},
+{sr:1594,acc:'4926',title:'ब्राह्मण की बेटी-शरत चंद्र साहित्य (Set of 10 Books) (Hindi)'},
+{sr:1595,acc:'4927',title:'दत्ता- शरत चंद्र साहित्य (Set of 10 Books) (Hindi)'},
+{sr:1596,acc:'4928',title:'परिणीता- शरत चंद्र साहित्य (Set of 10 Books) (Hindi)'},
+{sr:1597,acc:'4929',title:'बिराज बहू - शरत चंद्र साहित्य (Set of 10 Books) (Hindi)'},
+{sr:1598,acc:'4930',title:'हिंदी उद्भव - विकास और स्वरूप-'},
+{sr:1599,acc:'4931',title:'विवेकानंद की आत्मकथा'},
+{sr:1600,acc:'4932',title:'जीवन के अद्भुत रहस्य'},
+{sr:1601,acc:'4933',title:'इनर इंजिनीयरिंग'},
+{sr:1602,acc:'4934',title:'प्रसिद्ध साहित्यकारों की अनमोल कहानियाँ (प्रेमचंद, शरतचंद्र, जयशंकर प्रसाद, रवींद्रनाथ टैगोर)'},
+{sr:1603,acc:'4935',title:'देश का बंटवारा'},
+{sr:1604,acc:'4936',title:'निबंध-दृष्टि'},
+{sr:1605,acc:'4937',title:'शब्दों का सफर: खंड. 1'},
+{sr:1606,acc:'4938',title:'शब्दों का सफर: खंड. 2'},
+{sr:1607,acc:'4939',title:'शब्दों का सफर: खंड. 3'},
+{sr:1608,acc:'4940',title:'बी-15बी, फॉर्थ फ्लोर'},
+{sr:1609,acc:'4941',title:'काशीनाथ'},
+{sr:1610,acc:'4942',title:'डिजिटल हिंदी की यात्रा'},
+{sr:1611,acc:'4943',title:'हिंदी साहित्य के प्रतिमान'},
+{sr:1612,acc:'4944',title:'भारतीय अर्थव्यवस्था'},
+{sr:1613,acc:'4945',title:'मेरी जीवन यात्रा- ए पी जे अब्दुल कलाम'},
+{sr:1614,acc:'4946',title:'लता मंगेश्कर-अपने खुद के शब्दों में'},
+{sr:1615,acc:'4947',title:'आधा गाँव'},
+{sr:1616,acc:'4948',title:'मैला आँचल'},
+{sr:1617,acc:'4949',title:'राग दरबारी'},
+{sr:1618,acc:'4950',title:'बूँद और समुद्र'},
+{sr:1619,acc:'4951',title:'चार्ली चाप्लिन'},
+{sr:1620,acc:'4952',title:'मंटो एक बदनाम लेखक'},
+{sr:1621,acc:'4953',title:'अन्तोन चेख़व और जॉर्ज बर्नाड शा'},
+{sr:1622,acc:'4954',title:'सफदर-सफदर हाशमी का व्यक्तित्व और कृतित्व'},
+{sr:1623,acc:'4955',title:'सफर एक डोंगी में डगमग'},
+{sr:1624,acc:'4956',title:'आजादी मेरा ब्रांड'},
+{sr:1625,acc:'4957',title:'दूर दुर्गम दुरुस्त : पूर्वग्रहों के पार पूर्वोत्तर की यात्रा'},
+{sr:1626,acc:'4958',title:'मैं तुमसे कुछ कहना चाहती हूँ'},
+{sr:1627,acc:'4959',title:'मैक्सिम गोर्की की लोकप्रिय कहानियां'},
+{sr:1628,acc:'4960',title:'विश्व की श्रेष्ठ कहानियाँ'},
+{sr:1629,acc:'4961',title:'मणिकर्णिका'},
+{sr:1630,acc:'4962',title:'मुर्दहिया'},
+{sr:1631,acc:'4963',title:'इश्क में शहर होना'},
+{sr:1632,acc:'4964',title:'इश्क में माटी सोना'},
+{sr:1633,acc:'4965',title:'इश्क कोई न्यूस नहीं'},
+{sr:1634,acc:'4966',title:'शिकायत मुझे भी है'},
+{sr:1635,acc:'4967',title:'निठल्ले की डायरी'},
+{sr:1636,acc:'4968',title:'कहत कबीर'},
+{sr:1637,acc:'4969',title:'ठिठुरता हुआ गणतंत्र'},
+{sr:1638,acc:'4970',title:'आवारा भीड़ के खतरे'},
+{sr:1639,acc:'4971',title:'विकलांग श्रद्धा का दौर'},
+{sr:1640,acc:'4972',title:'पगडंडियों का जमाना'},
+{sr:1641,acc:'4973',title:'तुलसीदास चंदन घिसै'},
+{sr:1642,acc:'4974',title:'वैष्णव की फिसलन'},
+{sr:1643,acc:'4975',title:'मृत्यु के बाद (हिंदी)'},
+{sr:1644,acc:'4976',title:'वधस्थल'},
+{sr:1645,acc:'4977',title:'मामोनी रैसम गोस्वामी की कहानियां (हिंदी)'},
+{sr:1646,acc:'4978',title:'नरेन्द्र कोहली श्रेष्ठ व्यंग'},
+{sr:1647,acc:'4979',title:'भूमंडलीकरण के दौर में : चुने हुए निबंध'},
+{sr:1648,acc:'4980',title:'सृजनशील जीवन और शिक्षा: त्सुनेसाबुरो माकीगुची के विचार और सुझाव'},
+{sr:1649,acc:'4981',title:'फनी धाबा'},
+{sr:1650,acc:'4982',title:'आपदाएँ: लघु कथाएँ, निबंध और उपाख्यान'},
+{sr:1651,acc:'4983',title:'मेघों के देश में'},
+{sr:1652,acc:'4984',title:'आदि शंकरम'},
+{sr:1653,acc:'4985',title:'स्वर्ण क्षेत्र में स्वागत है'},
+{sr:1654,acc:'4986',title:'मंदिर का हाथी'},
+{sr:1655,acc:'4987',title:'शब्द चित्र और श्रद्धांजलियाँ- गाँधीजी'},
+{sr:1656,acc:'4988',title:'ज्ञान चतुर्वेदी: संकलित व्यंग्य'},
+{sr:1657,acc:'4989',title:'चंद्रधर शर्मा गुलेरी की संकलित कहानियाँ'},
+{sr:1658,acc:'4990',title:'हिंदी की आरंभिक कहानियाँ'},
+{sr:1659,acc:'4991',title:'मालती जोशी - प्रतिनिधि साहित्य'},
+{sr:1660,acc:'4992',title:'राजभाषा हिन्दी % विविध परिप्रेक्ष्य'},
+{sr:1661,acc:'4993',title:'राजभाषा हिन्दी % विविध विमर्श'},
+{sr:1662,acc:'4994',title:'डिजिटल शिक्षा'},
+{sr:1663,acc:'4995',title:'मेरी बाल कहानियाँ % गिजुभाई'},
+{sr:1664,acc:'4996',title:'मुल्ला नसरूद्दीन के रोचक किस्से'},
+{sr:1665,acc:'4997',title:'शेखचिल्ली के रोचक कारनामे'},
+{sr:1666,acc:'4998',title:'विक्रम बेताल की कहानियाँ'},
+{sr:1667,acc:'4999',title:'तेनालीराम के रोचक किस्से'},
+{sr:1668,acc:'5000',title:'हितोपदेश की अनमोल कहानियाँ'},
+{sr:1669,acc:'5001',title:'पंचतंत्र की अनमोल कहानियाँ'},
+{sr:1670,acc:'5002',title:'जातक कथाएँ'},
+{sr:1671,acc:'5003',title:'चिन्ता एवं तनाव से मुक्ति'},
+{sr:1672,acc:'5004',title:'साइबर सुरक्षा'},
+{sr:1673,acc:'5005',title:'साइबर क्राइम'},
+{sr:1674,acc:'5006',title:'व्यक्तित्व विकास के 7 आध्यात्मिक नियम'},
+{sr:1675,acc:'5007',title:'स्वामी विवेकानन्द की शिक्षाप्रद कहानियाँ'},
+{sr:1676,acc:'5008',title:'रामायण की शिक्षाप्रद कहानियाँ'},
+{sr:1677,acc:'5009',title:'महाभारत की शिक्षाप्रद कहानियाँ'},
+{sr:1678,acc:'5010',title:'श्रीरामकृष्ण परमहंस की शिक्षाप्रद कहानियाँ'},
+{sr:1679,acc:'5011',title:'हितोपदेश की शिक्षाप्रद कहानियाँ'},
+{sr:1680,acc:'5012',title:'Principles & Practices of Banking'},
+{sr:1681,acc:'5013',title:'Advanced Bank Management'},
+{sr:1682,acc:'5014',title:'Bank Financial Management'},
+{sr:1683,acc:'5015',title:'Corporate Banking'},
+{sr:1684,acc:'5016',title:'Rural Banking'},
+{sr:1685,acc:'5017',title:'Retail Banking'},
+{sr:1686,acc:'5018',title:'Human Resources Management'},
+{sr:1687,acc:'5019',title:'Information Technology'},
+{sr:1688,acc:'5020',title:'Central Banking'},
+{sr:1689,acc:'5021',title:'Risk Management'},
+{sr:1690,acc:'5022',title:'Treasury Management'},
+{sr:1691,acc:'5023',title:'Anti-Money Laundering & Know Your Customer'},
+{sr:1692,acc:'5024',title:'Foreign ExchangeFacilities for Individual'},
+{sr:1693,acc:'5025',title:'Micro-finance Perspectives & operation'},
+{sr:1694,acc:'5026',title:'Information Technology,DataCommunication & Electronic Banking'},
+{sr:1695,acc:'5027',title:'Design, Development & Implementation of Information System'},
+{sr:1696,acc:'5028',title:'Security in Electronic  Banking'},
+{sr:1697,acc:'5029',title:'Management and Operations of co-operative Banks'},
+{sr:1698,acc:'5030',title:'International Banking Operations'},
+{sr:1699,acc:'5031',title:'International Corporate Finance'},
+{sr:1700,acc:'5032',title:'International Banking-Legal & Regulatory Aspects'},
+{sr:1701,acc:'5033',title:'Retail Assets Product & Other Related Services'},
+{sr:1702,acc:'5034',title:'Retail Liability Product & Other Related Services'},
+{sr:1703,acc:'5035',title:'Accounting & Finance for Bankers'},
+{sr:1704,acc:'5036',title:'Legal  and Regulatory Aspects of Banking'},
+{sr:1705,acc:'5037',title:'Introduction to Financial Planning'},
+{sr:1706,acc:'5038',title:'Risk Analysis, Insurance and Retirement Planning'},
+{sr:1707,acc:'5039',title:'Investment Planning, Tax Planning & Estate Planing'},
+{sr:1708,acc:'5040',title:'Bank Vittiya Prabandhan'},
+{sr:1709,acc:'5041',title:'Unnat Bank Prabandhan'},
+{sr:1710,acc:'5042',title:'Khudra Banking'},
+{sr:1711,acc:'5043',title:'Compliance in Banks'},
+{sr:1712,acc:'5044',title:'Ethics in Banking'},
+{sr:1713,acc:'5045',title:'Insolvency and Bankruptcy Code'},
+{sr:1714,acc:'5046',title:'Inclusive Banking: Thro’ Business Correspondents in Hindi'},
+{sr:1715,acc:'5047',title:'Inclusive Banking: Thro’ Business Correspondents in Kannada'},
+{sr:1716,acc:'5048',title:'Hand Book on Debt Recovery'},
+{sr:1717,acc:'5049',title:'Hand Book on Debt Recovery (Hindi)'},
+{sr:1718,acc:'5050',title:'Small Finance Banks'},
+{sr:1719,acc:'5051',title:'Small Finance Banks'},
+{sr:1720,acc:'5052',title:'Banking  Oriented  Paper in  Hindi'},
+{sr:1721,acc:'5053',title:'Customer Service & Banking Codes and Standards'},
+{sr:1722,acc:'5054',title:'Customer Service & Banking Codes and Standards (Hindi)'},
+{sr:1723,acc:'5055',title:'International Trade Finance'},
+{sr:1724,acc:'5056',title:'IT Suraksha (Hindi)'},
+{sr:1725,acc:'5057',title:'Micro Small & Medium Enterprises in India'},
+{sr:1726,acc:'5058',title:'Rural Banking Operation'},
+{sr:1727,acc:'5059',title:'Inclusive Banking: Thro’ Business Correspondents'},
+{sr:1728,acc:'5060',title:'Inclusive Banking Thro BC (Payments Banks - Hindi)'},
+{sr:1729,acc:'5061',title:'Inclusive Banking Thro BC (Payments Banks - English)'},
+{sr:1730,acc:'5062',title:'Bankers Handbook on Accounting'},
+{sr:1731,acc:'5063',title:'Bankers Handbook on Auditing'},
+{sr:1732,acc:'5064',title:'Trainers, Handbook'},
+{sr:1733,acc:'5065',title:'Bankers Hand Book on Credit Management'},
+{sr:1734,acc:'5066',title:'Information System for Banks'},
+{sr:1735,acc:'5067',title:'Digital  Banking'},
+{sr:1736,acc:'5068',title:'Treasury, Investment and Risk Management'},
+{sr:1737,acc:'5069',title:'Non-banking Financial Companies'},
+{sr:1738,acc:'5070',title:'Cooperative Banking- Principles, Laws & Practcies'},
+{sr:1740,acc:'5071',title:'हिन्दी पर्यायवाची कोश'},
+{sr:1741,acc:'5072',title:'विलोम शब्द कोश'},
+{sr:1742,acc:'5073',title:'हिन्दी मुहावरा कोश'},
+{sr:1743,acc:'5074',title:'सरल-सुलभ ज्ञान कोश'},
+{sr:1744,acc:'5075',title:'डिजिटल इंडिया'},
+{sr:1745,acc:'5076',title:'भारतीय इतिहास प्रश्नोत्तरी'},
+{sr:1746,acc:'5077',title:'उत्तर भारत के पर्यटन-स्थल'},
+{sr:1747,acc:'5078',title:'दक्षिण भारत के पर्यटन-स्थल'},
+{sr:1748,acc:'5079',title:'पूर्व भारत के पर्यटन-स्थल'},
+{sr:1749,acc:'5080',title:'पश्चिम भारत के पर्यटन-स्थल'},
+{sr:1750,acc:'5081',title:'सम्पूर्ण भारत के सांस्कृतिक पर्यटन-स्थल'},
+{sr:1751,acc:'5082',title:'योग द्वारा स्वास्थ्य शिक्षा'},
+{sr:1752,acc:'5083',title:'योग-साधना'},
+{sr:1753,acc:'5084',title:'योगासन और प्राणायाम'},
+{sr:1754,acc:'5085',title:'महापुरुषों के प्रेरक प्रसंग'},
+{sr:1755,acc:'5086',title:'जीवन को सार्थक बनाएँ'},
+{sr:1756,acc:'5087',title:'भारतीय महापुरुषों के शिक्षाप्रद विचार'},
+{sr:1757,acc:'5088',title:'परीक्षा गुरु -हिन्दी का पहला उपन्यास'},
+{sr:1758,acc:'5089',title:'आमार शोनार बांग्ला'},
+{sr:1759,acc:'5090',title:'वयं रक्षामः'},
+{sr:1760,acc:'5091',title:'रेहन पर रग्घू'},
+{sr:1761,acc:'5092',title:'डार से बिछुडी'},
+{sr:1762,acc:'5093',title:'कुरु कुरु स्वाहा'},
+{sr:1763,acc:'5094',title:'संपूर्ण उपन्यास'},
+{sr:1764,acc:'5095',title:'बेताल पच्चीसी'},
+{sr:1765,acc:'5096',title:'बिल्लेसुर बकरिहा'},
+{sr:1766,acc:'5097',title:'कुल्लीभाट'},
+{sr:1767,acc:'5098',title:'अँधेरे बंद कमरे'},
+{sr:1768,acc:'5099',title:'निर्वासित'},
+{sr:1769,acc:'5100',title:'एकदा नैमिशारण्ये'},
+{sr:1770,acc:'5101',title:'हिंदी राष्ट्रवाद'},
+{sr:1771,acc:'5102',title:'शेष यात्रा'},
+{sr:1772,acc:'5103',title:'हयवदन'},
+{sr:1773,acc:'5104',title:'भूमंडलीकरण और हिंदी'},
+{sr:1774,acc:'5105',title:'आल्फा बीटा गामा'},
+{sr:1775,acc:'5106',title:'प्रतिनिधि कहानियाँ'},
+{sr:1776,acc:'5107',title:'प्रतिनिधि कहानियाँ'},
+{sr:1777,acc:'5108',title:'प्रतिनिधि कहानियाँ'},
+{sr:1778,acc:'5109',title:'मैक्सिम गोर्की की लोकप्रिय कहानियाँ'},
+{sr:1779,acc:'5110',title:'तीन साल'},
+{sr:1780,acc:'5111',title:'कांपता हुआ दरिया'},
+{sr:1781,acc:'5112',title:'पच्चीस बरस: पच्चीस कहानियाँ'},
+{sr:1782,acc:'5113',title:'अरे यायावर याद रहेगा'},
+{sr:1783,acc:'5114',title:'श्रीलाल शुक्ल संचयिता'},
+{sr:1784,acc:'5115',title:'हिंदी कुछ नई चुनौतियाँ'},
+{sr:1785,acc:'5116',title:'योग विज्ञान'},
+{sr:1786,acc:'5117',title:'शेखर एक जीवनी-1'},
+{sr:1787,acc:'5118',title:'शेखर एक जीवनी-2'},
+{sr:1788,acc:'5119',title:'Introduction to Financial Planning'},
+{sr:1789,acc:'5120',title:'Risk Analysis, Insurance and Retirement Planning'},
+{sr:1790,acc:'5121',title:'Investment Planning, Tax Planning & Estate Planing'},
+{sr:1791,acc:'5122',title:'Treasury, Investment and Risk Management'},
+{sr:1792,acc:'5123',title:'Banking & Finance Year Book 2021'},
+{sr:1793,acc:'5124',title:'Purushotamdas Thakurdas Memorial Lectures'},
+{sr:1794,acc:'5125',title:'Compilation of RK Talwar Memorial Lectures'},
+{sr:1795,acc:'5126',title:'MSME'},
+{sr:1796,acc:'5127',title:'Bankers Hand Book on Credit Management'},
+{sr:1797,acc:'5128',title:'Human Resources Management (Text & Cases)'},
+{sr:1798,acc:'5129',title:'Bankers Handbook on Accounting'},
+{sr:1799,acc:'5130',title:'Bankers Handbook on Auditing'},
+{sr:1800,acc:'5131',title:'Think Again'},
+{sr:1801,acc:'5132',title:'Start With Why'},
+{sr:1802,acc:'5133',title:'Awaken The Giant Within'},
+{sr:1803,acc:'5134',title:'Otions, Futures & Other Derivatives'},
+{sr:1804,acc:'5135',title:'Foreign Exchange Practice, Concepts and Control'},
+{sr:1805,acc:'5136',title:'Foreign Exchange Practice, Concepts and Control'},
+{sr:1806,acc:'5137',title:'Foreign Exchange & Risk Management'},
+{sr:1807,acc:'5138',title:'Foreign Exchange & Risk Management'},
+{sr:1808,acc:'5139',title:'Employees First, Customers Second'},
+{sr:1809,acc:'5140',title:'Animal Farm Hindi'},
+{sr:1810,acc:'5141',title:'Parti Parikatha'},
+{sr:1811,acc:'5142',title:'Akal Mein Saras'},
+{sr:1812,acc:'5143',title:'H G Wells ki Lokpriya Kahaniyan'},
+{sr:1813,acc:'5144',title:'Byomkesh Bakshi ki rahasyamayi kahaniyan'},
+{sr:1814,acc:'5145',title:'Ret Samadhi'},
+{sr:1815,acc:'5146',title:'Kali Katha Via Bypass'},
+{sr:1816,acc:'5147',title:'Ram'},
+{sr:1817,acc:'5148',title:'Sita'},
+{sr:1818,acc:'5149',title:'Ravan'},
+{sr:1819,acc:'5150',title:'Satyajit Ray Ki Lokpriya Kahaniyan'},
+{sr:1820,acc:'5151',title:'Risk Management'},
+{sr:1821,acc:'5152',title:'Handbook of Banking Information'},
+{sr:1822,acc:'5153',title:'Strategic Management & Innovations in Banking'},
+{sr:1823,acc:'5154',title:'Design, Development & Implementation of Information Systums'},
+{sr:1824,acc:'5155',title:'Security in Electronic Banking'},
+{sr:1825,acc:'5156',title:'Retail Liability Products & Other Related Services'},
+{sr:1826,acc:'5157',title:'Central Banking'},
+{sr:1827,acc:'5158',title:'International Corporate Finance'},
+{sr:1828,acc:'5159',title:'International Banking Operations'},
+{sr:1829,acc:'5160',title:'Rural Banking'},
+{sr:1830,acc:'5161',title:'Risk Management'},
+{sr:1831,acc:'5162',title:'Information Technology Data Communication'},
+{sr:1832,acc:'5163',title:'Human Resources Management'},
+{sr:1833,acc:'5164',title:'Accounting & Financial Management'},
+{sr:1834,acc:'5165',title:'Half of a Yellow Sun'},
+{sr:1835,acc:'5166',title:'In the Footsteps of Rama : Travels with the Ramayana'},
+{sr:1836,acc:'5167',title:'All the Light we Cannot See'},
+{sr:1837,acc:'5168',title:'One Hundred Years Of Solitude'},
+{sr:1838,acc:'5169',title:'Love in the Time of Cholera'},
+{sr:1839,acc:'5170',title:'Complete Adventures of Feluda Vol.1'},
+{sr:1840,acc:'5171',title:'Complete Adventures of Feluda Vol.2'},
+{sr:1841,acc:'5172',title:'Govinda: The Aryavarta Chronicles Book 1'},
+{sr:1842,acc:'5173',title:'Kaurava: The Aryavarta Chronicles Book 2'},
+{sr:1843,acc:'5174',title:'The Story of the Reserve Bank of India'},
+{sr:1844,acc:'5175',title:'The Great Indian Fraud'},
+{sr:1845,acc:'5176',title:'How to Master the Art of Selling from Smarter Comics'},
+{sr:1846,acc:'5177',title:'Advice and Dissent: My Life in Public Service'},
+{sr:1847,acc:'5178',title:'Kurukshetra: The Aryavarta Chronicles'},
+{sr:1848,acc:'5179',title:'The Thoughtful Investor'},
+{sr:1849,acc:'5180',title:'Barons of Banking: Glimpses of Indian Banking History'},
+{sr:1850,acc:'5181',title:'The Tata Group: From Torchbearers to Trailblazers'},
+{sr:1851,acc:'5182',title:'संस्कृति के चार अध्याय'},
+{sr:1852,acc:'5183',title:'युगों का यात्री - नागार्जुन की जीवनी'},
+{sr:1853,acc:'5184',title:'हिंदी आकांक्षा और यथार्थ'},
+{sr:1854,acc:'5185',title:'संसार कायरों के लिए नहीं'},
+{sr:1855,acc:'5186',title:'निर्माण पुरुष अंबेडकर की संविधान यात्रा'},
+{sr:1856,acc:'5187',title:'जूठन- पहला खंड'},
+{sr:1857,acc:'5188',title:'जूठन- दूसरा खंड'},
+{sr:1858,acc:'5189',title:'कबीर ग्रंथावली (सटीक)'},
+{sr:1859,acc:'5190',title:'जहालत के पचास साल'},
+{sr:1860,acc:'5191',title:'नेताजी कहिन'},
+{sr:1861,acc:'5192',title:'विश्व की श्रेष्ठ कहानियाँ-1'},
+{sr:1862,acc:'5193',title:'विश्व की श्रेष्ठ कहानियाँ-2'},
+{sr:1863,acc:'5194',title:'मामूली चीज़ों के देवता'},
+{sr:1864,acc:'5195',title:'नरवानर'},
+{sr:1865,acc:'5196',title:'तीन उपन्यास'},
+{sr:1866,acc:'5197',title:'अँधेरे बंद कमरे'},
+{sr:1867,acc:'5198',title:'कथा सतीसर'},
+{sr:1868,acc:'5199',title:'नमो अंधकारम'},
+{sr:1869,acc:'5200',title:'राजभाषा सहूलियतकार'},
+{sr:1870,acc:'5201',title:'द पावर ऑफ हैबिट'},
+{sr:1871,acc:'5202',title:'माइंडसेट-सफलता का नया मनोविज्ञान'},
+{sr:1872,acc:'5203',title:'एटॉमिक हैबिट्स: छोटे बदलाव, असाधारण परिणाम'},
+{sr:1873,acc:'5204',title:'80/20 सिद्धांत'},
+{sr:1874,acc:'5205',title:'डीप वर्क'},
+{sr:1875,acc:'5206',title:'धन संपत्ति का मनोविज्ञान'},
+{sr:1876,acc:'5207',title:'1% फ़ार्मूला'},
+{sr:1877,acc:'5208',title:'असीम आनंद की ओर'},
+{sr:1878,acc:'5209',title:'लोक व्यवहार'},
+{sr:1879,acc:'5210',title:'बेबीलोन को सबसे अमीर आदमी'},
+{sr:1880,acc:'5211',title:'थिंक एंड ग्रो रिच'},
+{sr:1881,acc:'5212',title:'आपके अवचेतन मन की शक्ति'},
+{sr:1882,acc:'5213',title:'इकिगाई'},
+{sr:1883,acc:'5214',title:'इकिगाई एक अपूर्व अनुभव'},
+{sr:1884,acc:'5215',title:'PROJECT AND INFRASTRUCTURE FINANCE: CORPORATE BANKING PERSPECTIVE'},
+{sr:1885,acc:'5216',title:'BREAKING THE MOULD : REIMAGINING INDIA\'S ECONOMIC FUTURE'},
+{sr:1886,acc:'5217',title:'LAW ON PROJECT FINANCE'},
+{sr:1887,acc:'5218',title:'INDIAN ECONOMY AND FINANCIAL SYSTEM 2023'},
+{sr:1888,acc:'5219',title:'PRINCIPLES AND PRACTICES OF BANKING'},
+{sr:1889,acc:'5220',title:'ACCOUNTING & FINANCIAL MNGT FOR BANKERS 2023'},
+{sr:1890,acc:'5221',title:'RETAIL BANKING & WEALTH MANAGEMENT 2023'},
+{sr:1891,acc:'5222',title:'BANK FINANCIAL MANAGEMENT'},
+{sr:1892,acc:'5223',title:'ADVANCED BUSINESS & FINANCIAL MANAGEMENT'},
+{sr:1893,acc:'5224',title:'BANKING REGULATIONS AND BUSINESS LAWS'},
+{sr:1894,acc:'5225',title:'HUMAN RESOURCE MANAGEMENT'},
+{sr:1895,acc:'5226',title:'RURAL BANKING'},
+{sr:1896,acc:'5227',title:'CENTRAL BANKING'},
+{sr:1897,acc:'5228',title:'ANTI-MONEY LAUNDERING AND KYC'},
+{sr:1898,acc:'5229',title:'RISK MANAGEMENT'},
+{sr:1899,acc:'5230',title:'ADVANCED BANK MANAGEMENT'},
+{sr:1900,acc:'5231',title:'INFORMATION TECHNOLOGY & DIGITAL BANKING'},
+{sr:1901,acc:'5232',title:'THE MOTHER I NEVER KNEW'},
+{sr:1902,acc:'5233',title:'ATOMIC HABITS: TINY CHANGES, REMARKABLE RESULTS'},
+{sr:1903,acc:'5234',title:'SAVING CAPITALISM FROM THE CAPITALISTS'},
+{sr:1904,acc:'5235',title:'ZERO TO ONE: NOTES ON START UPS, OR HOW TO BUILD THE FUTURE'},
+{sr:1905,acc:'5236',title:'THE MAN WHO SOLVED THE MARKET'},
+{sr:1906,acc:'5237',title:'THE PSYCHOLOGY OF MONEY'},
+{sr:1907,acc:'5238',title:'BANKERS HAND BOOK ON CREDIT MANAGEMENT'},
+{sr:1908,acc:'5239',title:'IKIGAI IS IKIGAI'},
+{sr:1909,acc:'5240',title:'THE SEVEN MOONS OF MAALI ALMEIDA'},
+{sr:1910,acc:'5241',title:'पंचतंत्र की लोकप्रिय कहानियाँ'},
+{sr:1911,acc:'5242',title:'दादा-दादी की कहानियों का पिटारा'},
+{sr:1912,acc:'5243',title:'बुक ऑफ लव'},
+{sr:1913,acc:'5244',title:'मेरी उडान'},
+{sr:1914,acc:'5245',title:'कोरोना लॉकडाउन-बदलती जिंदगी बदलते रंग'},
+{sr:1915,acc:'5246',title:'कही-अनकही लघुकथाएँ'},
+{sr:1916,acc:'5247',title:'इंडिया अर्थात भारत'},
+{sr:1917,acc:'5248',title:'धर्म से आगे'},
+{sr:1918,acc:'5249',title:'हास्य विनोद की कहानियाँ'},
+{sr:1919,acc:'5250',title:'बोलना ही है'},
+{sr:1920,acc:'5251',title:'अंतिम अरण्य'},
+{sr:1921,acc:'5252',title:'परिन्दे'},
+{sr:1922,acc:'5253',title:'विस्मृत यात्री'},
+{sr:1923,acc:'5254',title:'वोल्गा से गंगा'},
+{sr:1924,acc:'5255',title:'आज़ादी'},
+{sr:1925,acc:'5256',title:'Forever Classics Set of 20 Fairy Tales) - Story Books for Kids (PART 1)'},
+{sr:1926,acc:'5257',title:'Forever Classics Set of 20 Fairy Tales) - Story Books for Kids (PART 2)'},
+{sr:1927,acc:'5258',title:'Forever Classics Set of 20 Fairy Tales) - Story Books for Kids  (PART 3)'},
+{sr:1928,acc:'5259',title:'Forever Classics Set of 20 Fairy Tales) - Story Books for Kids (PART 4)'},
+{sr:1929,acc:'5260',title:'Forever Classics Set of 20 Fairy Tales) - Story Books for Kids (PART 5)'},
+{sr:1930,acc:'5261',title:'सबसे मुश्किल काम, सबसे पहले'},
+{sr:1931,acc:'5262',title:'I\'AM OK - YOU\'RE OK'},
+{sr:1932,acc:'5263',title:'EAT THAT FROG'},
+{sr:1933,acc:'5264',title:'DESIGN, DEVELOPMENT & IMPLEMENTATION OF INFORMATION SYSTUMS'},
+{sr:1934,acc:'5265',title:'SECURITY IN ELECTRONIC BANKING'},
+{sr:1935,acc:'5266',title:'STRATEGIC MANAGEMENT & INNOVATIONS IN BANKING'},
+{sr:1936,acc:'5267',title:'INDOMITABLE'},
+{sr:1937,acc:'5268',title:'ROLLER COASTER'},
+{sr:1938,acc:'5269',title:'HUMAN RESOURCE MANAGEMENT-IIBF'},
+{sr:1939,acc:'5270',title:'INFORMATION TECHNOLOGY-IIBF'},
+{sr:1940,acc:'5271',title:'RETAIL LIABILITY PRODUCTS & OTHER RELATED SERVICES-IIBF'},
+{sr:1941,acc:'5272',title:'BANKERS\' HANDBOOK ON CREDIT MANAGEMENT'},
+{sr:1942,acc:'5273',title:'BANKERS\' HANDBOOK ON CREDIT MANAGEMENT'},
+{sr:1943,acc:'5274',title:'BANKERS\' HANDBOOK ON CREDIT MANAGEMENT'},
+{sr:1944,acc:'5275',title:'BANKERS\' HANDBOOK ON CREDIT MANAGEMENT'},
+{sr:1945,acc:'5276',title:'BANKERS\' HANDBOOK ON CREDIT MANAGEMENT'},
+{sr:1946,acc:'5277',title:'BANKERS\' HANDBOOK ON CREDIT MANAGEMENT'},
+{sr:1947,acc:'5278',title:'LEARN TAMIL TRHOUGH ENGLISH'},
+{sr:1948,acc:'5279',title:'LEARN TAMIL TRHOUGH ENGLISH'},
+{sr:1949,acc:'5280',title:'हिंदी से मराठी सीखें'},
+{sr:1950,acc:'5281',title:'LEARN ASSAMESE THROUGH ENGLISH'},
+{sr:1951,acc:'5282',title:'हिंदी से गुजराती सीखें'},
+{sr:1952,acc:'5283',title:'LEARN PUNJABI THROUGH ENGLISH'},
+{sr:1953,acc:'5284',title:'LEARN ODIA THROUGH ENGLISH'},
+{sr:1954,acc:'5285',title:'LEARN TELUGU THROUGH ENGLISH'},
+{sr:1955,acc:'5286',title:'हिंदी से बांग्ला सीखें'},
+{sr:1956,acc:'5287',title:'LEARN KANNADA THROUGH ENGLISH'},
+{sr:1957,acc:'5288',title:'अल्केमिस्ट'},
+{sr:1958,acc:'5289',title:'5 एएम क्लब'},
+{sr:1959,acc:'5290',title:'रामकथा'},
+{sr:1960,acc:'5291',title:'द माउंटेन इस यू'},
+{sr:1961,acc:'5292',title:'सेपियंस'},
+{sr:1962,acc:'5293',title:'मैं हूँ भी कि नही'},
+{sr:1963,acc:'5294',title:'मैं कोई एक रास्ता जैसे'},
+{sr:1964,acc:'5295',title:'मृत्यु है ही नही'},
+{sr:1965,acc:'5296',title:'वसूली पर पुस्तिका'},
+{sr:1966,acc:'5297',title:'हाई 5 हैबिट'},
+{sr:1967,acc:'5298',title:'टाटा स्टोरीज'},
+{sr:1968,acc:'5299',title:'द लास्ट गर्ल'},
+{sr:1969,acc:'5300',title:'दुनिया मेरी नजरों में'},
+{sr:1970,acc:'5301',title:'आर्ट ओफ़ वार'},
+{sr:1971,acc:'5302',title:'महाराणा'},
+{sr:1972,acc:'5303',title:'इनर इंजीनियरिंग'},
+{sr:1973,acc:'5304',title:'द वन थिंग'},
+{sr:1974,acc:'5305',title:'शब्दो के साथ साथ'},
+{sr:1975,acc:'5306',title:'सबसे मुशिक्ल काम सबसे पहले'},
+{sr:1976,acc:'5307',title:'द इंटेलिजेंस इंवेस्ट्र'},
+{sr:1977,acc:'5308',title:'दोगलापन'},
+{sr:1978,acc:'4900',title:'PREVENTION OF CYBER CRIME & FRAUD MANAGEMENT'},
+{sr:1979,acc:'4901',title:'INTERNATIONAL TRADE FINANCE'},
+{sr:1980,acc:'4902',title:'DIGITAL BANKING-IIBF'},
+{sr:1981,acc:'4903',title:'EMERGING TECHNOLOGIES-IIBF'},
+{sr:1982,acc:'4904',title:'ETHICS IN BANKING-IIBF'},
+{sr:1983,acc:'4905',title:'IT SECURITY-IIBF'},
+{sr:1984,acc:'4906',title:'INFORMATION SYSTEMS FOR BANKS-IIBF'},
+{sr:1985,acc:'4907',title:'MICRO, SMALL & MEDUIM ENTERPRISES-IIBF'},
+{sr:1986,acc:'4908',title:'INTERNATIONAL TRADE FINANCE-IIBF'},
+{sr:1987,acc:'5683',title:'Let\'s Talk Money: You\'ve Worked Hard for It, Now Make'},
+{sr:1988,acc:'5684',title:'The World in 2050'},
+{sr:1989,acc:'5685',title:'Foreign Exchange Facilities for Individuals –'},
+{sr:1990,acc:'5686',title:'21 Lessons for the 21st Century'},
+{sr:1991,acc:'5687',title:'Digital Discovery Books Pack – Set of 3 Educational'},
+{sr:1992,acc:'5688',title:'Leaders Eat Last'},
+{sr:1993,acc:'5689',title:'Leaders Eat Last'},
+{sr:1994,acc:'5690',title:'Artificial Intelligence: A Modern Approach, 4e'},
+{sr:1995,acc:'5691',title:'THE AGE OF AI: AND OUR HUMAN FUTURE (B PB)'},
+{sr:1996,acc:'5692',title:'Tracing and Scrutiny of Title in Immovable Property | A Practical Guide on Property Title Verification, Ownership, Mortgage, Lease,Possession and Legal Documentation'},
+{sr:1997,acc:'5693',title:'Banking Negligence | Professional Misconduct, Cheque Fraud,Debit Card, ATMs, Information Security, Professional Negligence'},
+{sr:1998,acc:'5694',title:'Electronic Banking Frauds [ATM, Mobile Banking and Internet Banking]'},
+{sr:1999,acc:'5695',title:'Cybersecurity All-in-one for Dummies'},
+{sr:2000,acc:'5696',title:'Brainologi A Kid\'s Guide to Money'},
+{sr:2001,acc:'5697',title:'Coding for Kids Ages 8–12: Learn to Code with Fun Games, Projects & Step-by-Step Activities'},
+{sr:2002,acc:'5698',title:'The Master Stitch: Sewing Dreams - A Tale of Mother\'s Love'},
+{sr:2003,acc:'5699',title:'The Master Stitch: Sewing Dreams - A Tale of Mother\'s Love'},
+{sr:2004,acc:'5700',title:'Cyber Security and Information Systems in Corporate Governance and Financial Management'},
+{sr:2005,acc:'5701',title:'Inside-Out Leadership 16 radical insights successful leaders'},
+{sr:2006,acc:'5702',title:'Macmillan Treasury Management Latest Edition for 2025 Exam'},
+{sr:2007,acc:'5703',title:'Leadership Essentials You Always Wanted to Know (Self-Learning Management Series): A Practical Guide to Leadership Traits, Power, Ethics, and Leading High-Performance Teams'},
+{sr:2008,acc:'5704',title:'A Leader’s Tripping Points: Guide to Cognizance | Corporate Jungle Series - 1'},
+{sr:2009,acc:'5705',title:'The AI-Driven Leader: Harnessing AI to Make Faster,Smarter Decisions'},
+{sr:2010,acc:'5706',title:'Nexus: A Brief History of Information Networks from the Stone Age to AI'},
+{sr:2011,acc:'5707',title:'Artificial Intelligence for Managers'},
+{sr:2012,acc:'5708',title:'It’s a Computer Story'},
+{sr:2013,acc:'5709',title:'It’s a Computer Story'},
+{sr:2014,acc:'5710',title:'The 3 Edges of Silence: The Breath That Decided a Civilization'},
+{sr:2015,acc:'5711',title:'Mastering the Art of Communication: A Guide to Effective_x000D_ Listening and Speaking Skills |'},
+{sr:2016,acc:'5712',title:'Certified Credit Research Analyst(CCRA) Level 1'},
+{sr:2017,acc:'5713',title:'Certified Credit Research Analyst(CCRA) Level 1'},
+{sr:2018,acc:'5714',title:'Certified Credit Research Analyst(CCRA) Level 2'},
+{sr:2019,acc:'5715',title:'Certified Credit Research Analyst(CCRA) Level 2'},
+{sr:2020,acc:'5718',title:'IIBF CAIIB HINDI Bank Vittiya Prabandhan 2025'},
+{sr:2021,acc:'5720',title:'IIBF CAIIB HINDI Unnat Bank Prabandhan 2025'},
+{sr:2022,acc:'5721',title:'IIBF CAIIB HINDI Banking Viniyaman Aur Vyaavasayik Kanon2025'},
+{sr:2023,acc:'5722',title:'IIBF CAIIB HINDI Unnat Vyavasaay Evam Vittiya Prabandhan2025'},
+{sr:2024,acc:'5724',title:'21Veen Saadee Ke Liye 21 Sabaq - Hindi'},
+{sr:2025,acc:'5725',title:'Nexus (Hindi)'},
+{sr:2026,acc:'5726',title:'Homo Deus: Aanewale Kal Ka Sanshipt Itihas (Hindi Edition)'},
+];
+
+let BOOKS=BOOKS_RAW.map(b=>({...b,av:true,author:'',pub:'',edyr:'',category:'',language:'',price:'',disc:'',finalP:'',subject:'',pdate:''}));
+const BM={};BOOKS.forEach(b=>{BM[b.acc]=b;});
+
+// STAFF DATA
+const ST=[
+{no:'864559',nm:'NITIN SETIA',dg:'DM',sc:'MMGS-III',br:'CIBM MANIPAL',em:''},
+{no:'898736',nm:'SHASHI KANT PANDEY',dg:'MANAGER',sc:'MMGS-II',br:'CIBM MANIPAL',em:'librarycibm@gmail.com'},
+{no:'800001',nm:'RAJESH KUMAR',dg:'AGM',sc:'SMGS-V',br:'MANIPAL CO',em:''},
+{no:'800002',nm:'PRIYA SHARMA',dg:'MANAGER',sc:'MMGS-III',br:'MANIPAL CO',em:''},
+{no:'800003',nm:'AMIT SINGH',dg:'OFFICER',sc:'JMGS-I',br:'MANIPAL CO',em:''},
+{no:'800004',nm:'SUNITA DEVI',dg:'MANAGER',sc:'MMGS-II',br:'MANIPAL CO',em:''},
+{no:'800005',nm:'VIKRAM PATEL',dg:'SENIOR MANAGER',sc:'MMGS-III',br:'CIBM MANIPAL',em:''},
+];
+
+document.addEventListener('DOMContentLoaded',()=>{});
+</script>
+<div style="text-align:center;padding:10px;font-size:11px;color:#999;background:#f4f6fa;margin-top:20px">
+  Designed &amp; Developed by: Vipin Kumar, Divisional Manager, CIBM Manipal
+</div>
+</body>
+</html>
